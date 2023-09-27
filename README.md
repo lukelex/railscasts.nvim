@@ -41,7 +41,7 @@ vim.cmd.colorscheme "railscasts"
 require("lualine").setup {
   options = {
     -- ... your lualine config
-    theme = require("lush_theme/lualine")
+    theme = require("railscasts.lualine")
     -- ... your lualine config
   }
 }

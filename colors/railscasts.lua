@@ -14,7 +14,7 @@ vim.g.colors_name = "railscasts"
 --
 -- The performance impact of this call can be measured in the hundreds of
 -- *nanoseconds* and such could be considered "production safe".
-package.loaded["lush_theme.railscasts"] = nil
+-- package.loaded["railscasts.theme"] = nil
 
 -- include our theme file and pass it to lush to apply
-require("lush")(require("lush_theme.railscasts"))
+require("lush")(require("railscasts.theme"))
