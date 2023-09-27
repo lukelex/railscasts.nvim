@@ -385,9 +385,10 @@ local theme = lush(function(injected_functions)
 
     TelescopeBorder            { fg=hsl(colors.light_brown) },
     TelescopeSelection         { fg=hsl(colors.dark_orange) },
-    TelescopeTitle             { fg=hsl(colors.yellow) },
+    TelescopeTitle             { fg=hsl(colors.red) },
     TelescopePromptTitle       { TelescopeTitle },
-    TelescopePromptNormal      { fg=hsl(colors.red) },
+    TelescopePromptNormal      { fg=hsl(colors.yellow) },
+    TelescopePromptPrefix      { TelescopePromptNormal },
     TelescopeMatching          { TelescopePromptNormal },
   }
 end)
