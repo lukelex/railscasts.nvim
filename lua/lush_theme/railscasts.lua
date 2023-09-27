@@ -42,28 +42,10 @@
 --
 --  `:lua require('lush').ify()`
 
-local lush = require('lush')
+local lush = require("lush")
 local hsl = lush.hsl
 
-local colors = {
-  background = hsl("#000000"),
-  foreground = hsl("#E6E1DC"),
-
-  blue = hsl("#5C7E96"),
-  light_green = hsl("#87af5f"),
-  dark_green=hsl("#005f00"),
-  red = hsl("#df5f5f"),
-  light_orange = hsl("#FFC66D"),
-  dark_orange = hsl("#FF8700"),
-  yellow = hsl("#EBE774"),
-  purple = hsl("#B3B3D9"),
-  light_brown = hsl("#92764C"),
-  dark_brown = hsl("#AF5F00"),
-  moss = hsl("#DEFF10"),
-  pink = hsl("#F9D7E4"),
-  cyan = hsl("#6D9CBE"),
-  white = hsl("#FFFFFF"),
-}
+local colors = require("utils.colors")
 
 -- LSP/Linters mistakenly show `undefined global` errors in the spec, they may
 -- support an annotation like the following. Consult your server documentation.
@@ -83,7 +65,7 @@ local theme = lush(function(injected_functions)
     --
     ColorColumn       { bg="#1c1c1c" }, -- Columns set with 'colorcolumn'
     Conceal           { bg="darkgrey", fg="lightgrey" }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
-    Cursor            { bg=colors.white, fg="#000000" }, -- Character under the cursor
+    Cursor            { bg=hsl(colors.white), fg=hsl(colors.black)}, -- Character under the cursor
 
     Search            { bg="#5f5f87", fg=hsl(colors.black)}, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
     CurSearch         { Search }, -- Highlighting a search pattern under the cursor (see 'hlsearch')
@@ -116,17 +98,17 @@ local theme = lush(function(injected_functions)
     VertSplit         { bg="#121212", fg="#444444" }, -- Column separating vertically split windows
     WinSeparator      { VertSplit }, -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
 
-    Folded            { bg="#444444", fg=colors.white }, -- Line used for closed folds
+    Folded            { bg="#444444", fg=hsl(colors.white) }, -- Line used for closed folds
 
     FoldColumn        { bg="grey", fg="cyan" }, -- 'foldcolumn'
     CursorLineFold    { FoldColumn }, -- Like FoldColumn when 'cursorline' is set for the cursor line
 
-    SignColumn        { fg=colors.white}, -- Column where |signs| are displayed
+    SignColumn        { fg=hsl(colors.white)}, -- Column where |signs| are displayed
     CursorLineSign    { SignColumn }, -- Like SignColumn when 'cursorline' is set for the cursor line
 
     IncSearch         { gui="reverse" }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
 
-    MatchParen        { bg="#005f5f", fg=colors.white }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
+    MatchParen        { bg="#005f5f", fg=hsl(colors.white) }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
     ModeMsg           { gui="bold" }, -- 'showmode' message (e.g., "-- INSERT -- ")
     -- MsgArea        { }, -- Area for messages and cmdline
 
@@ -135,12 +117,12 @@ local theme = lush(function(injected_functions)
 
     MoreMsg           { gui="bold", fg="seagreen" }, -- |more-prompt|
     Normal            { bg="#121212", fg="#e4e4e4" }, -- Normal text
-    NormalFloat       { bg="#444444", fg=colors.white}, -- Normal text in floating windows.
+    NormalFloat       { bg="#444444", fg=hsl(colors.white)}, -- Normal text in floating windows.
     -- FloatBorder    { }, -- Border of floating windows.
-    FloatTitle        { gui="bold", fg=colors.white}, -- Title of floating windows.
+    FloatTitle        { gui="bold", fg=hsl(colors.white)}, -- Title of floating windows.
     -- NormalNC       { }, -- normal text in non-current windows
 
-    Pmenu             { bg="#444444", fg=colors.white}, -- Popup menu: Normal item.
+    Pmenu             { bg="#444444", fg=hsl(colors.white)}, -- Popup menu: Normal item.
     PmenuKind         { Pmenu }, -- Popup menu: Normal item "kind"
     PmenuExtra        { Pmenu }, -- Popup menu: Normal item "extra text"
 
@@ -149,7 +131,7 @@ local theme = lush(function(injected_functions)
     PmenuExtraSel     { PmenuSel }, -- Popup menu: Selected item "extra text"
 
     PmenuSbar         { bg="#5a647e" }, -- Popup menu: Scrollbar.
-    PmenuThumb        { bg="#a8a8a8", fg=colors.white }, -- Popup menu: Thumb of the scrollbar.
+    PmenuThumb        { bg="#a8a8a8", fg=hsl(colors.white) }, -- Popup menu: Thumb of the scrollbar.
     Question          { gui="bold", fg="green" }, -- |hit-enter| prompt and yes/no questions
     SpellBad          { gui="undercurl", sp="red", fg="#d70000" }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
     SpellCap          { gui="underline", sp="blue", fg="#dfdfff" }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
@@ -159,7 +141,7 @@ local theme = lush(function(injected_functions)
     TabLine           { gui="underline", bg="darkgrey" }, -- Tab pages line, not active tab page label
     TabLineFill       { gui="reverse" }, -- Tab pages line, where there are no labels
     TabLineSel        { gui="bold" }, -- Tab pages line, active tab page label
-    Title             { gui="bold", fg=colors.white }, -- Titles for output from ":set all", ":autocmd" etc.
+    Title             { gui="bold", fg=hsl(colors.white) }, -- Titles for output from ":set all", ":autocmd" etc.
     Visual            { bg="#5f5f87" }, -- Visual mode selection
     -- VisualNOS      { }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg        { fg="#800000" }, -- Warning messages
@@ -178,7 +160,7 @@ local theme = lush(function(injected_functions)
 
     Comment           { fg="#af875f" }, -- Any comment
 
-    Constant          { fg=colors.red }, -- (*) Any constant
+    Constant          { fg=hsl(colors.red) }, -- (*) Any constant
     Character         { Constant }, --   A character constant: 'c', '\n'
     Identifier        { Constant }, -- (*) Any variable name
     StorageClass      { Constant }, --   static, register, volatile, etc.
@@ -186,30 +168,30 @@ local theme = lush(function(injected_functions)
     Type              { Constant }, -- (*) int, long, char, etc.
     Typedef           { Type }, --   A typedef
 
-    String            { fg=colors.light_green }, --   A string constant: "this is a string"
+    String            { fg=hsl(colors.light_green) }, --   A string constant: "this is a string"
     Number            { String }, --   A number constant: 234, 0xff
     Float             { Number }, --   A floating point constant: 2.3e10
 
-    Boolean           { fg=colors.blue }, --   A boolean constant: TRUE, false
+    Boolean           { fg=hsl(colors.blue) }, --   A boolean constant: TRUE, false
 
-    Function          { fg=colors.light_orange }, --   Function name (also: methods for classes)
+    Function          { fg=hsl(colors.light_orange) }, --   Function name (also: methods for classes)
 
-    Label             { fg=colors.purple }, --   case, default, etc.
+    Label             { fg=hsl(colors.purple) }, --   case, default, etc.
 
-    Statement         { fg=colors.dark_brown }, -- (*) Any statement
+    Statement         { fg=hsl(colors.dark_brown) }, -- (*) Any statement
     Conditional       { Statement }, --   if, then, else, endif, switch, etc.
     Repeat            { Statement }, --   for, do, while, etc.
     Operator          { Statement }, --   "sizeof", "+", "*", etc.
     Keyword           { Statement }, --   any other keyword
     Exception         { Statement }, --   try, catch, throw
 
-    PreProc           { fg=colors.dark_orange }, -- (*) Generic Preprocessor
+    PreProc           { fg=hsl(colors.dark_orange) }, -- (*) Generic Preprocessor
     Include           { PreProc }, --   Preprocessor #include
     Define            { PreProc }, --   Preprocessor #define
     Macro             { PreProc }, --   Same as Define
     PreCondit         { PreProc }, --   Preprocessor #if, #else, #endif, etc.
 
-    Special           { fg=colors.dark_green }, -- (*) Any special symbol
+    Special           { fg=hsl(colors.dark_green) }, -- (*) Any special symbol
     SpecialChar       { Special }, -- Special character in a constant
     Tag               { Special }, -- You can use CTRL-] on this
     Delimiter         { Special }, -- Character that needs attention
@@ -218,8 +200,8 @@ local theme = lush(function(injected_functions)
 
     Underlined        { gui="underline", fg="#80a0ff" }, -- Text that stands out, HTML links
     Ignore            { fg="bg" }, -- Left blank, hidden |hl-Ignore| (NOTE: May be invisible here in template)
-    Error             { bg="#990000", fg=colors.white }, -- Any erroneous construct
-    Todo              { gui="bold", fg=colors.red }, -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+    Error             { bg="#990000", fg=hsl(colors.white) }, -- Any erroneous construct
+    Todo              { gui="bold", fg=hsl(colors.red) }, -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
     -- These groups are for the native LSP client and diagnostic system. Some
     -- other LSP clients may use these groups, or use their own. Consult your
@@ -271,13 +253,7 @@ local theme = lush(function(injected_functions)
     --
     -- Tree-Sitter groups are defined with an "@" symbol, which must be
     -- specially handled to be valid lua code, we do this via the special
-    -- sym function. The following are all valid ways to call the sym function,
-    -- for more details see https://www.lua.org/pil/5.html
-    --
-    -- sym("@text.literal")
-    -- sym('@text.literal')
-    -- sym"@text.literal"
-    -- sym'@text.literal'
+    -- sym function.
     --
     -- For more information see https://github.com/rktjmp/lush.nvim/issues/109
 
@@ -311,16 +287,16 @@ local theme = lush(function(injected_functions)
     sym"@number"                { Number },
     sym"@keyword"               { Keyword },
     sym"@preproc"               { PreProc },
-    sym"@symbol.ruby"           { fg=colors.cyan },
+    sym"@symbol.ruby"           { fg=hsl(colors.cyan) },
 
-    sym"@function.call"         { fg=colors.white }, -- Function calls
-    sym"@parameter"             { fg=colors.white },
-    sym"@punctuation.bracket"   { fg=colors.white }, -- For brackets and parenthesis
-    sym"@punctuation.delimiter" { fg=colors.white }, -- For delimiters (e.g. `.`)
-    sym"@variable"              { fg=colors.white },
+    sym"@function.call"         { fg=hsl(colors.white) }, -- Function calls
+    sym"@parameter"             { fg=hsl(colors.white) },
+    sym"@punctuation.bracket"   { fg=hsl(colors.white) }, -- For brackets and parenthesis
+    sym"@punctuation.delimiter" { fg=hsl(colors.white) }, -- For delimiters (e.g. `.`)
+    sym"@variable"              { fg=hsl(colors.white) },
 
-    sym"@constant.builtin"      { fg=colors.yellow },
-    sym"@variable.builtin"      { fg=colors.yellow },
+    sym"@constant.builtin"      { fg=hsl(colors.yellow) },
+    sym"@variable.builtin"      { fg=hsl(colors.yellow) },
 
     -- sym"@constant.macro"        { }, -- Define
     -- sym"@define"                { }, -- Define
@@ -353,53 +329,53 @@ local theme = lush(function(injected_functions)
     -- sym"@debug"                 { }, -- Debug
     -- sym"@tag"                   { }, -- Tag
 
-    NvimInvalidSpacing                           { ErrorMsg }, -- NvimInvalidSpacing xxx links to ErrorMsg
-    NvimSpacing                                  { Normal }, -- NvimSpacing    xxx links to Normal
-    FloatShadow                                  { bg="black", blend=80 }, -- FloatShadow    xxx guibg=Black blend=80
-    FloatShadowThrough                           { bg="black", blend=100 }, -- FloatShadowThrough xxx guibg=Black blend=100
-    RedrawDebugNormal                            { gui="reverse" }, -- RedrawDebugNormal xxx cterm=reverse gui=reverse
-    RedrawDebugClear                             { bg="yellow" }, -- RedrawDebugClear xxx ctermbg=11 guibg=Yellow
-    RedrawDebugComposed                          { bg="green" }, -- RedrawDebugComposed xxx ctermbg=10 guibg=Green
-    RedrawDebugRecompose                         { bg="red" }, -- RedrawDebugRecompose xxx ctermbg=9 guibg=Red
-    NvimInvalid                                  { Error }, -- NvimInvalid    xxx links to Error
-    NvimString                                   { String }, -- NvimString     xxx links to String
-    NvimNumber                                   { Number }, -- NvimNumber     xxx links to Number
-    NvimIdentifier                               { Identifier }, -- NvimIdentifier xxx links to Identifier
-    NvimNumberPrefix                             { Type }, -- NvimNumberPrefix xxx links to Type
-    NvimOptionSigil                              { Type }, -- NvimOptionSigil xxx links to Type
+    NvimInvalidSpacing                           { ErrorMsg },
+    NvimSpacing                                  { Normal },
+    FloatShadow                                  { bg="black", blend=80 },
+    FloatShadowThrough                           { bg="black", blend=100 },
+    RedrawDebugNormal                            { gui="reverse" },
+    RedrawDebugClear                             { bg="yellow" },
+    RedrawDebugComposed                          { bg="green" },
+    RedrawDebugRecompose                         { bg="red" },
+    NvimInvalid                                  { Error },
+    NvimString                                   { String },
+    NvimNumber                                   { Number },
+    NvimIdentifier                               { Identifier },
+    NvimNumberPrefix                             { Type },
+    NvimOptionSigil                              { Type },
 
-    NvimInternalError                            { bg="red", fg="red" }, -- NvimInternalError xxx ctermfg=9 ctermbg=9 guifg=Red guibg=Red
-    NvimFigureBrace                              { NvimInternalError }, -- NvimFigureBrace xxx links to NvimInternalError
-    NvimSingleQuotedUnknownEscape                { NvimInternalError }, -- NvimSingleQuotedUnknownEscape xxx links to NvimInternalError
-    NvimInvalidSingleQuotedUnknownEscape         { NvimInternalError }, -- NvimInvalidSingleQuotedUnknownEscape xxx links to NvimInternalError
-    User1                                        { gui="bold", bg="#606060", fg="#eeeeee" }, -- User1          xxx cterm=bold ctermfg=255 ctermbg=241 gui=bold guifg=#eeeeee guibg=#606060
-    User2                                        { gui="bold", bg="#606060", fg="#ffaf00" }, -- User2          xxx cterm=bold ctermfg=214 ctermbg=241 gui=bold guifg=#ffaf00 guibg=#606060
-    User3                                        { gui="bold", bg="#606060", fg="#5fff00" }, -- User3          xxx cterm=bold ctermfg=82 ctermbg=241 gui=bold guifg=#5fff00 guibg=#606060
-    User4                                        { gui="bold", bg="#606060", fg="#870000" }, -- User4          xxx cterm=bold ctermfg=88 ctermbg=241 gui=bold guifg=#870000 guibg=#606060
-    User5                                        { gui="bold", bg="#606060", fg="#e4e4e4" }, -- User5          xxx cterm=bold ctermfg=254 ctermbg=241 gui=bold guifg=#e4e4e4 guibg=#606060
-    User6                                        { gui="bold", bg="#606060", fg="#e4e4e4" }, -- User6          xxx cterm=bold ctermfg=254 ctermbg=241 gui=bold guifg=#e4e4e4 guibg=#606060
-    User7                                        { gui="bold", bg="#606060", fg="#e4e4e4" }, -- User7          xxx cterm=bold ctermfg=254 ctermbg=241 gui=bold guifg=#e4e4e4 guibg=#606060
-    User8                                        { gui="bold", bg="#606060", fg="#e4e4e4" }, -- User8          xxx cterm=bold ctermfg=254 ctermbg=241 gui=bold guifg=#e4e4e4 guibg=#606060
-    User9                                        { gui="bold", bg="#606060", fg="#e4e4e4" }, -- User9          xxx cterm=bold ctermfg=254 ctermbg=241 gui=bold guifg=#e4e4e4 guibg=#606060
-    diffAdded                                    { DiffAdd }, -- diffAdded      xxx ctermfg=28 guifg=#008700
-    diffRemoved                                  { fg="#800000" }, -- diffRemoved    xxx ctermfg=1 guifg=#800000
-    diffNewFile                                  { gui="bold", fg=colors.white }, -- diffNewFile    xxx cterm=bold ctermfg=15 gui=bold guifg=#ffffff
-    diffFile                                     { gui="bold", fg=colors.white }, -- diffFile       xxx cterm=bold ctermfg=15 gui=bold guifg=#ffffff
-    pythonExceptions                             { fg="#ffaf87" }, -- pythonExceptions xxx ctermfg=216 guifg=#ffaf87
-    pythonDoctest                                { fg="#8787ff" }, -- pythonDoctest  xxx ctermfg=105 guifg=#8787ff
-    pythonDoctestValue                           { fg="#87d7af" }, -- pythonDoctestValue xxx ctermfg=115 guifg=#87d7af
-    mailEmail                                    { gui="italic", fg="#87af5f" }, -- mailEmail      xxx cterm=underline ctermfg=107 gui=italic guifg=#87af5f
-    mailHeaderKey                                { fg="#ffdf5f" }, -- mailHeaderKey  xxx ctermfg=221 guifg=#ffdf5f
-    mailSubject                                  { mailHeaderKey }, -- mailSubject    xxx links to mailHeaderKey
-    xmlTag                                       { fg="#dfaf5f" }, -- xmlTag         xxx ctermfg=179 guifg=#dfaf5f
-    htmlTag                                      { xmlTag }, -- htmlTag        xxx links to xmlTag
-    xmlTagName                                   { fg="#dfaf5f" }, -- xmlTagName     xxx ctermfg=179 guifg=#dfaf5f
-    htmlTagName                                  { xmlTagName }, -- htmlTagName    xxx links to xmlTagName
-    xmlEndTag                                    { fg="#dfaf5f" }, -- xmlEndTag      xxx ctermfg=179 guifg=#dfaf5f
-    htmlEndTag                                   { xmlEndTag }, -- htmlEndTag     xxx links to xmlEndTag
-    checkbox                                     { fg="#3a3a3a" }, -- checkbox       xxx ctermfg=237 guifg=#3a3a3a
-    checkboxDone                                 { gui="bold", fg="#5fff00" }, -- checkboxDone   xxx cterm=bold ctermfg=82 gui=bold guifg=#5fff00
-    checkboxNotDone                              { gui="bold", fg="#005fdf" }, -- checkboxNotDone xxx cterm=bold ctermfg=26 gui=bold guifg=#005fdf
+    NvimInternalError                            { bg="red", fg="red" },
+    NvimFigureBrace                              { NvimInternalError },
+    NvimSingleQuotedUnknownEscape                { NvimInternalError },
+    NvimInvalidSingleQuotedUnknownEscape         { NvimInternalError },
+    User1                                        { gui="bold", bg="#606060", fg="#eeeeee" },
+    User2                                        { gui="bold", bg="#606060", fg="#ffaf00" },
+    User3                                        { gui="bold", bg="#606060", fg="#5fff00" },
+    User4                                        { gui="bold", bg="#606060", fg="#870000" },
+    User5                                        { gui="bold", bg="#606060", fg="#e4e4e4" },
+    User6                                        { gui="bold", bg="#606060", fg="#e4e4e4" },
+    User7                                        { gui="bold", bg="#606060", fg="#e4e4e4" },
+    User8                                        { gui="bold", bg="#606060", fg="#e4e4e4" },
+    User9                                        { gui="bold", bg="#606060", fg="#e4e4e4" },
+    diffAdded                                    { DiffAdd },
+    diffRemoved                                  { fg="#800000" },
+    diffNewFile                                  { gui="bold", fg=hsl(colors.white) },
+    diffFile                                     { gui="bold", fg=hsl(colors.white) },
+    pythonExceptions                             { fg="#ffaf87" },
+    pythonDoctest                                { fg="#8787ff" },
+    pythonDoctestValue                           { fg="#87d7af" },
+    mailEmail                                    { gui="italic", fg="#87af5f" },
+    mailHeaderKey                                { fg="#ffdf5f" },
+    mailSubject                                  { mailHeaderKey },
+    xmlTag                                       { fg="#dfaf5f" },
+    htmlTag                                      { xmlTag },
+    xmlTagName                                   { fg="#dfaf5f" },
+    htmlTagName                                  { xmlTagName },
+    xmlEndTag                                    { fg="#dfaf5f" },
+    htmlEndTag                                   { xmlEndTag },
+    checkbox                                     { fg="#3a3a3a" },
+    checkboxDone                                 { gui="bold", fg="#5fff00" },
+    checkboxNotDone                              { gui="bold", fg="#005fdf" },
 
     IndentBlanklineSpaceChar                     { gui="nocombine", fg="#767676" }, -- IndentBlanklineSpaceChar xxx cterm=nocombine ctermfg=243 gui=nocombine guifg=#767676
     IndentBlanklineContextStart                  { gui="underline", sp="#af5f00" }, -- IndentBlanklineContextStart xxx cterm=underline gui=underline guisp=#af5f00
