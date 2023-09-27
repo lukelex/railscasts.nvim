@@ -35,13 +35,13 @@ vim.cmd.colorscheme "railscasts"
 
 ### External Plugins
 
-#### Lualine
+#### [Lualine](https://github.com/nvim-lualine/lualine.nvim)
 
 ```lua
 require("lualine").setup {
   options = {
     -- ... your lualine config
-    theme = require("railscasts.lualine")
+    theme = "railscasts"
     -- ... your lualine config
   }
 }
