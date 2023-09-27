@@ -1,6 +1,6 @@
 # Railscasts Theme for Neovim
 
-(this is still a work in progress)
+(this is a work in progress)
 
 The goal is to be a 1/1 port of the original Textmate theme,
 respecting the differences and shortcomings of using TreeSitter
@@ -45,4 +45,13 @@ require("lualine").setup {
     -- ... your lualine config
   }
 }
+```
+
+#### Kitty
+
+Paste the contents of `./extras/kitty.conf` into your Kitty
+config file. Usually found at `~/.config/kitty/kitty.conf`.
+
+```sh
+$ wget -O - https://raw.githubusercontent.com/lukelex/railscasts.nvim/main/extras/kitty.conf >> ~/.config/kitty/kitty.conf
 ```
