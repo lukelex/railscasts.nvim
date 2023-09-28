@@ -64,10 +64,10 @@ local theme = lush(function(injected_functions)
     -- See :h highlight-groups
     --
     ColorColumn       { bg="#1c1c1c" }, -- Columns set with 'colorcolumn'
-    Conceal           { bg="darkgrey", fg="lightgrey" }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
-    Cursor            { bg=hsl(colors.white), fg=hsl(colors.black)}, -- Character under the cursor
+    Conceal           { bg="darkgrey", fg=hsl(colors.light_grey) }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
+    Cursor            { bg=hsl(colors.white), fg=hsl(colors.black) }, -- Character under the cursor
 
-    Search            { bg="#5f5f87", fg=hsl(colors.black)}, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
+    Search            { bg="#5f5f87", fg=hsl(colors.black) }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
     CurSearch         { Search }, -- Highlighting a search pattern under the cursor (see 'hlsearch')
     Substitute        { Search }, -- |:substitute| replacement text highlighting
     QuickFixLine      { Search }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
@@ -103,7 +103,7 @@ local theme = lush(function(injected_functions)
     FoldColumn        { bg="grey", fg="cyan" }, -- 'foldcolumn'
     CursorLineFold    { FoldColumn }, -- Like FoldColumn when 'cursorline' is set for the cursor line
 
-    SignColumn        { fg=hsl(colors.white)}, -- Column where |signs| are displayed
+    SignColumn        { fg=hsl(colors.white) }, -- Column where |signs| are displayed
     CursorLineSign    { SignColumn }, -- Like SignColumn when 'cursorline' is set for the cursor line
 
     IncSearch         { gui="reverse" }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
@@ -117,12 +117,12 @@ local theme = lush(function(injected_functions)
 
     MoreMsg           { gui="bold", fg="seagreen" }, -- |more-prompt|
     Normal            { bg=hsl(colors.background), fg="#e4e4e4" }, -- Normal text
-    NormalFloat       { bg="#444444", fg=hsl(colors.white)}, -- Normal text in floating windows.
+    NormalFloat       { bg="#444444", fg=hsl(colors.white) }, -- Normal text in floating windows.
     -- FloatBorder    { }, -- Border of floating windows.
-    FloatTitle        { gui="bold", fg=hsl(colors.white)}, -- Title of floating windows.
+    FloatTitle        { gui="bold", fg=hsl(colors.white) }, -- Title of floating windows.
     -- NormalNC       { }, -- normal text in non-current windows
 
-    Pmenu             { bg="#444444", fg=hsl(colors.white)}, -- Popup menu: Normal item.
+    Pmenu             { bg="#444444", fg=hsl(colors.white) }, -- Popup menu: Normal item.
     PmenuKind         { Pmenu }, -- Popup menu: Normal item "kind"
     PmenuExtra        { Pmenu }, -- Popup menu: Normal item "extra text"
 
@@ -221,7 +221,7 @@ local theme = lush(function(injected_functions)
     DiagnosticError               { fg="red" }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     DiagnosticWarn                { fg="orange" }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     DiagnosticInfo                { fg="lightblue" }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticHint                { fg="lightgrey" }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticHint                { fg=hsl(colors.light_grey) }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     DiagnosticOk                  { fg="lightgreen" }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     DiagnosticVirtualTextError    { DiagnosticError }, -- Used for "Error" diagnostic virtual text.
     DiagnosticVirtualTextWarn     { DiagnosticWarn }, -- Used for "Warn" diagnostic virtual text.
@@ -231,7 +231,7 @@ local theme = lush(function(injected_functions)
     DiagnosticUnderlineError      { gui="underline", sp="red" }, -- Used to underline "Error" diagnostics.
     DiagnosticUnderlineWarn       { gui="underline", sp="orange" }, -- Used to underline "Warn" diagnostics.
     DiagnosticUnderlineInfo       { gui="underline", sp="lightblue" }, -- Used to underline "Info" diagnostics.
-    DiagnosticUnderlineHint       { gui="underline", sp="lightgrey" }, -- Used to underline "Hint" diagnostics.
+    DiagnosticUnderlineHint       { gui="underline", sp=hsl(colors.light_grey) }, -- Used to underline "Hint" diagnostics.
     DiagnosticUnderlineOk         { gui="underline", sp="lightgreen" }, -- Used to underline "Ok" diagnostics.
     DiagnosticFloatingError       { DiagnosticError }, -- Used to color "Error" diagnostic messages in diagnostics float. See |vim.diagnostic.open_float()|
     DiagnosticFloatingWarn        { DiagnosticWarn }, -- Used to color "Warn" diagnostic messages in diagnostics float.
@@ -285,16 +285,19 @@ local theme = lush(function(injected_functions)
     sym"@text.todo"             { Todo },
     sym"@string"                { String },
     sym"@number"                { Number },
+    sym"@label.json"            { String },
     sym"@keyword"               { Keyword },
     sym"@symbol.ruby"           { fg=hsl(colors.cyan) },
     sym"@constructor"           { Special },
 
-    sym"@function.call"         { fg=hsl(colors.white) }, -- Function calls
-    sym"@parameter"             { fg=hsl(colors.white) },
-    sym"@punctuation.bracket"   { fg=hsl(colors.white) }, -- For brackets and parenthesis
-    sym"@punctuation.delimiter" { fg=hsl(colors.white) }, -- For delimiters (e.g. `.`)
-    sym"@variable"              { fg=hsl(colors.white) },
-    sym"@operator"              { fg=hsl(colors.white) },
+    sym"@function.call"         { fg=hsl(colors.light_grey) }, -- Function calls
+    sym"@parameter"             { fg=hsl(colors.light_grey) },
+    sym"@punctuation.bracket"   { fg=hsl(colors.light_grey) }, -- For brackets and parenthesis
+    sym"@punctuation.delimiter" { fg=hsl(colors.light_grey) }, -- For delimiters (e.g. `.`)
+    sym"@variable"              { fg=hsl(colors.light_grey) },
+    sym"@operator"              { fg=hsl(colors.light_grey) },
+    sym"@label"                 { fg=hsl(colors.light_grey) },
+    sym"@field.yaml"            { fg=hsl(colors.light_grey) },
 
     sym"@constant.builtin"      { fg=hsl(colors.yellow) },
     sym"@variable.builtin"      { fg=hsl(colors.yellow) },
@@ -316,7 +319,6 @@ local theme = lush(function(injected_functions)
     -- sym"@constructor"           { }, -- Special
     -- sym"@conditional"           { }, -- Conditional
     -- sym"@repeat"                { }, -- Repeat
-    -- sym"@label"                 { }, -- Label
     -- sym"@keyword"               { }, -- Keyword
     -- sym"@exception"             { }, -- Exception
     -- sym"@variable"              { }, -- Identifier

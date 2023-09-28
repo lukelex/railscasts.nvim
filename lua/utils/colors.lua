@@ -2,7 +2,6 @@ return {
   background = "#121212",
 
   black = "#000000",
-  beige = "#E6E1DC",
   blue = "#5C7E96",
   light_green = "#87af5f",
   dark_green="#005f00",
@@ -17,5 +16,6 @@ return {
   pink = "#F9D7E4",
   cyan = "#6D9CBE",
   white = "#FFFFFF",
-  grey = "#5f5f87",
+  grey = "#5F5F87",
+  light_grey = "#E6E1DC"
 }
