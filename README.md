@@ -55,3 +55,7 @@ config file. Usually found at `~/.config/kitty/kitty.conf`.
 ```sh
 $ wget -O - https://raw.githubusercontent.com/lukelex/railscasts.nvim/main/extras/kitty.conf >> ~/.config/kitty/kitty.conf
 ```
+
+#### [IndentBlankLine](https://github.com/lukas-reineke/indent-blankline.nvim)
+
+It just works :wink:.
