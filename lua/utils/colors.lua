@@ -7,7 +7,7 @@ return {
   dark_green="#005F00",
   red = "#DF5F5F",
   light_orange = "#FFC66D",
-  dark_orange = "#FF8700",
+  dark_orange = "#CC7833",
   yellow = "#EBE774",
   purple = "#B3B3D9",
   light_brown = "#92764C",
