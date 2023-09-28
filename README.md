@@ -19,6 +19,7 @@ ones that it has been visually optimized for so far are:
 
 * Ruby
 * Lua
+* Bash
 
 ## Installation
 

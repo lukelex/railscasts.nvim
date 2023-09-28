@@ -278,22 +278,23 @@ local theme = lush(function(injected_functions)
     sym"@type"                  { Type },
     sym"@lsp.type.type"         { Type },
 
-    sym"@function.builtin"      { Special },
-    sym"@constructor"           { Special },
+    sym"@preproc"               { PreProc },
+    sym"@function.builtin"      { PreProc },
 
     sym"@text.title"            { Title },
     sym"@text.todo"             { Todo },
     sym"@string"                { String },
     sym"@number"                { Number },
     sym"@keyword"               { Keyword },
-    sym"@preproc"               { PreProc },
     sym"@symbol.ruby"           { fg=hsl(colors.cyan) },
+    sym"@constructor"           { Special },
 
     sym"@function.call"         { fg=hsl(colors.white) }, -- Function calls
     sym"@parameter"             { fg=hsl(colors.white) },
     sym"@punctuation.bracket"   { fg=hsl(colors.white) }, -- For brackets and parenthesis
     sym"@punctuation.delimiter" { fg=hsl(colors.white) }, -- For delimiters (e.g. `.`)
     sym"@variable"              { fg=hsl(colors.white) },
+    sym"@operator"              { fg=hsl(colors.white) },
 
     sym"@constant.builtin"      { fg=hsl(colors.yellow) },
     sym"@variable.builtin"      { fg=hsl(colors.yellow) },
@@ -308,7 +309,6 @@ local theme = lush(function(injected_functions)
     -- sym"@boolean"               { }, -- Boolean
     -- sym"@float"                 { }, -- Float
     -- sym"@function"              { }, -- Function
-    -- sym"@function.builtin"      { }, -- Special
     -- sym"@function.macro"        { }, -- Macro
     -- sym"@method"                { }, -- Function
     -- sym"@field"                 { }, -- Identifier
@@ -317,7 +317,6 @@ local theme = lush(function(injected_functions)
     -- sym"@conditional"           { }, -- Conditional
     -- sym"@repeat"                { }, -- Repeat
     -- sym"@label"                 { }, -- Label
-    -- sym"@operator"              { }, -- Operator
     -- sym"@keyword"               { }, -- Keyword
     -- sym"@exception"             { }, -- Exception
     -- sym"@variable"              { }, -- Identifier
