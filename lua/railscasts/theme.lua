@@ -133,7 +133,7 @@ local theme = lush(function(injected_functions)
     PmenuSbar         { bg="#5a647e" }, -- Popup menu: Scrollbar.
     PmenuThumb        { bg="#a8a8a8", fg=hsl(colors.white) }, -- Popup menu: Thumb of the scrollbar.
     Question          { gui="bold", fg="green" }, -- |hit-enter| prompt and yes/no questions
-    SpellBad          { gui="undercurl", sp="red", fg="#d70000" }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
+    SpellBad          { gui="undercurl", sp="red", fg=hsl(colors.beige_grey)}, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
     SpellCap          { gui="underline", sp="blue", fg="#dfdfff" }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
     SpellLocal        { gui="undercurl", sp="cyan", fg="#00ffff" }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
     SpellRare         { gui="underline", sp="magenta", fg="#df5f87" }, -- Word that is recognized by the spellchecker as one that is hardly ever used. |spell| Combined with the highlighting used otherwise.
