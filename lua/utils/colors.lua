@@ -1,5 +1,5 @@
 return {
-  background = "#121212",
+  background = "#2B2B2B",
 
   black = "#000000",
   blue = "#5C7E96",
@@ -16,6 +16,6 @@ return {
   pink = "#F9D7E4",
   cyan = "#6D9CBE",
   white = "#FFFFFF",
-  grey = "#5F5F87",
-  light_grey = "#E6E1DC"
+  grey = "#E6E1DC",
+  dark_grey = "#5F5F87",
 }

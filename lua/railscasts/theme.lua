@@ -64,7 +64,7 @@ local theme = lush(function(injected_functions)
     -- See :h highlight-groups
     --
     ColorColumn       { bg="#1c1c1c" }, -- Columns set with 'colorcolumn'
-    Conceal           { bg="darkgrey", fg=hsl(colors.light_grey) }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
+    Conceal           { bg="darkgrey", fg=hsl(colors.grey) }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
     Cursor            { bg=hsl(colors.white), fg=hsl(colors.black) }, -- Character under the cursor
 
     Search            { bg="#5f5f87", fg=hsl(colors.black) }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
@@ -142,7 +142,7 @@ local theme = lush(function(injected_functions)
     TabLineFill       { bg=hsl(colors.light_brown) }, -- Tab pages line, where there are no labels
     TabLineSel        { gui="bold", bg=hsl(colors.background), fg=hsl(colors.light_brown) }, -- Tab pages line, active tab page label
     Title             { gui="bold", fg=hsl(colors.white) }, -- Titles for output from ":set all", ":autocmd" etc.
-    Visual            { bg="#5f5f87" }, -- Visual mode selection
+    Visual            { bg="#5A647E" }, -- Visual mode selection
     -- VisualNOS      { }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg        { fg="#800000" }, -- Warning messages
     WildMenu          { bg="yellow", fg="black" }, -- Current match in 'wildmenu' completion
@@ -221,7 +221,7 @@ local theme = lush(function(injected_functions)
     DiagnosticError               { fg="red" }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     DiagnosticWarn                { fg="orange" }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     DiagnosticInfo                { fg="lightblue" }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticHint                { fg=hsl(colors.light_grey) }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticHint                { fg=hsl(colors.grey) }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     DiagnosticOk                  { fg="lightgreen" }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     DiagnosticVirtualTextError    { DiagnosticError }, -- Used for "Error" diagnostic virtual text.
     DiagnosticVirtualTextWarn     { DiagnosticWarn }, -- Used for "Warn" diagnostic virtual text.
@@ -231,7 +231,7 @@ local theme = lush(function(injected_functions)
     DiagnosticUnderlineError      { gui="underline", sp="red" }, -- Used to underline "Error" diagnostics.
     DiagnosticUnderlineWarn       { gui="underline", sp="orange" }, -- Used to underline "Warn" diagnostics.
     DiagnosticUnderlineInfo       { gui="underline", sp="lightblue" }, -- Used to underline "Info" diagnostics.
-    DiagnosticUnderlineHint       { gui="underline", sp=hsl(colors.light_grey) }, -- Used to underline "Hint" diagnostics.
+    DiagnosticUnderlineHint       { gui="underline", sp=hsl(colors.grey) }, -- Used to underline "Hint" diagnostics.
     DiagnosticUnderlineOk         { gui="underline", sp="lightgreen" }, -- Used to underline "Ok" diagnostics.
     DiagnosticFloatingError       { DiagnosticError }, -- Used to color "Error" diagnostic messages in diagnostics float. See |vim.diagnostic.open_float()|
     DiagnosticFloatingWarn        { DiagnosticWarn }, -- Used to color "Warn" diagnostic messages in diagnostics float.
@@ -278,8 +278,10 @@ local theme = lush(function(injected_functions)
     sym"@type"                  { Type },
     sym"@lsp.type.type"         { Type },
 
-    sym"@preproc"               { PreProc },
-    sym"@function.builtin"      { PreProc },
+    sym"@preproc"                  { PreProc },
+    sym"@function.builtin"         { PreProc },
+    sym"@tag"                      { PreProc }, -- Tag
+    sym"@punctuation.special.yaml" { PreProc }, -- For delimiters (e.g. `.`)
 
     sym"@text.title"            { Title },
     sym"@text.todo"             { Todo },
@@ -290,14 +292,14 @@ local theme = lush(function(injected_functions)
     sym"@symbol.ruby"           { fg=hsl(colors.cyan) },
     sym"@constructor"           { Special },
 
-    sym"@function.call"         { fg=hsl(colors.light_grey) }, -- Function calls
-    sym"@parameter"             { fg=hsl(colors.light_grey) },
-    sym"@punctuation.bracket"   { fg=hsl(colors.light_grey) }, -- For brackets and parenthesis
-    sym"@punctuation.delimiter" { fg=hsl(colors.light_grey) }, -- For delimiters (e.g. `.`)
-    sym"@variable"              { fg=hsl(colors.light_grey) },
-    sym"@operator"              { fg=hsl(colors.light_grey) },
-    sym"@label"                 { fg=hsl(colors.light_grey) },
-    sym"@field.yaml"            { fg=hsl(colors.light_grey) },
+    sym"@function.call"         { fg=hsl(colors.grey) }, -- Function calls
+    sym"@parameter"             { fg=hsl(colors.grey) },
+    sym"@punctuation.bracket"   { fg=hsl(colors.grey) }, -- For brackets and parenthesis
+    sym"@punctuation.delimiter" { fg=hsl(colors.grey) }, -- For delimiters (e.g. `.`)
+    sym"@variable"              { fg=hsl(colors.grey) },
+    sym"@operator"              { fg=hsl(colors.grey) },
+    sym"@label"                 { fg=hsl(colors.grey) },
+    sym"@field.yaml"            { fg=hsl(colors.grey) },
 
     sym"@constant.builtin"      { fg=hsl(colors.yellow) },
     sym"@variable.builtin"      { fg=hsl(colors.yellow) },
@@ -328,7 +330,6 @@ local theme = lush(function(injected_functions)
     -- sym"@structure"             { }, -- Structure
     -- sym"@include"               { }, -- Include
     -- sym"@debug"                 { }, -- Debug
-    -- sym"@tag"                   { }, -- Tag
 
     NvimInvalidSpacing                           { ErrorMsg },
     NvimSpacing                                  { Normal },
