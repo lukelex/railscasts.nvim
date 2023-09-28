@@ -291,6 +291,7 @@ local theme = lush(function(injected_functions)
     sym"@keyword"               { Keyword },
     sym"@symbol.ruby"           { fg=hsl(colors.cyan) },
     sym"@constructor"           { Special },
+    sym"@field.yaml"            { Function },
 
     sym"@function.call"         { fg=hsl(colors.beige_grey) }, -- Function calls
     sym"@parameter"             { fg=hsl(colors.beige_grey) },
@@ -299,7 +300,6 @@ local theme = lush(function(injected_functions)
     sym"@variable"              { fg=hsl(colors.beige_grey) },
     sym"@operator"              { fg=hsl(colors.beige_grey) },
     sym"@label"                 { fg=hsl(colors.beige_grey) },
-    sym"@field.yaml"            { fg=hsl(colors.beige_grey) },
 
     sym"@constant.builtin"      { fg=hsl(colors.yellow) },
     sym"@variable.builtin"      { fg=hsl(colors.yellow) },
