@@ -3,7 +3,7 @@
 (this is a work in progress)
 
 The goal is to be a 1/1 port of the original Textmate theme,
-respecting the differences and shortcomings of using TreeSitter
+respecting the differences and shortcomings of using TreeSitter's
 grammar over TextMate's.
 
 The original theme can be found below:
