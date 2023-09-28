@@ -33,17 +33,36 @@ use({
 })
 ```
 
-### LazyVim
+### Lazy.nvim
 
-I don't use it ¯\\\_(ツ)\_/¯...PRs are welcomed!
+```lua
+{
+  "lukelex/railscasts.nvim",
+  dependencies = { "rktjmp/lush.nvim" }
+},
+```
+
+### Plug
+
+```vim
+Plug "rktjmp/lush.nvim"
+Plug "lukelex/railscasts.nvim"
+```
 
 ## Usage
 
 ```lua
+-- Lua
 vim.cmd.colorscheme "railscasts"
 ```
 
-### External Plugins
+```vim
+" Vimscript
+colorscheme railscasts
+```
+
+
+### Plugins
 
 #### [Lualine](https://github.com/nvim-lualine/lualine.nvim)
 
@@ -57,6 +76,12 @@ require("lualine").setup {
 }
 ```
 
+#### [IndentBlankLine](https://github.com/lukas-reineke/indent-blankline.nvim)
+
+It just works :wink:.
+
+### External Applications
+
 #### Kitty
 
 Paste the contents of `./extras/kitty.conf` into your Kitty
@@ -65,7 +90,3 @@ config file. Usually found at `~/.config/kitty/kitty.conf`.
 ```sh
 $ wget -O - https://raw.githubusercontent.com/lukelex/railscasts.nvim/main/extras/kitty.conf >> ~/.config/kitty/kitty.conf
 ```
-
-#### [IndentBlankLine](https://github.com/lukas-reineke/indent-blankline.nvim)
-
-It just works :wink:.
