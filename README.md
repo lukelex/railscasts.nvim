@@ -1,4 +1,4 @@
-# Railscasts Theme for [TreeSitter](https://tree-sitter.github.io/tree-sitter/)
+# Railscasts Theme for [Neovim](https://neovim.io/)
 
 (this is a work in progress)
 
@@ -11,6 +11,14 @@ The original theme can be found below:
 * TextMate: [ryanb/textmate_theme.zip](http://media.railscasts.com/resources/textmate_theme.zip)
 * Vim: [ryanb/railscasts.vim](https://github.com/ryanb/dotfiles/blob/master/vim/colors/railscasts.vim)
 * Font: [Bitstream Vera Sans Mono](https://www.fontmirror.com/bitstream-vera-sans-mono)
+
+## Language support
+
+Although you can run this color scheme with any language, the only
+ones that it has been visually optimized for so far are:
+
+* Ruby
+* Lua
 
 ## Installation
 
