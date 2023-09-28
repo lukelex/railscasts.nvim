@@ -64,7 +64,7 @@ local theme = lush(function(injected_functions)
     -- See :h highlight-groups
     --
     ColorColumn       { bg="#1c1c1c" }, -- Columns set with 'colorcolumn'
-    Conceal           { bg="darkgrey", fg=hsl(colors.grey) }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
+    Conceal           { bg="darkgrey", fg=hsl(colors.beige_grey) }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
     Cursor            { bg=hsl(colors.white), fg=hsl(colors.black) }, -- Character under the cursor
 
     Search            { bg="#5f5f87", fg=hsl(colors.black) }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
@@ -75,7 +75,7 @@ local theme = lush(function(injected_functions)
     lCursor           { bg="fg", fg="bg" }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
     -- CursorIM       { }, -- Like Cursor, but used when in IME mode |CursorIM|
     CursorColumn      { bg="grey40" }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
-    CursorLine        { bg="#1c1c1c" }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
+    CursorLine        { bg=hsl(colors.grey)}, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
     Directory         { fg="#87af5f" }, -- Directory names (and other special names in listings)
     DiffAdd           { fg=hsl(colors.dark_green) }, -- Diff mode: Added line |diff.txt|
     DiffChange        { fg=hsl(colors.cyan) }, -- Diff mode: Changed line |diff.txt|
@@ -221,7 +221,7 @@ local theme = lush(function(injected_functions)
     DiagnosticError               { fg="red" }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     DiagnosticWarn                { fg="orange" }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     DiagnosticInfo                { fg="lightblue" }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticHint                { fg=hsl(colors.grey) }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticHint                { fg=hsl(colors.beige_grey) }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     DiagnosticOk                  { fg="lightgreen" }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     DiagnosticVirtualTextError    { DiagnosticError }, -- Used for "Error" diagnostic virtual text.
     DiagnosticVirtualTextWarn     { DiagnosticWarn }, -- Used for "Warn" diagnostic virtual text.
@@ -231,7 +231,7 @@ local theme = lush(function(injected_functions)
     DiagnosticUnderlineError      { gui="underline", sp="red" }, -- Used to underline "Error" diagnostics.
     DiagnosticUnderlineWarn       { gui="underline", sp="orange" }, -- Used to underline "Warn" diagnostics.
     DiagnosticUnderlineInfo       { gui="underline", sp="lightblue" }, -- Used to underline "Info" diagnostics.
-    DiagnosticUnderlineHint       { gui="underline", sp=hsl(colors.grey) }, -- Used to underline "Hint" diagnostics.
+    DiagnosticUnderlineHint       { gui="underline", sp=hsl(colors.beige_grey) }, -- Used to underline "Hint" diagnostics.
     DiagnosticUnderlineOk         { gui="underline", sp="lightgreen" }, -- Used to underline "Ok" diagnostics.
     DiagnosticFloatingError       { DiagnosticError }, -- Used to color "Error" diagnostic messages in diagnostics float. See |vim.diagnostic.open_float()|
     DiagnosticFloatingWarn        { DiagnosticWarn }, -- Used to color "Warn" diagnostic messages in diagnostics float.
@@ -292,14 +292,14 @@ local theme = lush(function(injected_functions)
     sym"@symbol.ruby"           { fg=hsl(colors.cyan) },
     sym"@constructor"           { Special },
 
-    sym"@function.call"         { fg=hsl(colors.grey) }, -- Function calls
-    sym"@parameter"             { fg=hsl(colors.grey) },
-    sym"@punctuation.bracket"   { fg=hsl(colors.grey) }, -- For brackets and parenthesis
-    sym"@punctuation.delimiter" { fg=hsl(colors.grey) }, -- For delimiters (e.g. `.`)
-    sym"@variable"              { fg=hsl(colors.grey) },
-    sym"@operator"              { fg=hsl(colors.grey) },
-    sym"@label"                 { fg=hsl(colors.grey) },
-    sym"@field.yaml"            { fg=hsl(colors.grey) },
+    sym"@function.call"         { fg=hsl(colors.beige_grey) }, -- Function calls
+    sym"@parameter"             { fg=hsl(colors.beige_grey) },
+    sym"@punctuation.bracket"   { fg=hsl(colors.beige_grey) }, -- For brackets and parenthesis
+    sym"@punctuation.delimiter" { fg=hsl(colors.beige_grey) }, -- For delimiters (e.g. `.`)
+    sym"@variable"              { fg=hsl(colors.beige_grey) },
+    sym"@operator"              { fg=hsl(colors.beige_grey) },
+    sym"@label"                 { fg=hsl(colors.beige_grey) },
+    sym"@field.yaml"            { fg=hsl(colors.beige_grey) },
 
     sym"@constant.builtin"      { fg=hsl(colors.yellow) },
     sym"@variable.builtin"      { fg=hsl(colors.yellow) },
