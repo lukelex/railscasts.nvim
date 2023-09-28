@@ -116,7 +116,7 @@ local theme = lush(function(injected_functions)
     MsgSeparator      { StatusLine }, -- Separator for scrolled messages, `msgsep` flag of 'display'
 
     MoreMsg           { gui="bold", fg="seagreen" }, -- |more-prompt|
-    Normal            { bg=hsl(colors.background), fg="#e4e4e4" }, -- Normal text
+    Normal            { bg=hsl(colors.background), fg=hsl(colors.beige_grey)}, -- Normal text
     NormalFloat       { bg="#444444", fg=hsl(colors.white) }, -- Normal text in floating windows.
     -- FloatBorder    { }, -- Border of floating windows.
     FloatTitle        { gui="bold", fg=hsl(colors.white) }, -- Title of floating windows.
