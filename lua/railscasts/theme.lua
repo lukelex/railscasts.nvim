@@ -63,11 +63,11 @@ local theme = lush(function(injected_functions)
     --
     -- See :h highlight-groups
     --
-    ColorColumn       { bg="#1c1c1c" }, -- Columns set with 'colorcolumn'
+    ColorColumn       { bg=hsl(colors.black)}, -- Columns set with 'colorcolumn'
     Conceal           { bg="darkgrey", fg=hsl(colors.beige_grey) }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
     Cursor            { bg=hsl(colors.white), fg=hsl(colors.black) }, -- Character under the cursor
 
-    Search            { bg="#5f5f87", fg=hsl(colors.black) }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
+    Search            { bg=hsl(colors.dark_grey), fg=hsl(colors.black) }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
     CurSearch         { Search }, -- Highlighting a search pattern under the cursor (see 'hlsearch')
     Substitute        { Search }, -- |:substitute| replacement text highlighting
     QuickFixLine      { Search }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
@@ -75,11 +75,11 @@ local theme = lush(function(injected_functions)
     lCursor           { bg="fg", fg="bg" }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
     -- CursorIM       { }, -- Like Cursor, but used when in IME mode |CursorIM|
     CursorColumn      { bg="grey40" }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
-    CursorLine        { bg=hsl(colors.grey)}, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
-    Directory         { fg="#87af5f" }, -- Directory names (and other special names in listings)
+    CursorLine        { bg=hsl(colors.grey) }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
+    Directory         { fg=hsl(colors.light_green) }, -- Directory names (and other special names in listings)
     DiffAdd           { fg=hsl(colors.dark_green) }, -- Diff mode: Added line |diff.txt|
     DiffChange        { fg=hsl(colors.cyan) }, -- Diff mode: Changed line |diff.txt|
-    DiffDelete        { gui="bold", bg="#660000", fg="#000000" }, -- Diff mode: Deleted line |diff.txt|
+    DiffDelete        { gui="bold", bg="#660000", fg=hsl(colors.black)}, -- Diff mode: Deleted line |diff.txt|
     DiffText          { gui="bold", bg="#ff0000", fg=hsl(colors.white) }, -- Diff mode: Changed text within a changed line |diff.txt|
 
     NonText           { fg="#767676" }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
@@ -126,7 +126,7 @@ local theme = lush(function(injected_functions)
     PmenuKind         { Pmenu }, -- Popup menu: Normal item "kind"
     PmenuExtra        { Pmenu }, -- Popup menu: Normal item "extra text"
 
-    PmenuSel          { bg="#87af5f", fg="#000000" }, -- Popup menu: Selected item.
+    PmenuSel          { bg=hsl(colors.light_green), fg=hsl(colors.black)}, -- Popup menu: Selected item.
     PmenuKindSel      { PmenuSel }, -- Popup menu: Selected item "kind"
     PmenuExtraSel     { PmenuSel }, -- Popup menu: Selected item "extra text"
 
@@ -366,7 +366,7 @@ local theme = lush(function(injected_functions)
     pythonExceptions                             { fg="#ffaf87" },
     pythonDoctest                                { fg="#8787ff" },
     pythonDoctestValue                           { fg="#87d7af" },
-    mailEmail                                    { gui="italic", fg="#87af5f" },
+    mailEmail                                    { gui="italic", fg=hsl(colors.light_green)},
     mailHeaderKey                                { fg="#ffdf5f" },
     mailSubject                                  { mailHeaderKey },
     xmlTag                                       { fg="#dfaf5f" },
@@ -379,11 +379,11 @@ local theme = lush(function(injected_functions)
     checkboxDone                                 { gui="bold", fg="#5fff00" },
     checkboxNotDone                              { gui="bold", fg="#005fdf" },
 
-    IndentBlanklineSpaceChar                     { gui="nocombine", fg="#767676" }, -- IndentBlanklineSpaceChar xxx cterm=nocombine ctermfg=243 gui=nocombine guifg=#767676
-    IndentBlanklineContextStart                  { gui="underline", sp="#af5f00" }, -- IndentBlanklineContextStart xxx cterm=underline gui=underline guisp=#af5f00
-    IndentBlanklineSpaceCharBlankline            { gui="nocombine", fg="#767676" }, -- IndentBlanklineSpaceCharBlankline xxx cterm=nocombine ctermfg=243 gui=nocombine guifg=#767676
-    IndentBlanklineContextChar                   { gui="nocombine", fg="#af5f00" }, -- IndentBlanklineContextChar xxx cterm=nocombine ctermfg=130 gui=nocombine guifg=#af5f00
-    IndentBlanklineChar                          { gui="nocombine", fg="#767676" }, -- IndentBlanklineChar xxx cterm=nocombine ctermfg=243 gui=nocombine guifg=#767676
+    IndentBlanklineSpaceChar                     { gui="nocombine", fg="#767676" },
+    IndentBlanklineContextStart                  { gui="underline", sp=hsl(colors.dark_brown)},
+    IndentBlanklineSpaceCharBlankline            { gui="nocombine", fg="#767676" },
+    IndentBlanklineContextChar                   { gui="nocombine", fg=hsl(colors.dark_brown)},
+    IndentBlanklineChar                          { gui="nocombine", fg="#767676" },
 
     TelescopeBorder            { fg=hsl(colors.light_brown) },
     TelescopeSelection         { fg=hsl(colors.dark_orange) },
