@@ -12,6 +12,9 @@ The original theme can be found below:
 * Vim: [ryanb/railscasts.vim](https://github.com/ryanb/dotfiles/blob/master/vim/colors/railscasts.vim)
 * Font: [Bitstream Vera Sans Mono](https://www.fontmirror.com/bitstream-vera-sans-mono)
 
+![railscasts/ruby.png](./screenshots/ruby.png)
+![railscasts/telescope.png](./screenshots/telescope.png)
+
 ## Language support
 
 Although you can run this color scheme with any language, the only
