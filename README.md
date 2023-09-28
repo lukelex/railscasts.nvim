@@ -1,10 +1,10 @@
-# Railscasts Theme for Neovim
+# Railscasts Theme for [TreeSitter](https://tree-sitter.github.io/tree-sitter/)
 
 (this is a work in progress)
 
 The goal is to be a 1/1 port of the original Textmate theme,
 respecting the differences and shortcomings of using TreeSitter
-instead of the original Regular Expression-based highlighter.
+grammar over TextMate's.
 
 The original theme can be found below:
 
