@@ -169,7 +169,7 @@ local theme = lush(function(injected_functions)
     Typedef           { Type }, --   A typedef
 
     String            { fg=hsl(colors.light_green) }, --   A string constant: "this is a string"
-    Number            { String }, --   A number constant: 234, 0xff
+    Number            { fg=hsl(colors.moss) }, --   A number constant: 234, 0xff
     Float             { Number }, --   A floating point constant: 2.3e10
 
     Boolean           { fg=hsl(colors.blue) }, --   A boolean constant: TRUE, false
@@ -301,8 +301,8 @@ local theme = lush(function(injected_functions)
     sym"@operator"              { fg=hsl(colors.beige_grey) },
     sym"@label"                 { fg=hsl(colors.beige_grey) },
 
-    sym"@constant.builtin"      { fg=hsl(colors.yellow) },
-    sym"@variable.builtin"      { fg=hsl(colors.yellow) },
+    sym"@constant.builtin"      { fg=hsl(colors.blue) },
+    sym"@variable.builtin"      { fg=hsl(colors.blue) },
 
     -- sym"@constant.macro"        { }, -- Define
     -- sym"@define"                { }, -- Define
