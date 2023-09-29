@@ -280,7 +280,6 @@ local theme = lush(function(injected_functions)
 
     sym"@preproc"                  { PreProc },
     sym"@function.builtin"         { PreProc },
-    sym"@tag"                      { PreProc }, -- Tag
     sym"@punctuation.special.yaml" { PreProc }, -- For delimiters (e.g. `.`)
 
     sym"@text.title"            { Title },
@@ -291,6 +290,8 @@ local theme = lush(function(injected_functions)
     sym"@keyword"               { Keyword },
     sym"@symbol.ruby"           { fg=hsl(colors.cyan) },
     sym"@constructor"           { Special },
+
+    sym"@tag"                   { Function }, -- Tag
     sym"@field.yaml"            { Function },
 
     sym"@function.call"         { fg=hsl(colors.beige_grey) }, -- Function calls
