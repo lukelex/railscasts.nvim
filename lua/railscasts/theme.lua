@@ -258,25 +258,25 @@ local theme = lush(function(injected_functions)
     -- For more information see https://github.com/rktjmp/lush.nvim/issues/109
 
     sym"@comment"               { Comment },
-    sym"@lsp.type.comment"      { Comment },
+    sym"@lsp.type.comment"      {},
     sym"@text.literal"          { Comment },
 
     sym"@field"                 { Identifier },
     sym"@property"              { Identifier },
     sym"@namespace"             { Identifier },
     sym"@text.reference"        { Identifier },
-    sym"@lsp.type.parameter"    { Identifier },
-    sym"@lsp.type.property"     { Identifier },
-    sym"@lsp.type.variable"     { Identifier },
+    sym"@lsp.type.parameter"    {},
+    sym"@lsp.type.property"     {},
+    sym"@lsp.type.variable"     {},
 
     sym"@text.uri"              { Underlined },
     sym"@text.underline"        { Underlined },
 
     sym"@constant"              { Constant },
-    sym"@lsp.type.enumMember"   { Constant },
+    sym"@lsp.type.enumMember"   {},
 
     sym"@type"                  { Type },
-    sym"@lsp.type.type"         { Type },
+    sym"@lsp.type.type"         {},
 
     sym"@preproc"                  { PreProc },
     sym"@function.builtin"         { PreProc },
@@ -291,7 +291,7 @@ local theme = lush(function(injected_functions)
     sym"@symbol.ruby"           { fg=hsl(colors.cyan) },
     sym"@constructor"           { Special },
 
-    sym"@tag"                   { Function }, -- Tag
+    sym"@tag"                   { Function },
     sym"@field.yaml"            { Function },
 
     sym"@function.call"         { fg=hsl(colors.beige_grey) }, -- Function calls
