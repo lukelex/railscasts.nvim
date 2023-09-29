@@ -261,7 +261,6 @@ local theme = lush(function(injected_functions)
     sym"@lsp.type.comment"      {},
     sym"@text.literal"          { Comment },
 
-    sym"@field"                 { Identifier },
     sym"@property"              { Identifier },
     sym"@namespace"             { Identifier },
     sym"@text.reference"        { Identifier },
@@ -298,6 +297,7 @@ local theme = lush(function(injected_functions)
     sym"@parameter"             { fg=hsl(colors.beige_grey) },
     sym"@punctuation.bracket"   { fg=hsl(colors.beige_grey) }, -- For brackets and parenthesis
     sym"@punctuation.delimiter" { fg=hsl(colors.beige_grey) }, -- For delimiters (e.g. `.`)
+    sym"@field"                 { fg=hsl(colors.beige_grey) },
     sym"@variable"              { fg=hsl(colors.beige_grey) },
     sym"@operator"              { fg=hsl(colors.beige_grey) },
     sym"@label"                 { fg=hsl(colors.beige_grey) },
@@ -317,7 +317,6 @@ local theme = lush(function(injected_functions)
     -- sym"@function"              { }, -- Function
     -- sym"@function.macro"        { }, -- Macro
     -- sym"@method"                { }, -- Function
-    -- sym"@field"                 { }, -- Identifier
     -- sym"@punctuation"           { }, -- Delimiter
     -- sym"@constructor"           { }, -- Special
     -- sym"@conditional"           { }, -- Conditional
