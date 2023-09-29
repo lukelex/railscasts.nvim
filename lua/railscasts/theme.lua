@@ -246,91 +246,6 @@ local theme = lush(function(injected_functions)
     DiagnosticDeprecated          { gui="strikethrough", sp="red" },
     DiagnosticUnnecessary         { Comment },
 
-    -- Tree-Sitter syntax groups.
-    --
-    -- See :h treesitter-highlight-groups, some groups may not be listed,
-    -- submit a PR fix to lush-template!
-    --
-    -- Tree-Sitter groups are defined with an "@" symbol, which must be
-    -- specially handled to be valid lua code, we do this via the special
-    -- sym function.
-    --
-    -- For more information see https://github.com/rktjmp/lush.nvim/issues/109
-
-    sym"@comment"               { Comment },
-    sym"@lsp.type.comment"      {},
-    sym"@text.literal"          { Comment },
-
-    sym"@property"              { Identifier },
-    sym"@namespace"             { Identifier },
-    sym"@text.reference"        { Identifier },
-    sym"@lsp.type.parameter"    {},
-    sym"@lsp.type.property"     {},
-    sym"@lsp.type.variable"     {},
-
-    sym"@text.uri"              { Underlined },
-    sym"@text.underline"        { Underlined },
-
-    sym"@constant"              { Constant },
-    sym"@lsp.type.enumMember"   {},
-
-    sym"@type"                  { Type },
-    sym"@lsp.type.type"         {},
-
-    sym"@preproc"                  { PreProc },
-    sym"@function.builtin"         { PreProc },
-    sym"@punctuation.special.yaml" { PreProc }, -- For delimiters (e.g. `.`)
-
-    sym"@text.title"            { Title },
-    sym"@text.todo"             { Todo },
-    sym"@string"                { String },
-    sym"@number"                { Number },
-    sym"@label.json"            { String },
-    sym"@keyword"               { Keyword },
-    sym"@symbol.ruby"           { fg=hsl(colors.cyan) },
-    sym"@constructor"           { Special },
-
-    sym"@tag"                   { Function },
-    sym"@field.yaml"            { Function },
-
-    sym"@function.call"         { fg=hsl(colors.beige_grey) }, -- Function calls
-    sym"@parameter"             { fg=hsl(colors.beige_grey) },
-    sym"@punctuation.bracket"   { fg=hsl(colors.beige_grey) }, -- For brackets and parenthesis
-    sym"@punctuation.delimiter" { fg=hsl(colors.beige_grey) }, -- For delimiters (e.g. `.`)
-    sym"@field"                 { fg=hsl(colors.beige_grey) },
-    sym"@variable"              { fg=hsl(colors.beige_grey) },
-    sym"@operator"              { fg=hsl(colors.beige_grey) },
-    sym"@label"                 { fg=hsl(colors.beige_grey) },
-
-    sym"@constant.builtin"      { fg=hsl(colors.blue) },
-    sym"@variable.builtin"      { fg=hsl(colors.blue) },
-
-    -- sym"@constant.macro"        { }, -- Define
-    -- sym"@define"                { }, -- Define
-    -- sym"@macro"                 { }, -- Macro
-    -- sym"@string.escape"         { }, -- SpecialChar
-    -- sym"@string.special"        { }, -- SpecialChar
-    -- sym"@character"             { }, -- Character
-    -- sym"@character.special"     { }, -- SpecialChar
-    -- sym"@boolean"               { }, -- Boolean
-    -- sym"@float"                 { }, -- Float
-    -- sym"@function"              { }, -- Function
-    -- sym"@function.macro"        { }, -- Macro
-    -- sym"@method"                { }, -- Function
-    -- sym"@punctuation"           { }, -- Delimiter
-    -- sym"@constructor"           { }, -- Special
-    -- sym"@conditional"           { }, -- Conditional
-    -- sym"@repeat"                { }, -- Repeat
-    -- sym"@keyword"               { }, -- Keyword
-    -- sym"@exception"             { }, -- Exception
-    -- sym"@variable"              { }, -- Identifier
-    -- sym"@type"                  { }, -- Type
-    -- sym"@type.definition"       { }, -- Typedef
-    -- sym"@storageclass"          { }, -- StorageClass
-    -- sym"@structure"             { }, -- Structure
-    -- sym"@include"               { }, -- Include
-    -- sym"@debug"                 { }, -- Debug
-
     NvimInvalidSpacing                           { ErrorMsg },
     NvimSpacing                                  { Normal },
     FloatShadow                                  { bg="black", blend=80 },
@@ -392,6 +307,90 @@ local theme = lush(function(injected_functions)
     TelescopePromptNormal      { fg=hsl(colors.yellow) },
     TelescopePromptPrefix      { TelescopePromptNormal },
     TelescopeMatching          { TelescopePromptNormal },
+
+    -- Tree-Sitter syntax groups.
+    --
+    -- See :h treesitter-highlight-groups, some groups may not be listed,
+    -- submit a PR fix to lush-template!
+    --
+    -- Tree-Sitter groups are defined with an "@" symbol, which must be
+    -- specially handled to be valid lua code, we do this via the special
+    -- sym function.
+    --
+    -- For more information see https://github.com/rktjmp/lush.nvim/issues/109
+
+    sym"@text.title"               { Title },
+    sym"@text.todo"                { Todo },
+    sym"@number"                   { Number },
+    sym"@float"                    { Number },
+    sym"@symbol.ruby"              { fg=hsl(colors.cyan) },
+
+    sym"@function.call"            { fg=hsl(colors.beige_grey) }, -- Function calls
+    sym"@parameter"                { sym"@function.call" },
+    sym"@punctuation.bracket"      { sym"@function.call" }, -- For brackets and parenthesis
+    sym"@punctuation.delimiter"    { sym"@function.call" }, -- For delimiters (e.g. `.`)
+    sym"@field"                    { sym"@function.call" },
+    sym"@variable"                 { sym"@function.call" },
+    sym"@operator"                 { sym"@function.call" },
+    sym"@label"                    { sym"@function.call" },
+
+    sym"@property"                 { Identifier },
+    sym"@namespace"                { Identifier },
+    sym"@text.reference"           { Identifier },
+    sym"@constant"                 { Identifier },
+    sym"@type"                     { Identifier },
+    sym"@character"                { Identifier },
+    sym"@type"                     { Identifier },
+    sym"@type.definition"          { Identifier },
+    sym"@storageclass"             { Identifier },
+
+    sym"@comment"                  { Comment },
+    sym"@structure"                { Comment },
+    sym"@text.literal"             { Comment },
+
+    sym"@preproc"                  { PreProc },
+    sym"@function.builtin"         { PreProc },
+    sym"@function.macro"           { PreProc },
+    sym"@punctuation.special.yaml" { PreProc },
+    sym"@include"                  { PreProc },
+    sym"@constant.macro"           { PreProc },
+    sym"@define"                   { PreProc },
+    sym"@macro"                    { PreProc },
+
+    sym"@conditional"              { Keyword },
+    sym"@keyword"                  { Keyword },
+    sym"@repeat"                   { Keyword },
+    sym"@exception"                { Keyword },
+
+    sym"@constructor"              { Special },
+    sym"@character.special"        { Special },
+    sym"@punctuation"              { Special },
+    sym"@constructor"              { Special },
+    sym"@debug"                    { Special },
+
+    sym"@string"                   { String },
+    sym"@string.escape"            { String },
+    sym"@string.special"           { String },
+    sym"@label.json"               { String },
+
+    sym"@tag"                      { Function },
+    sym"@field.yaml"               { Function },
+    sym"@function"                 { Function },
+    sym"@method"                   { Function },
+
+    sym"@constant.builtin"         { fg=hsl(colors.blue) },
+    sym"@variable.builtin"         { fg=hsl(colors.blue) },
+    sym"@boolean"                  { fg=hsl(colors.blue) },
+
+    sym"@text.uri"                 { Underlined },
+    sym"@text.underline"           { Underlined },
+
+    sym"@lsp.type.type"            {},
+    sym"@lsp.type.comment"         {},
+    sym"@lsp.type.enumMember"      {},
+    sym"@lsp.type.parameter"       {},
+    sym"@lsp.type.property"        {},
+    sym"@lsp.type.variable"        {},
   }
 end)
 
