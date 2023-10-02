@@ -324,6 +324,7 @@ local theme = lush(function(injected_functions)
     sym"@number"                   { Number },
     sym"@float"                    { Number },
     sym"@symbol.ruby"              { fg=hsl(colors.cyan) },
+    sym"@label"                    { fg=hsl(colors.purple) },
 
     sym"@function.call"            { fg=hsl(colors.beige_grey) }, -- Function calls
     sym"@parameter"                { sym"@function.call" },
@@ -332,7 +333,6 @@ local theme = lush(function(injected_functions)
     sym"@field"                    { sym"@function.call" },
     sym"@variable"                 { sym"@function.call" },
     sym"@operator"                 { sym"@function.call" },
-    sym"@label"                    { sym"@function.call" },
 
     sym"@property"                 { Identifier },
     sym"@namespace"                { Identifier },
@@ -356,6 +356,8 @@ local theme = lush(function(injected_functions)
     sym"@constant.macro"           { PreProc },
     sym"@define"                   { PreProc },
     sym"@macro"                    { PreProc },
+    sym"@type.qualifier"           { PreProc },
+    sym"@operator.ruby"            { PreProc },
 
     sym"@conditional"              { Keyword },
     sym"@keyword"                  { Keyword },
