@@ -294,11 +294,13 @@ local theme = lush(function(injected_functions)
     checkboxDone                                 { gui="bold", fg="#5fff00" },
     checkboxNotDone                              { gui="bold", fg="#005fdf" },
 
+    IndentLine                                   { fg=hsl("#767676") },
+
     IndentBlanklineSpaceChar                     { gui="nocombine", fg="#767676" },
     IndentBlanklineContextStart                  { gui="underline", sp=hsl(colors.dark_brown)},
-    IndentBlanklineSpaceCharBlankline            { gui="nocombine", fg="#767676" },
+    IndentBlanklineSpaceCharBlankline            { IndentBlanklineSpaceChar },
     IndentBlanklineContextChar                   { gui="nocombine", fg=hsl(colors.dark_brown)},
-    IndentBlanklineChar                          { gui="nocombine", fg="#767676" },
+    IndentBlanklineChar                          { IndentBlanklineSpaceChar },
 
     TelescopeBorder            { fg=hsl(colors.light_brown) },
     TelescopeSelection         { fg=hsl(colors.dark_orange) },
