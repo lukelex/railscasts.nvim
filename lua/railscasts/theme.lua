@@ -116,7 +116,7 @@ local theme = lush(function(injected_functions)
     MsgSeparator      { StatusLine }, -- Separator for scrolled messages, `msgsep` flag of 'display'
 
     MoreMsg           { gui="bold", fg="seagreen" }, -- |more-prompt|
-    Normal            { bg=hsl(colors.background), fg=hsl(colors.beige_grey)}, -- Normal text
+    Normal            { bg=hsl(colors.background), fg=hsl(colors.beige_grey) }, -- Normal text
     NormalFloat       { bg="#444444", fg=hsl(colors.white) }, -- Normal text in floating windows.
     -- FloatBorder    { }, -- Border of floating windows.
     FloatTitle        { gui="bold", fg=hsl(colors.white) }, -- Title of floating windows.
@@ -310,6 +310,8 @@ local theme = lush(function(injected_functions)
     TelescopePromptPrefix      { TelescopePromptNormal },
     TelescopeMatching          { TelescopePromptNormal },
 
+    zshDeref { Constant },
+
     -- Tree-Sitter syntax groups.
     --
     -- See :h treesitter-highlight-groups, some groups may not be listed,
@@ -321,12 +323,13 @@ local theme = lush(function(injected_functions)
     --
     -- For more information see https://github.com/rktjmp/lush.nvim/issues/109
 
+    sym"@text"                     { fg=hsl(colors.beige_grey) },
     sym"@text.title"               { Title },
     sym"@text.todo"                { Todo },
     sym"@number"                   { Number },
     sym"@float"                    { Number },
-    sym"@symbol.ruby"              { fg=hsl(colors.cyan) },
     sym"@label"                    { fg=hsl(colors.purple) },
+    sym"@conceal"                  { NonText },
 
     sym"@function.call"            { fg=hsl(colors.beige_grey) }, -- Function calls
     sym"@parameter"                { sym"@function.call" },
@@ -353,18 +356,16 @@ local theme = lush(function(injected_functions)
     sym"@preproc"                  { PreProc },
     sym"@function.builtin"         { PreProc },
     sym"@function.macro"           { PreProc },
-    sym"@punctuation.special.yaml" { PreProc },
     sym"@include"                  { PreProc },
     sym"@constant.macro"           { PreProc },
     sym"@define"                   { PreProc },
     sym"@macro"                    { PreProc },
     sym"@type.qualifier"           { PreProc },
-    sym"@operator.ruby"            { PreProc },
 
     sym"@conditional"              { Keyword },
+    sym"@exception"                { Keyword },
     sym"@keyword"                  { Keyword },
     sym"@repeat"                   { Keyword },
-    sym"@exception"                { Keyword },
 
     sym"@constructor"              { Special },
     sym"@character.special"        { Special },
@@ -378,16 +379,18 @@ local theme = lush(function(injected_functions)
     sym"@label.json"               { String },
 
     sym"@tag"                      { Function },
-    sym"@field.yaml"               { Function },
     sym"@function"                 { Function },
     sym"@method"                   { Function },
 
     sym"@constant.builtin"         { fg=hsl(colors.blue) },
-    sym"@variable.builtin"         { fg=hsl(colors.blue) },
-    sym"@boolean"                  { fg=hsl(colors.blue) },
+    sym"@variable.builtin"         { sym"@constant.builtin" },
+    sym"@boolean"                  { sym"@constant.builtin" },
 
     sym"@text.uri"                 { Underlined },
     sym"@text.underline"           { Underlined },
+
+    sym"@text.diff.add"            { diffAdded },                           -- Added text (for diff files)
+    sym"@text.diff.delete"         { diffRemoved },
 
     sym"@lsp.type.type"            {},
     sym"@lsp.type.comment"         {},
@@ -395,6 +398,16 @@ local theme = lush(function(injected_functions)
     sym"@lsp.type.parameter"       {},
     sym"@lsp.type.property"        {},
     sym"@lsp.type.variable"        {},
+
+    sym"@operator.ruby"            { PreProc },
+    sym"@symbol.ruby"              { fg=hsl(colors.cyan) },
+
+    sym"@tag.delimiter.html"       { PreProc },
+
+    sym"@property.typescript"      { sym"@text" },
+
+    sym"@field.yaml"               { Function },
+    sym"@punctuation.special.yaml" { PreProc },
   }
 end)
 
