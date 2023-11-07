@@ -13,7 +13,7 @@ return {
     c = { bg = colors.light_brown, fg = colors.beige_grey }
   },
   visual = {
-    a = { bg = colors.light_brown, fg = colors.black, gui = "bold" },
+    a = { bg = colors.cyan, fg = colors.black, gui = "bold" },
     b = { bg = colors.black, fg = colors.light_brown },
     c = { bg = colors.light_brown, fg = colors.beige_grey }
   },
