@@ -147,8 +147,8 @@ local theme = lush(function(injected_functions)
     WarningMsg        { fg="#800000" }, -- Warning messages
     WildMenu          { bg="yellow", fg="black" }, -- Current match in 'wildmenu' completion
 
-    WinBar            { gui="bold" }, -- Window bar of current window
-    WinBarNC          { WinBar }, -- Window bar of not-current windows
+    WinBar            { gui="bold", TabLineSel }, -- Window bar of current window
+    WinBarNC          { TabLine }, -- Window bar of not-current windows
 
     -- Common vim syntax groups used for all kinds of code and markup.
     -- Commented-out groups should chain up to their preferred (*) group
