@@ -19,5 +19,5 @@ return {
   grey = "#333435",
   beige_grey = "#E6E1DC",
   dark_grey = "#5F5F87",
-  inactive_grey = "#7C6F64"
+  light_grey = "#7C6F64"
 }
