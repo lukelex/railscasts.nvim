@@ -401,6 +401,7 @@ local theme = lush(function(injected_functions)
 
     sym"@operator.ruby"            { PreProc },
     sym"@symbol.ruby"              { fg=hsl(colors.cyan) },
+    sym"@string.special.symbol"    { sym"@symbol.ruby" },
 
     sym"@tag.delimiter.html"       { PreProc },
 
