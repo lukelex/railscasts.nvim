@@ -15,7 +15,7 @@ return {
   moss = "#A5C261",
   pink = "#F9D7E4",
   cyan = "#6D9CBE",
-  white = "#FFFFFF",
+  white = "#F3F4F5",
   grey = "#333435",
   beige_grey = "#E6E1DC",
   dark_grey = "#5F5F87",
