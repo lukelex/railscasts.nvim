@@ -328,7 +328,6 @@ local theme = lush(function(injected_functions)
     sym"@text.todo"                { Todo },
     sym"@number"                   { Number },
     sym"@float"                    { Number },
-    sym"@label"                    { fg=hsl(colors.purple) },
     sym"@conceal"                  { NonText },
 
     sym"@function.call"            { fg=hsl(colors.beige_grey) }, -- Function calls
@@ -338,6 +337,9 @@ local theme = lush(function(injected_functions)
     sym"@field"                    { sym"@function.call" },
     sym"@variable"                 { sym"@function.call" },
     sym"@operator"                 { sym"@function.call" },
+
+    sym"@label"                    { fg=hsl(colors.purple) },
+    sym"@variable.member"          { sym"@label" },
 
     sym"@property"                 { Identifier },
     sym"@namespace"                { Identifier },
