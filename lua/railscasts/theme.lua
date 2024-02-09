@@ -65,9 +65,9 @@ local theme = lush(function(injected_functions)
     --
     ColorColumn       { bg=hsl(colors.black)}, -- Columns set with 'colorcolumn'
     Conceal           { bg="darkgrey", fg=hsl(colors.beige_grey) }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
-    Cursor            { bg=hsl(colors.white), fg=hsl(colors.black) }, -- Character under the cursor
+    Cursor            { bg=hsl(colors.white), fg=hsl(colors.background) }, -- Character under the cursor
 
-    Search            { bg=hsl(colors.dark_grey), fg=hsl(colors.black) }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
+    Search            { bg=hsl(colors.yellow), fg=hsl(colors.background) }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
     CurSearch         { Search }, -- Highlighting a search pattern under the cursor (see 'hlsearch')
     Substitute        { Search }, -- |:substitute| replacement text highlighting
     QuickFixLine      { Search }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
@@ -117,9 +117,9 @@ local theme = lush(function(injected_functions)
 
     MoreMsg           { gui="bold", fg="seagreen" }, -- |more-prompt|
     Normal            { bg=hsl(colors.background), fg=hsl(colors.beige_grey) }, -- Normal text
-    NormalFloat       { bg="#444444", fg=hsl(colors.white) }, -- Normal text in floating windows.
+    NormalFloat       { Normal }, -- Normal text in floating windows.
     -- FloatBorder    { }, -- Border of floating windows.
-    FloatTitle        { gui="bold", fg=hsl(colors.white) }, -- Title of floating windows.
+    FloatTitle        { gui="bold", fg=hsl(colors.beige_grey) }, -- Title of floating windows.
     -- NormalNC       { }, -- normal text in non-current windows
 
     Pmenu             { bg="#444444", fg=hsl(colors.white) }, -- Popup menu: Normal item.
