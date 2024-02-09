@@ -67,7 +67,7 @@ local theme = lush(function(injected_functions)
     Conceal           { bg="darkgrey", fg=hsl(colors.beige_grey) }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
     Cursor            { bg=hsl(colors.white), fg=hsl(colors.background) }, -- Character under the cursor
 
-    Search            { bg=hsl(colors.yellow), fg=hsl(colors.background) }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
+    Search            { gui="bold", bg=hsl(colors.yellow), fg=hsl(colors.background) }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
     CurSearch         { Search }, -- Highlighting a search pattern under the cursor (see 'hlsearch')
     Substitute        { Search }, -- |:substitute| replacement text highlighting
     QuickFixLine      { Search }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
