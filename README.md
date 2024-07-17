@@ -64,7 +64,6 @@ vim.cmd.colorscheme "railscasts"
 colorscheme railscasts
 ```
 
-
 ### Plugins
 
 #### [Lualine](https://github.com/nvim-lualine/lualine.nvim)

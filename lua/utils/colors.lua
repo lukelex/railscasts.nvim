@@ -4,7 +4,7 @@ return {
   black = "#000000",
   blue = "#6E9CBE",
   light_green = "#87AF5F",
-  dark_green="#005F00",
+  dark_green = "#005F00",
   red = "#DA4939",
   light_orange = "#FFC66D",
   dark_orange = "#CC7833",
