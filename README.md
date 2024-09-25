@@ -9,7 +9,7 @@ grammar over TextMate's.
 The original theme can be found below:
 
 * TextMate: [ryanb/textmate_theme.zip](http://media.railscasts.com/resources/textmate_theme.zip)
-* Vim: [ryanb/railscasts.vim](https://github.com/ryanb/dotfiles/blob/master/vim/colors/railscasts.vim)
+* Vim: [ryanb/railscasts.vim](https://github.com/ryanb/dotfiles/blob/997d6caa218d41cdc23e8dda3953d2fd93af2740/vim/colors/railscasts.vim)
 * Font: [Bitstream Vera Sans Mono](https://www.fontmirror.com/bitstream-vera-sans-mono)
 
 ![railscasts/ruby.png](./screenshots/ruby.png)
