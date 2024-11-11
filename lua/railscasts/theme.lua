@@ -79,8 +79,8 @@ local theme = lush(function(injected_functions)
     Directory         { fg=hsl(colors.light_green) }, -- Directory names (and other special names in listings)
     DiffAdd           { fg=hsl(colors.dark_green) }, -- Diff mode: Added line |diff.txt|
     DiffChange        { fg=hsl(colors.cyan) }, -- Diff mode: Changed line |diff.txt|
-    DiffDelete        { gui="bold", bg="#660000", fg=hsl(colors.black)}, -- Diff mode: Deleted line |diff.txt|
-    DiffText          { gui="bold", bg="#ff0000", fg=hsl(colors.white) }, -- Diff mode: Changed text within a changed line |diff.txt|
+    DiffDelete        { gui="bold", fg=hsl(colors.red)}, -- Diff mode: Deleted line |diff.txt|
+    DiffText          { gui="bold", bg=hsl(colors.red), fg=hsl(colors.white) }, -- Diff mode: Changed text within a changed line |diff.txt|
 
     NonText           { fg="#767676" }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
     EndOfBuffer       { NonText }, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
@@ -274,8 +274,6 @@ local theme = lush(function(injected_functions)
     User7                                        { gui="bold", bg="#606060", fg="#e4e4e4" },
     User8                                        { gui="bold", bg="#606060", fg="#e4e4e4" },
     User9                                        { gui="bold", bg="#606060", fg="#e4e4e4" },
-    diffAdded                                    { DiffAdd },
-    diffRemoved                                  { fg="#800000" },
     diffNewFile                                  { gui="bold", fg=hsl(colors.white) },
     diffFile                                     { gui="bold", fg=hsl(colors.white) },
     pythonExceptions                             { fg="#ffaf87" },
@@ -293,6 +291,16 @@ local theme = lush(function(injected_functions)
     checkbox                                     { fg="#3a3a3a" },
     checkboxDone                                 { gui="bold", fg="#5fff00" },
     checkboxNotDone                              { gui="bold", fg="#005fdf" },
+
+    diffAdded                                    { DiffAdd },
+    diffRemoved                                  { DiffChange },
+
+    MiniDiffSignAdd                              { DiffAdd },
+    MiniDiffOverAdd                              { DiffAdd },
+    MiniDiffSignDelete                           { DiffDelete },
+    MiniDiffOverDelete                           { DiffDelete },
+    MiniDiffOverChange                           { DiffChange },
+    MiniDiffOverContext                          { bg=hsl(colors.purple) },
 
     IndentLine                                   { fg=hsl("#767676") },
 
