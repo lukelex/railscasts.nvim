@@ -77,10 +77,6 @@ local theme = lush(function(injected_functions)
     CursorColumn      { bg="grey40" }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
     CursorLine        { bg=hsl(colors.grey) }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
     Directory         { fg=hsl(colors.light_green) }, -- Directory names (and other special names in listings)
-    DiffAdd           { fg=hsl(colors.dark_green) }, -- Diff mode: Added line |diff.txt|
-    DiffChange        { fg=hsl(colors.cyan) }, -- Diff mode: Changed line |diff.txt|
-    DiffDelete        { gui="bold", fg=hsl(colors.red)}, -- Diff mode: Deleted line |diff.txt|
-    DiffText          { gui="bold", bg=hsl(colors.red), fg=hsl(colors.white) }, -- Diff mode: Changed text within a changed line |diff.txt|
 
     NonText           { fg="#767676" }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
     EndOfBuffer       { NonText }, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
@@ -293,6 +289,11 @@ local theme = lush(function(injected_functions)
     checkboxDone                                 { gui="bold", fg="#5fff00" },
     checkboxNotDone                              { gui="bold", fg="#005fdf" },
 
+    DiffAdd                                      { fg=hsl(colors.dark_green) }, -- Diff mode: Added line |diff.txt|
+    DiffChange                                   { fg=hsl(colors.cyan) }, -- Diff mode: Changed line |diff.txt|
+    DiffDelete                                   { gui="bold", fg=hsl(colors.red)}, -- Diff mode: Deleted line |diff.txt|
+    DiffText                                     { gui="bold", bg=hsl(colors.red), fg=hsl(colors.white) }, -- Diff mode: Changed text within a changed line |diff.txt|
+
     diffAdded                                    { DiffAdd },
     diffRemoved                                  { DiffChange },
 
@@ -300,6 +301,7 @@ local theme = lush(function(injected_functions)
     MiniDiffOverAdd                              { DiffAdd },
     MiniDiffSignDelete                           { DiffDelete },
     MiniDiffOverDelete                           { DiffDelete },
+    MiniDiffSignChange                           { DiffChange },
     MiniDiffOverChange                           { DiffChange },
     MiniDiffOverContext                          { bg=hsl(colors.purple) },
 
