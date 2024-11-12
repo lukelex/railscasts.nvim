@@ -158,7 +158,9 @@ local theme = lush(function(injected_functions)
     --
     -- Uncomment and edit if you want more specific syntax highlighting.
 
-    Comment           { fg="#af875f" }, -- Any comment
+    Comment           { fg=hsl(colors.light_brown) }, -- Any comment
+
+    Delimiter         { fg=hsl(colors.light_grey) }, -- Character that needs attention
 
     Constant          { fg=hsl(colors.red) }, -- (*) Any constant
     Character         { Constant }, --   A character constant: 'c', '\n'
@@ -194,7 +196,6 @@ local theme = lush(function(injected_functions)
     Special           { fg=hsl(colors.dark_green) }, -- (*) Any special symbol
     SpecialChar       { Special }, -- Special character in a constant
     Tag               { Special }, -- You can use CTRL-] on this
-    Delimiter         { Special }, -- Character that needs attention
     SpecialComment    { Special }, -- Special things inside a comment (e.g. '\n')
     Debug             { Special }, -- Debugging statements
 
