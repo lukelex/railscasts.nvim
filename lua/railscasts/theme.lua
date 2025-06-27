@@ -108,7 +108,7 @@ local theme = lush(function(injected_functions)
     ModeMsg { gui = "bold" },                                                      -- 'showmode' message (e.g., "-- INSERT -- ")
     -- MsgArea        { }, -- Area for messages and cmdline
 
-    StatusLine { bg = "#606060", fg = "#e4e4e4" },                       -- Status line of current window
+    StatusLine { bg = hsl(colors.background), fg = "#e4e4e4" },          -- Status line of current window
     MsgSeparator { StatusLine },                                         -- Separator for scrolled messages, `msgsep` flag of 'display'
 
     MoreMsg { gui = "bold", fg = "seagreen" },                           -- |more-prompt|
@@ -133,7 +133,7 @@ local theme = lush(function(injected_functions)
     SpellCap { gui = "underline", sp = "blue", fg = "#dfdfff" },                           -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
     SpellLocal { gui = "undercurl", sp = "cyan", fg = "#00ffff" },                         -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
     SpellRare { gui = "underline", sp = "magenta", fg = "#df5f87" },                       -- Word that is recognized by the spellchecker as one that is hardly ever used. |spell| Combined with the highlighting used otherwise.
-    StatusLineNC { bg = "#303030", fg = "#585858" },                                       -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+    StatusLineNC { StatusLine },                                                           -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
     TabLine { bg = hsl(colors.light_brown), fg = hsl(colors.background) },                 -- Tab pages line, not active tab page label
     TabLineFill { bg = hsl(colors.background) },                                           -- Tab pages line, where there are no labels
     TabLineSel { gui = "bold", bg = hsl(colors.dark_green), fg = hsl(colors.beige_grey) }, -- Tab pages line, active tab page label
