@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="360" viewBox="0 0 800 360">
+<rect width="800" height="360" fill="#2B2B2B"/>
+<g font-family="monospace" font-size="24">
+<text x="48" y="32" fill="#E6E1DC">Railscasts</text>
+<text x="48" y="64" fill="#92764C"># A muted comment</text>
+<text x="48" y="96" fill="#87AF5F">"A string"</text>
+<text x="48" y="128" fill="#FFC66D">render_theme()</text>
+<text x="48" y="160" fill="#CC7833">return</text>
+<text x="48" y="192" fill="#A5C261">2026</text>
+<text x="48" y="224" fill="#6E9CBE">true</text>
+<text x="48" y="256" fill="#87AF5F">+ added line</text>
+<text x="48" y="288" fill="#6D9CBE">~ changed line</text>
+<text x="48" y="320" fill="#DA4939">- deleted line</text>
+</g></svg>

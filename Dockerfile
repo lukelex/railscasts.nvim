@@ -56,5 +56,6 @@ CMD set -e; \
       else \
         "$nvim" --headless --clean --cmd 'set rtp^=.' -l tests/theme_spec.lua; \
       fi; \
+      "$nvim" --headless --clean --cmd 'set rtp^=.' -l tests/screenshot_spec.lua; \
     done; \
     kitty +runpy 'import kitty.config; bad = []; kitty.config.load_config("extras/kitty.conf", accumulate_bad_lines=bad); assert not bad, bad'

@@ -61,4 +61,5 @@ jobs:
           -o pipefail -c
           'nvim="/opt/neovim/${{ matrix.neovim }}/bin/nvim";
           echo "Testing Neovim ${{ matrix.neovim }}";
-          "$nvim" --headless --clean --cmd "set rtp^=." -l tests/theme_spec.lua'
+          "$nvim" --headless --clean --cmd "set rtp^=." -l tests/theme_spec.lua;
+          "$nvim" --headless --clean --cmd "set rtp^=." -l tests/screenshot_spec.lua'

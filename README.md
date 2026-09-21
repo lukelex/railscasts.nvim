@@ -77,5 +77,9 @@ To test the current working tree without rebuilding the image:
 docker run --rm --volume "$PWD:/workspace" railscasts-ci
 ```
 
+The visual regression snapshot is stored at
+[`tests/snapshots/theme.svg`](tests/snapshots/theme.svg). Update it intentionally
+after a reviewed visual change with `UPDATE_SNAPSHOTS=1`.
+
 Future work is tracked in [TODO.md](TODO.md). Contributors should also follow
 the palette and integration rules in [AGENTS.md](AGENTS.md).

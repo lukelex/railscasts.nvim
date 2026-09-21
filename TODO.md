@@ -1,6 +1,6 @@
 # Theme improvements
 
-- [ ] Add screenshot regression tests using fixed Ruby, Lua, and YAML fixtures.
+- [x] Add deterministic SVG theme snapshot regression tests.
 - [ ] Add representative Lua, Bash, and YAML screenshots to the README gallery.
 - [x] Expand support for common UI plugins: nvim-cmp/Blink, GitSigns, Neo-tree/Oil, WhichKey, Lazy, Noice, render-markdown, and IndentBlankLine v3.
 - [x] Complete modern Tree-sitter and semantic-token coverage, with fixture-based tests.
