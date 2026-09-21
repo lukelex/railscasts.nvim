@@ -6,11 +6,7 @@
 [Installation](docs/INSTALLATION.md) · [Design language](DESIGN.md) · [Accessibility](docs/ACCESSIBILITY.md) · [Development](#development)
 
 <p align="center">
-  <a href="screenshots/ruby.png"><img src="screenshots/ruby.png" alt="Railscasts highlighting Ruby in Neovim" width="32%" /></a>
-  <a href="screenshots/lua.svg"><img src="screenshots/lua.svg" alt="Railscasts highlighting Lua" width="32%" /></a>
-  <a href="screenshots/bash.svg"><img src="screenshots/bash.svg" alt="Railscasts highlighting Bash" width="32%" /></a>
-  <a href="screenshots/yaml.svg"><img src="screenshots/yaml.svg" alt="Railscasts highlighting YAML" width="32%" /></a>
-  <a href="screenshots/telescope.png"><img src="screenshots/telescope.png" alt="Railscasts styling a Telescope picker in Neovim" width="32%" /></a>
+  <img src="screenshots/gallery.gif" alt="Railscasts syntax highlighting for Ruby, Lua, Bash, and YAML" width="800" />
 </p>
 
 ## Railscasts, carried forward
@@ -34,9 +30,9 @@ has remained immediately recognizable for years.
 
 ## Gallery
 
-The gallery above is designed as a side-by-side carousel for GitHub and other
-Markdown renderers. It shows Ruby, Lua, Bash, and YAML syntax alongside a
-Telescope picker; select an image to view it at full size.
+The gallery cycles through Ruby, Lua, Bash, and YAML highlights. The previews
+are rasterized to keep their monospaced glyphs and spacing consistent in GitHub
+and other Markdown renderers.
 
 ## Language support
 
