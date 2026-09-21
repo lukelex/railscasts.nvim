@@ -5,7 +5,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-    && apt-get install --yes --no-install-recommends ca-certificates curl g++ gcc lua5.1 \
+    && apt-get install --yes --no-install-recommends ca-certificates curl g++ gcc kitty lua5.1 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN for version in v0.9.5 v0.10.4 v0.11.7 v0.12.5; do \
@@ -21,15 +21,15 @@ RUN for version in v0.9.5 v0.10.4 v0.11.7 v0.12.5; do \
     && rm /tmp/nvim.tar.gz
 
 RUN mkdir -p /tmp/grammars /opt/treesitter/parsers \
-    && curl --fail --location https://github.com/tree-sitter/tree-sitter-ruby/archive/ad907a69da0c8a4f7a943a7fe012712208da6dee.tar.gz \
+    && curl --fail --location --retry 3 --retry-all-errors https://github.com/tree-sitter/tree-sitter-ruby/archive/ad907a69da0c8a4f7a943a7fe012712208da6dee.tar.gz \
       | tar --extract --gzip --directory /tmp/grammars --strip-components=1 \
     && mv /tmp/grammars /tmp/ruby \
     && mkdir /tmp/grammars \
-    && curl --fail --location https://github.com/tree-sitter-grammars/tree-sitter-lua/archive/10fe0054734eec83049514ea2e718b2a56acd0c9.tar.gz \
+    && curl --fail --location --retry 3 --retry-all-errors https://github.com/tree-sitter-grammars/tree-sitter-lua/archive/10fe0054734eec83049514ea2e718b2a56acd0c9.tar.gz \
       | tar --extract --gzip --directory /tmp/grammars --strip-components=1 \
     && mv /tmp/grammars /tmp/lua \
     && mkdir /tmp/grammars \
-    && curl --fail --location https://github.com/ikatyang/tree-sitter-yaml/archive/0e36bed171768908f331ff7dff9d956bae016efb.tar.gz \
+    && curl --fail --location --retry 3 --retry-all-errors https://github.com/ikatyang/tree-sitter-yaml/archive/0e36bed171768908f331ff7dff9d956bae016efb.tar.gz \
       | tar --extract --gzip --directory /tmp/grammars --strip-components=1 \
     && mv /tmp/grammars /tmp/yaml \
     && for language in ruby lua; do \
@@ -56,4 +56,5 @@ CMD set -e; \
       else \
         "$nvim" --headless --clean --cmd 'set rtp^=.' -l tests/theme_spec.lua; \
       fi; \
-    done
+    done; \
+    kitty +runpy 'import kitty.config; bad = []; kitty.config.load_config("extras/kitty.conf", accumulate_bad_lines=bad); assert not bad, bad'
