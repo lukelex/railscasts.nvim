@@ -3,9 +3,51 @@
 This document describes the visual system used by Railscasts integrations. It
 is intended for plugin themes and external applications such as Kitty.
 
-The canonical machine-readable palette is
-[`lua/railscasts/colors.lua`](lua/railscasts/colors.lua). Integrations should
-use the semantic roles below rather than introducing colors of their own.
+The canonical runtime palette is
+[`lua/railscasts/colors.lua`](lua/railscasts/colors.lua). This document also
+contains the complete token values and is self-contained for consumers that do
+not use Neovim or Lua. Integrations should use the semantic roles below rather
+than introducing colors of their own.
+
+## Consumer and derivative contract
+
+This design language is portable. It can be used by terminal profiles, editor
+themes, web interfaces, documentation sites, screenshots, or a derivative
+colorscheme.
+
+- Treat the palette token names and semantic-role names as the public contract.
+  A consumer should reference names such as `surface.base` and
+  `syntax.function`, then resolve them through the tables in this file.
+- A consumer that cannot represent a role should fall back in this order:
+  `text.primary` for text, `text.muted` for metadata, `surface.base` for
+  surfaces, and `syntax.special` for uncategorized syntax.
+- Consumers with only 16 terminal colors should follow the ANSI mapping below.
+  Consumers with true color should use the token values exactly.
+- Derivatives may change token **values**, but should retain token and role
+  **names** where their meaning is unchanged. New roles must be documented with
+  a purpose, foreground/background behavior, and fallback role.
+- A derivative must not silently change the meaning of stable roles such as
+  `change.added`, `change.changed`, `change.deleted`, or `diagnostic.error`.
+  Rename a role if its semantic meaning changes.
+
+### Minimal portable interface
+
+Every implementation based on Railscasts should provide these roles:
+
+```text
+surface.base        surface.current      surface.raised
+text.primary        text.strong          text.muted
+syntax.function     syntax.keyword       syntax.string
+syntax.number       syntax.boolean       syntax.member       syntax.special
+state.selection     state.search
+change.added        change.changed       change.deleted
+diagnostic.error    diagnostic.warning   diagnostic.info     diagnostic.hint
+```
+
+Optional capabilities add `mode.normal`, `mode.insert`, `mode.visual`,
+`mode.replace`, and `mode.command`, using the mode language below. A consumer
+that has no syntax, diagnostic, or mode support can safely omit those roles
+while preserving the base surface and text roles.
 
 ## Character
 
