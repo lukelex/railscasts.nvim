@@ -295,7 +295,7 @@ local theme = lush(function(injected_functions)
     DiffText { gui = "bold", bg = hsl(colors.red), fg = hsl(colors.white) }, -- Diff mode: Changed text within a changed line |diff.txt|
 
     diffAdded { DiffAdd },
-    diffRemoved { DiffChange },
+    diffRemoved { DiffDelete },
 
     MiniDiffSignAdd { DiffAdd },
     MiniDiffOverAdd { DiffAdd },
