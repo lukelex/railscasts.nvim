@@ -17,11 +17,8 @@ jobs:
         with:
           version: ${{ matrix.neovim }}
           neovim: true
-      - name: Install Lush
-        run: git clone --depth=1 https://github.com/rktjmp/lush.nvim.git .deps/lush.nvim
       - name: Load and validate the theme
         run: >-
           nvim --headless --clean
           --cmd "set rtp^=$PWD"
-          --cmd "set rtp+=$PWD/.deps/lush.nvim"
           -l tests/theme_spec.lua

@@ -27,13 +27,11 @@ ones that it has been visually optimized for so far are:
 
 ## Installation
 
-Requires Neovim 0.9.5 or later and [lush.nvim](https://github.com/rktjmp/lush.nvim).
+Requires Neovim 0.9.5 or later.
 
 ### Native packages
 
 ```sh
-git clone https://github.com/rktjmp/lush.nvim.git \
-  ~/.local/share/nvim/site/pack/plugins/start/lush.nvim
 git clone https://github.com/lukelex/railscasts.nvim.git \
   ~/.local/share/nvim/site/pack/plugins/start/railscasts.nvim
 ```
@@ -43,14 +41,12 @@ git clone https://github.com/lukelex/railscasts.nvim.git \
 ```lua
 {
   "lukelex/railscasts.nvim",
-  dependencies = { "rktjmp/lush.nvim" }
 },
 ```
 
 ### Plug
 
 ```vim
-Plug "rktjmp/lush.nvim"
 Plug "lukelex/railscasts.nvim"
 ```
 
