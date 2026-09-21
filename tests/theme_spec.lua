@@ -10,10 +10,26 @@ local fixtures = {
   ["lua.lua"] = "local Episode",
   ["config.yaml"] = "episode:",
 }
+local fixture_languages = {
+  ["ruby.rb"] = "ruby",
+  ["lua.lua"] = "lua",
+  ["config.yaml"] = "yaml",
+}
 
 for name, marker in pairs(fixtures) do
   local content = table.concat(vim.fn.readfile("tests/fixtures/" .. name), "\n")
   assert(content:find(marker, 1, true), "invalid fixture: " .. name)
+end
+
+local parser_dir = vim.env.RAILSCASTS_PARSER_DIR
+if parser_dir and parser_dir ~= "" then
+  for name in pairs(fixtures) do
+    local language = fixture_languages[name]
+    local content = table.concat(vim.fn.readfile("tests/fixtures/" .. name), "\n")
+    vim.treesitter.language.add(language, { path = parser_dir .. "/" .. language .. ".so" })
+    local tree = vim.treesitter.get_string_parser(content, language):parse()[1]
+    assert(not tree:root():has_error(), "Tree-sitter parse error: " .. name)
+  end
 end
 
 local kitty_colors = {

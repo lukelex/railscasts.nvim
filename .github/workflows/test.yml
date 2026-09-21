@@ -29,14 +29,24 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        neovim: [v0.9.5, v0.10.4, v0.11.7, v0.12.5]
+        include:
+          - neovim: v0.9.5
+            parser_dir: ""
+          - neovim: v0.10.4
+            parser_dir: ""
+          - neovim: v0.11.7
+            parser_dir: /opt/treesitter/parsers
+          - neovim: v0.12.5
+            parser_dir: /opt/treesitter/parsers
     steps:
       - uses: actions/checkout@v4
       - name: Build local CI image
         run: docker build --tag railscasts-ci .
       - name: Load and validate the theme on ${{ matrix.neovim }}
         run: >-
-          docker run --rm --entrypoint bash railscasts-ci
+          docker run --rm --entrypoint bash
+          --env RAILSCASTS_PARSER_DIR=${{ matrix.parser_dir }}
+          railscasts-ci
           -o pipefail -c
           'nvim="/opt/neovim/${{ matrix.neovim }}/bin/nvim";
           echo "Testing Neovim ${{ matrix.neovim }}";
