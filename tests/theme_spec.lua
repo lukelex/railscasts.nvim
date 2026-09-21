@@ -90,6 +90,8 @@ assert(highlight("SnacksPickerMatch").bg == highlight("Search").bg)
 assert(highlight("SnacksPickerGitStatusAdded").fg == highlight("DiffAdd").fg)
 assert(highlight("MiniFilesDirectory").fg == highlight("Directory").fg)
 assert(highlight("MiniPickMatchRanges").bg == highlight("Search").bg)
+assert(highlight("TroubleSignError").fg == highlight("DiagnosticError").fg)
+assert(highlight("TroubleCode").fg == highlight("Number").fg)
 assert(highlight("RenderMarkdownH1").fg == highlight("Title").fg)
 assert(highlight("IblScope").fg == 0xAF5F00)
 
