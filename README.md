@@ -3,7 +3,7 @@
 > A warm, dark Neovim colorscheme faithfully inspired by the original
 > Railscasts TextMate theme.
 
-[Installation](docs/INSTALLATION.md) · [Design language](DESIGN.md) · [Development](#development)
+[Installation](docs/INSTALLATION.md) · [Design language](DESIGN.md) · [Accessibility](docs/ACCESSIBILITY.md) · [Development](#development)
 
 <p align="center">
   <a href="screenshots/ruby.png"><img src="screenshots/ruby.png" alt="Railscasts highlighting Ruby in Neovim" width="49%" /></a>

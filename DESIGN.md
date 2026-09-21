@@ -80,7 +80,7 @@ while preserving the base surface and text roles.
 | `blue` | `#6E9CBE` | Booleans and built-in constants |
 | `cyan` | `#6D9CBE` | Changed diffs, Ruby symbols, visual mode |
 | `purple` | `#D0D0FF` | Labels and member-like identifiers |
-| `light_brown` | `#92764C` | Comments and inactive tab surfaces |
+| `light_brown` | `#92764C` | Comments and muted metadata |
 | `dark_brown` | `#AF5F00` | Statements and indentation scope |
 | `moss` | `#A5C261` | Numeric literals |
 | `pink` | `#F9D7E4` | Reserved palette accent |
@@ -103,10 +103,10 @@ Use these roles when a target supports named styling categories.
 | `syntax.number` | `moss` | Numbers and floats |
 | `syntax.boolean` | `blue` | Booleans and built-ins |
 | `syntax.member` | `purple` | Labels and member identifiers |
-| `syntax.special` | `dark_green` | Special characters and symbols |
+| `syntax.special` | `light_green` | Special characters and symbols |
 | `state.selection` | `light_green` on `black` | Completion or selected list item |
 | `state.search` | `yellow` on `background` | Search and current quickfix item |
-| `change.added` | `dark_green` | Added lines and Git additions |
+| `change.added` | `light_green` | Added lines and Git additions |
 | `change.changed` | `cyan` | Modified lines and Git changes |
 | `change.deleted` | `red` | Deleted lines and Git deletions |
 | `diagnostic.error` | `red` | Errors |

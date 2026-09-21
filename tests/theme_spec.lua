@@ -69,6 +69,11 @@ assert(highlight("DiagnosticInfo").fg == 0x6E9CBE)
 assert(highlight("DiagnosticOk").fg == 0x87AF5F)
 assert(highlight("lCursor").bg == 0xE6E1DC)
 assert(highlight("lCursor").fg == 0x2B2B2B)
+assert(highlight("Special").fg == 0x87AF5F)
+assert(highlight("DiffAdd").fg == 0x87AF5F)
+assert(highlight("Delimiter").fg == 0xE6E1DC)
+assert(highlight("TabLine").bg == 0x333435)
+assert(require("lualine.themes.railscasts").normal.c.bg == "#333435")
 
 require("railscasts").setup {
   high_contrast = true,
