@@ -45,7 +45,7 @@
 local lush = require("lush")
 local hsl = lush.hsl
 
-local colors = require("utils.colors")
+local colors = require("railscasts.colors")
 
 -- LSP/Linters mistakenly show `undefined global` errors in the spec, they may
 -- support an annotation like the following. Consult your server documentation.

@@ -1,4 +1,4 @@
-local colors = require("utils/colors")
+local colors = require("railscasts.colors")
 
 -- Lualine groups are placed as follows: "a > b > c < b < a"
 return {
