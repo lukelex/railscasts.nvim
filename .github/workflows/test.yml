@@ -17,13 +17,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install Lua 5.1
-        run: sudo apt-get update && sudo apt-get install --yes lua5.1
+      - name: Build local CI image
+        run: docker build --tag railscasts-ci .
       - name: Validate Lua syntax
-        run: find colors lua tests -name '*.lua' -print0 | xargs -0 -r luac5.1 -p
+        run: >-
+          docker run --rm --entrypoint bash railscasts-ci
+          -o pipefail -c "find colors lua tests -name '*.lua' -print0 | xargs -0 -r luac5.1 -p"
 
   theme:
-    needs: lua-syntax
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -31,12 +32,12 @@ jobs:
         neovim: [v0.9.5, v0.10.4, v0.11.7, v0.12.5]
     steps:
       - uses: actions/checkout@v4
-      - uses: rhysd/action-setup-vim@v1
-        with:
-          version: ${{ matrix.neovim }}
-          neovim: true
-      - name: Load and validate the theme
+      - name: Build local CI image
+        run: docker build --tag railscasts-ci .
+      - name: Load and validate the theme on ${{ matrix.neovim }}
         run: >-
-          nvim --headless --clean
-          --cmd "set rtp^=$PWD"
-          -l tests/theme_spec.lua
+          docker run --rm --entrypoint bash railscasts-ci
+          -o pipefail -c
+          'nvim="/opt/neovim/${{ matrix.neovim }}/bin/nvim";
+          echo "Testing Neovim ${{ matrix.neovim }}";
+          "$nvim" --headless --clean --cmd "set rtp^=." -l tests/theme_spec.lua'
