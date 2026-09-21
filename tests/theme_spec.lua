@@ -70,6 +70,14 @@ assert(highlight("DiagnosticOk").fg == 0x87AF5F)
 assert(highlight("lCursor").bg == 0xE6E1DC)
 assert(highlight("lCursor").fg == 0x2B2B2B)
 
-vim.g.railscasts_high_contrast = true
+require("railscasts").setup {
+  high_contrast = true,
+  transparent = true,
+  dim_inactive = true,
+}
 vim.cmd.colorscheme("railscasts")
 assert(require("railscasts.colors").dark_green == "#5FAF5F")
+assert(vim.g.railscasts_high_contrast == true)
+assert(highlight("Normal").bg == nil)
+assert(highlight("NormalNC").bg == nil)
+assert(highlight("NormalNC").fg == 0xC7A66D)

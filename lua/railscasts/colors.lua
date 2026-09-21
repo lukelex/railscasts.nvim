@@ -22,7 +22,7 @@ local colors = {
   light_grey = "#7C6F64",
 }
 
-if vim.g.railscasts_high_contrast then
+if require("railscasts.config").get().high_contrast then
   colors.dark_green = "#5FAF5F"
   colors.light_brown = "#C7A66D"
   colors.light_grey = "#635A50"

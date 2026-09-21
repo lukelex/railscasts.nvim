@@ -18,8 +18,10 @@ end
 
 function M.setup()
   local colors = require("railscasts.colors")
+  local options = require("railscasts.config").get()
+  local background = options.transparent and "NONE" or colors.background
 
-  apply_many({ "ColorColumn" }, { bg = colors.black })
+  apply_many({ "ColorColumn" }, { bg = options.transparent and "NONE" or colors.black })
   apply("Conceal", { bg = "darkgrey", fg = colors.beige_grey })
   apply("Cursor", { bg = colors.white, fg = colors.background })
   apply("Search", { bold = true, bg = colors.yellow, fg = colors.background })
@@ -42,11 +44,16 @@ function M.setup()
   apply("IncSearch", { reverse = true })
   apply("MatchParen", { bg = "#005f5f", fg = colors.white })
   apply("ModeMsg", { bold = true })
-  apply("StatusLine", { bg = colors.background, fg = "#e4e4e4" })
+  apply("StatusLine", { bg = background, fg = "#e4e4e4" })
   link({ "MsgSeparator", "StatusLineNC" }, "StatusLine")
   apply("MoreMsg", { bold = true, fg = colors.light_green })
-  apply("Normal", { bg = colors.background, fg = colors.beige_grey })
+  apply("Normal", { bg = background, fg = colors.beige_grey })
   link({ "NormalFloat" }, "Normal")
+  if options.dim_inactive then
+    apply("NormalNC", { bg = background, fg = colors.light_brown })
+  else
+    link({ "NormalNC" }, "Normal")
+  end
   apply("FloatTitle", { bold = true, fg = colors.beige_grey })
   apply("Pmenu", { bg = "#444444", fg = colors.white })
   link({ "PmenuKind", "PmenuExtra" }, "Pmenu")
@@ -60,14 +67,18 @@ function M.setup()
   apply("SpellLocal", { undercurl = true, sp = colors.cyan, fg = colors.cyan })
   apply("SpellRare", { underline = true, sp = colors.purple, fg = colors.pink })
   apply("TabLine", { bg = colors.light_brown, fg = colors.background })
-  apply("TabLineFill", { bg = colors.background })
+  apply("TabLineFill", { bg = background })
   apply("TabLineSel", { bold = true, bg = colors.dark_green, fg = colors.beige_grey })
   apply("Title", { bold = true, fg = colors.white })
   apply("Visual", { bg = "#5A647E" })
   apply("WarningMsg", { fg = "#800000" })
   apply("WildMenu", { bg = colors.yellow, fg = colors.black })
   apply("WinBar", { bold = true, bg = colors.dark_green, fg = colors.beige_grey })
-  link({ "WinBarNC" }, "TabLine")
+  if options.dim_inactive then
+    link({ "WinBarNC" }, "NormalNC")
+  else
+    link({ "WinBarNC" }, "TabLine")
+  end
 
   apply("Comment", { fg = colors.light_brown })
   apply("Delimiter", { fg = colors.light_grey })
@@ -87,7 +98,7 @@ function M.setup()
   apply("Special", { fg = colors.dark_green })
   link({ "SpecialChar", "Tag", "SpecialComment", "Debug" }, "Special")
   apply("Underlined", { underline = true, fg = "#80a0ff" })
-  apply("Ignore", { fg = "bg" })
+  apply("Ignore", { fg = colors.background })
   apply("Error", { bg = "#990000", fg = colors.white })
   apply("Todo", { bold = true, fg = colors.red })
 

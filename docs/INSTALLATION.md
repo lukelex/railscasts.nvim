@@ -57,13 +57,20 @@ colorscheme railscasts
 
 ## Options
 
-Set options before loading the colorscheme.
+Configure Railscasts before loading the colorscheme.
 
 ```lua
--- Brighter accents and a darker secondary surface.
-vim.g.railscasts_high_contrast = true
+require("railscasts").setup {
+  high_contrast = true, -- Brighter accents and darker secondary surfaces.
+  transparent = false,  -- Let the terminal or Neovim UI provide the background.
+  dim_inactive = false, -- Mute inactive windows and their winbars.
+}
+
 vim.cmd.colorscheme "railscasts"
 ```
+
+`vim.g.railscasts_high_contrast = true` remains supported for existing
+configurations. The setup API is preferred for new configurations.
 
 ## Integrations
 
