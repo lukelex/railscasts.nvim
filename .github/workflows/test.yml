@@ -1,11 +1,29 @@
-name: Test
+name: CI
 
 on:
   push:
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
+  lua-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lua 5.1
+        run: sudo apt-get update && sudo apt-get install --yes lua5.1
+      - name: Validate Lua syntax
+        run: find colors lua tests -name '*.lua' -print0 | xargs -0 -r luac5.1 -p
+
   theme:
+    needs: lua-syntax
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false

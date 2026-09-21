@@ -4,6 +4,7 @@ local function highlight(name)
   return vim.api.nvim_get_hl(0, { name = name, link = false })
 end
 
+local colors = require("railscasts.colors")
 local fixtures = {
   ["ruby.rb"] = "class Episode",
   ["lua.lua"] = "local Episode",
@@ -13,6 +14,26 @@ local fixtures = {
 for name, marker in pairs(fixtures) do
   local content = table.concat(vim.fn.readfile("tests/fixtures/" .. name), "\n")
   assert(content:find(marker, 1, true), "invalid fixture: " .. name)
+end
+
+local kitty_colors = {
+  colors.background,
+  colors.beige_grey,
+  colors.blue,
+  colors.cyan,
+  colors.dark_grey,
+  colors.dark_orange,
+  colors.light_green,
+  colors.light_grey,
+  colors.light_orange,
+  colors.moss,
+  colors.purple,
+  colors.red,
+  colors.white,
+}
+local kitty_config = table.concat(vim.fn.readfile("extras/kitty.conf"), "\n")
+for _, color in ipairs(kitty_colors) do
+  assert(kitty_config:find(color, 1, true), "missing Kitty palette color: " .. color)
 end
 
 assert(vim.g.colors_name == "railscasts")

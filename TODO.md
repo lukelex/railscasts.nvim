@@ -6,5 +6,8 @@
 - [ ] Provide a `require("railscasts").setup()` API for high contrast, transparency, and inactive-window options.
 - [ ] Set Neovim terminal colors from the Railscasts palette.
 - [ ] Audit and improve contrast, including diagnostics, diffs, search results, and statusline modes.
-- [ ] Extend CI assertions across supported Neovim versions for UI, plugins, Tree-sitter, semantic tokens, and high-contrast mode.
+- [ ] Add parser-backed Tree-sitter fixture tests for Ruby, Lua, and YAML.
+- [ ] Run the Kitty config through Kitty's own parser in CI.
+- [ ] Add a pinned StyLua formatting check after adopting a repository formatter configuration.
+- [ ] Extend CI assertions across supported Neovim versions for UI, documented plugin integrations, semantic tokens, and high-contrast mode.
 - [ ] Split highlight specifications into UI, syntax, Tree-sitter, plugin, and LSP modules as the theme grows.
