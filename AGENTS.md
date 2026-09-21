@@ -1,41 +1,47 @@
-# Colorscheme contribution rules
+# Railscasts contributor notes
 
-These rules apply to every colorscheme change, including changes made by AI agents.
+## Theme constraints
 
-## Palette fidelity
+- This is a visual port of the original Railscasts TextMate/Vim themes linked
+  from `README.md`; use them to resolve visual intent.
+- `lua/railscasts/colors.lua` is the canonical palette. Do not add a color
+  literal, palette key, or derived color without an explicit user request and
+  documented rationale. The default palette is stable; contrast changes use
+  the `high_contrast` setup option.
+- Prefer links to existing semantic, diagnostic, or diff groups over direct
+  colors for new plugin groups.
+- Keep native `vim.api.nvim_set_hl` highlighting and do not add a colorscheme
+  runtime dependency.
 
-- Preserve the original Railscasts/TextMate visual language. The TextMate and Vim
-  references linked from `README.md` are the source of truth when intent is unclear.
-- Use only values from `lua/railscasts/colors.lua` for new highlight colors.
-- Do not introduce a new color literal, palette key, or derived color without an
-  explicit user request and a corresponding documented rationale.
-- Prefer linking a new group to an existing semantic group (`Comment`, `String`,
-  `Function`, `Keyword`, `Type`, `Special`, or a diagnostic/diff group) over
-  assigning a color directly.
-- Keep the default palette unchanged. Accessibility changes belong in the opt-in
-  `railscasts_high_contrast` palette.
+## Layout and integration changes
 
-## Integration scope
+- `colors/railscasts.lua` is the reload-safe colorscheme entrypoint: it clears
+  highlights and reloads the palette before applying `lua/railscasts/theme.lua`.
+- `theme.lua` orchestrates `lua/railscasts/highlights/{ui,syntax,plugins,treesitter,lsp}.lua`;
+  put new definitions in the matching section.
+- Configuration accepts only boolean `high_contrast`, `transparent`, and
+  `dim_inactive` options through `require("railscasts").setup()`; the legacy
+  global option is intentionally unsupported.
+- Keep the Lualine theme (`lua/lualine/themes/railscasts.lua`) and Kitty palette
+  (`extras/kitty.conf`) aligned with the canonical palette.
+- Add a `tests/theme_spec.lua` assertion for every new semantic category or
+  plugin integration.
 
-- Keep the documented integrations working: Lualine, IndentBlankLine/ibl, and
-  Kitty. Their files are `lua/lualine/themes/railscasts.lua`,
-  `lua/railscasts/theme.lua`, and `extras/kitty.conf`.
-- Treat the original TextMate and Vim themes linked in `README.md` as visual
-  references, not runtime dependencies.
-- Add plugin-specific highlights only when explicitly requested or when needed to
-  preserve a documented integration. Use links and the established palette.
+## Verification
 
-## Implementation and verification
-
-- Use native `vim.api.nvim_set_hl`; do not add a colorscheme runtime dependency.
-- Add or update a headless assertion in `tests/theme_spec.lua` for each new
-  semantic category or plugin integration.
-- Run `luac -p` on changed Lua files and run the headless test command from the
-  CI workflow before committing.
+- Build and run the same complete suite as CI:
+  `docker build --tag railscasts-ci . && docker run --rm railscasts-ci`.
+- To run the current working tree without rebuilding, mount it at `/workspace`:
+  `docker run --rm --volume "$PWD:/workspace" railscasts-ci`.
+- The Docker suite runs Lua 5.1 syntax checks, StyLua, Kitty parsing, and the
+  theme/snapshot tests on Neovim 0.9.5, 0.10.4, 0.11.7, and 0.12.5. Parser-backed
+  fixture tests intentionally run only on 0.11.7 and 0.12.5 because of parser ABI compatibility.
+- Update `tests/snapshots/theme.svg` only for reviewed visual changes with
+  `UPDATE_SNAPSHOTS=1 docker run --rm --volume "$PWD:/workspace" railscasts-ci`.
 
 ## Release notes
 
-- Keep changelogs concise and user-facing: summarize visual changes, options,
+- Keep release changelogs concise and user-facing: visual changes, options,
   compatibility, breaking changes, and supported integrations.
-- Exclude CI, tests, linting, formatting, and internal infrastructure unless a
-  user explicitly requests those details.
+- Exclude CI, tests, linting, formatting, and internal infrastructure unless
+  explicitly requested.
