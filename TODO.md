@@ -11,4 +11,4 @@
 - [x] Run the Kitty config through Kitty's own parser in CI.
 - [x] Add a pinned StyLua formatting check after adopting a repository formatter configuration.
 - [x] Extend CI assertions across supported Neovim versions for UI, documented plugin integrations, semantic tokens, and high-contrast mode.
-- [ ] Split highlight specifications into UI, syntax, Tree-sitter, plugin, and LSP modules as the theme grows.
+- [x] Split highlight specifications into UI, syntax, Tree-sitter, plugin, and LSP modules as the theme grows.
