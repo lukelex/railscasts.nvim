@@ -26,6 +26,10 @@ assert(highlight("@keyword.import").fg == highlight("Keyword").fg)
 assert(highlight("@string.regex").fg == highlight("String").fg)
 assert(highlight("@lsp.type.function").fg == highlight("Function").fg)
 assert(highlight("@lsp.type.class").fg == highlight("Type").fg)
+assert(highlight("DiagnosticError").fg == 0xDA4939)
+assert(highlight("DiagnosticWarn").fg == 0xCC7833)
+assert(highlight("DiagnosticInfo").fg == 0x6E9CBE)
+assert(highlight("DiagnosticOk").fg == 0x87AF5F)
 
 vim.g.railscasts_high_contrast = true
 vim.cmd.colorscheme("railscasts")
