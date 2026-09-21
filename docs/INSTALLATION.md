@@ -95,6 +95,14 @@ require("lualine").setup {
 No configuration is required. Railscasts defines highlights for both the legacy
 IndentBlankLine groups and ibl v3 groups.
 
+### UI plugins
+
+No configuration is required for the supported UI plugins. Railscasts provides
+semantic highlights for Snacks, mini.nvim, Trouble, nvim-notify, bufferline,
+nvim-dap-ui, Diffview, vim-fugitive, dressing.nvim, nvim-navic, dropbar,
+treesitter-context, rainbow-delimiters, aerial.nvim, outline.nvim, neogit,
+neotest, and fzf-lua.
+
 ### Kitty
 
 Download [`extras/kitty.conf`](../extras/kitty.conf) as a separate include file
