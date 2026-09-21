@@ -1,358 +1,206 @@
--- Railscasts highlight definitions. Run `:Lushify` to edit with Lush support.
+local M = {}
 
-local lush = require("lush")
-local hsl = lush.hsl
+local function apply(name, options)
+  vim.api.nvim_set_hl(0, name, options)
+end
 
-local colors = require("railscasts.colors")
+local function link(names, target)
+  for _, name in ipairs(names) do
+    apply(name, { link = target })
+  end
+end
 
--- LSP/Linters mistakenly show `undefined global` errors in the spec, they may
--- support an annotation like the following. Consult your server documentation.
----@diagnostic disable: undefined-global
-local theme = lush(function(injected_functions)
-  local sym = injected_functions.sym
-  return {
-    ColorColumn { bg = hsl(colors.black) },                                        -- Columns set with 'colorcolumn'
-    Conceal { bg = "darkgrey", fg = hsl(colors.beige_grey) },                      -- Placeholder characters substituted for concealed text (see 'conceallevel')
-    Cursor { bg = hsl(colors.white), fg = hsl(colors.background) },                -- Character under the cursor
+local function apply_many(names, options)
+  for _, name in ipairs(names) do
+    apply(name, options)
+  end
+end
 
-    Search { gui = "bold", bg = hsl(colors.yellow), fg = hsl(colors.background) }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
-    CurSearch { Search },                                                          -- Highlighting a search pattern under the cursor (see 'hlsearch')
-    Substitute { Search },                                                         -- |:substitute| replacement text highlighting
-    QuickFixLine { Search },                                                       -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
+function M.setup()
+  local colors = require("railscasts.colors")
 
-    lCursor { bg = "fg", fg = "bg" },                                              -- Character under the cursor when |language-mapping| is used (see 'guicursor')
-    -- CursorIM       { }, -- Like Cursor, but used when in IME mode |CursorIM|
-    CursorColumn { bg = "grey40" },                                                -- Screen-column at the cursor, when 'cursorcolumn' is set.
-    CursorLine { bg = hsl(colors.grey) },                                          -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
-    Directory { fg = hsl(colors.light_green) },                                    -- Directory names (and other special names in listings)
+  apply_many({ "ColorColumn" }, { bg = colors.black })
+  apply("Conceal", { bg = "darkgrey", fg = colors.beige_grey })
+  apply("Cursor", { bg = colors.white, fg = colors.background })
+  apply("Search", { bold = true, bg = colors.yellow, fg = colors.background })
+  link({ "CurSearch", "Substitute", "QuickFixLine" }, "Search")
+  apply("lCursor", { bg = "fg", fg = "bg" })
+  apply("CursorColumn", { bg = "grey40" })
+  apply("CursorLine", { bg = colors.grey })
+  apply("Directory", { fg = colors.light_green })
+  apply("NonText", { fg = "#767676" })
+  link({ "EndOfBuffer", "Whitespace", "CursorLineNr", "LineNr", "LineNrAbove", "LineNrBelow", "SpecialKey" }, "NonText")
+  apply("TermCursor", { reverse = true })
+  apply("ErrorMsg", { bg = "red", fg = "white" })
+  apply("VertSplit", { bg = "#121212", fg = "#444444" })
+  link({ "WinSeparator" }, "VertSplit")
+  apply("Folded", { bg = "#444444", fg = colors.white })
+  apply("FoldColumn", { bg = "grey", fg = "cyan" })
+  link({ "CursorLineFold" }, "FoldColumn")
+  apply("SignColumn", { fg = colors.white })
+  link({ "CursorLineSign" }, "SignColumn")
+  apply("IncSearch", { reverse = true })
+  apply("MatchParen", { bg = "#005f5f", fg = colors.white })
+  apply("ModeMsg", { bold = true })
+  apply("StatusLine", { bg = colors.background, fg = "#e4e4e4" })
+  link({ "MsgSeparator", "StatusLineNC" }, "StatusLine")
+  apply("MoreMsg", { bold = true, fg = "seagreen" })
+  apply("Normal", { bg = colors.background, fg = colors.beige_grey })
+  link({ "NormalFloat" }, "Normal")
+  apply("FloatTitle", { bold = true, fg = colors.beige_grey })
+  apply("Pmenu", { bg = "#444444", fg = colors.white })
+  link({ "PmenuKind", "PmenuExtra" }, "Pmenu")
+  apply("PmenuSel", { bg = colors.light_green, fg = colors.black })
+  link({ "PmenuKindSel", "PmenuExtraSel" }, "PmenuSel")
+  apply("PmenuSbar", { bg = "#5a647e" })
+  apply("PmenuThumb", { bg = "#a8a8a8", fg = colors.white })
+  apply("Question", { bold = true, fg = "green" })
+  apply("SpellBad", { undercurl = true, sp = "red" })
+  apply("SpellCap", { underline = true, sp = "blue", fg = "#dfdfff" })
+  apply("SpellLocal", { undercurl = true, sp = "cyan", fg = "#00ffff" })
+  apply("SpellRare", { underline = true, sp = "magenta", fg = "#df5f87" })
+  apply("TabLine", { bg = colors.light_brown, fg = colors.background })
+  apply("TabLineFill", { bg = colors.background })
+  apply("TabLineSel", { bold = true, bg = colors.dark_green, fg = colors.beige_grey })
+  apply("Title", { bold = true, fg = colors.white })
+  apply("Visual", { bg = "#5A647E" })
+  apply("WarningMsg", { fg = "#800000" })
+  apply("WildMenu", { bg = "yellow", fg = "black" })
+  apply("WinBar", { bold = true, bg = colors.dark_green, fg = colors.beige_grey })
+  link({ "WinBarNC" }, "TabLine")
 
-    NonText { fg = "#767676" },                                                    -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-    EndOfBuffer { NonText },                                                       -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
-    Whitespace { NonText },                                                        -- "nbsp", "space", "tab" and "trail" in 'listchars'
-    CursorLineNr { NonText },                                                      -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
-    LineNr { NonText },                                                            -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
-    LineNrAbove { NonText },                                                       -- Line number for when the 'relativenumber' option is set, above the cursor line
-    LineNrBelow { NonText },                                                       -- Line number for when the 'relativenumber' option is set, below the cursor line
-    SpecialKey { NonText },                                                        -- Unprintable characters: text displayed differently from what it really is. But not 'listchars' whitespace. |hl-Whitespace|
+  apply("Comment", { fg = colors.light_brown })
+  apply("Delimiter", { fg = colors.light_grey })
+  apply("Constant", { fg = colors.red })
+  link({ "Character", "Identifier", "StorageClass", "Structure", "Type" }, "Constant")
+  link({ "Typedef" }, "Type")
+  apply("String", { fg = colors.light_green })
+  apply("Number", { fg = colors.moss })
+  link({ "Float" }, "Number")
+  apply("Boolean", { fg = colors.blue })
+  apply("Function", { fg = colors.light_orange })
+  apply("Label", { fg = colors.purple })
+  apply("Statement", { fg = colors.dark_brown })
+  link({ "Conditional", "Repeat", "Operator", "Keyword", "Exception" }, "Statement")
+  apply("PreProc", { fg = colors.dark_orange })
+  link({ "Include", "Define", "Macro", "PreCondit" }, "PreProc")
+  apply("Special", { fg = colors.dark_green })
+  link({ "SpecialChar", "Tag", "SpecialComment", "Debug" }, "Special")
+  apply("Underlined", { underline = true, fg = "#80a0ff" })
+  apply("Ignore", { fg = "bg" })
+  apply("Error", { bg = "#990000", fg = colors.white })
+  apply("Todo", { bold = true, fg = colors.red })
 
-    TermCursor { gui = "reverse" },                                                -- Cursor in a focused terminal
-    -- TermCursorNC   { }, -- Cursor in an unfocused terminal
-    ErrorMsg { bg = "red", fg = "white" },                                         -- Error messages on the command line
+  apply("DiagnosticError", { fg = "red" })
+  apply("DiagnosticWarn", { fg = "orange" })
+  apply("DiagnosticInfo", { fg = "lightblue" })
+  apply("DiagnosticHint", { fg = colors.beige_grey })
+  apply("DiagnosticOk", { fg = "lightgreen" })
+  for _, severity in ipairs({ "Error", "Warn", "Info", "Hint", "Ok" }) do
+    link({ "DiagnosticVirtualText" .. severity, "DiagnosticFloating" .. severity, "DiagnosticSign" .. severity }, "Diagnostic" .. severity)
+  end
+  apply("DiagnosticUnderlineError", { underline = true, sp = "red" })
+  apply("DiagnosticUnderlineWarn", { underline = true, sp = "orange" })
+  apply("DiagnosticUnderlineInfo", { underline = true, sp = "lightblue" })
+  apply("DiagnosticUnderlineHint", { underline = true, sp = colors.beige_grey })
+  apply("DiagnosticUnderlineOk", { underline = true, sp = "lightgreen" })
+  apply("DiagnosticDeprecated", { strikethrough = true, sp = "red" })
+  link({ "DiagnosticUnnecessary" }, "Comment")
 
-    VertSplit { bg = "#121212", fg = "#444444" },                                  -- Column separating vertically split windows
-    WinSeparator { VertSplit },                                                    -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
+  link({ "NvimInvalidSpacing" }, "ErrorMsg")
+  link({ "NvimSpacing" }, "Normal")
+  apply("FloatShadow", { bg = "black", blend = 80 })
+  apply("FloatShadowThrough", { bg = "black", blend = 100 })
+  apply("RedrawDebugNormal", { reverse = true })
+  apply("RedrawDebugClear", { bg = "yellow" })
+  apply("RedrawDebugComposed", { bg = "green" })
+  apply("RedrawDebugRecompose", { bg = "red" })
+  link({ "NvimInvalid" }, "Error")
+  link({ "NvimString" }, "String")
+  link({ "NvimNumber" }, "Number")
+  link({ "NvimIdentifier" }, "Identifier")
+  link({ "NvimNumberPrefix", "NvimOptionSigil" }, "Type")
+  apply("NvimInternalError", { bg = "red", fg = "red" })
+  link({ "NvimFigureBrace", "NvimSingleQuotedUnknownEscape", "NvimInvalidSingleQuotedUnknownEscape" }, "NvimInternalError")
+  apply_many({ "User1", "User6", "User7", "User8", "User9" }, { bold = true, bg = "#606060", fg = "#eeeeee" })
+  apply("User2", { bold = true, bg = "#606060", fg = "#ffaf00" })
+  apply("User3", { bold = true, bg = "#606060", fg = "#5fff00" })
+  apply("User4", { bold = true, bg = "#606060", fg = "#870000" })
+  apply("User5", { bold = true, bg = "#606060", fg = "#e4e4e4" })
+  apply_many({ "diffNewFile", "diffFile" }, { bold = true, fg = colors.white })
+  apply("pythonExceptions", { fg = "#ffaf87" })
+  apply("pythonDoctest", { fg = "#8787ff" })
+  apply("pythonDoctestValue", { fg = "#87d7af" })
+  apply("mailEmail", { italic = true, fg = colors.light_green })
+  apply("mailHeaderKey", { fg = "#ffdf5f" })
+  link({ "mailSubject" }, "mailHeaderKey")
+  apply_many({ "xmlTag", "xmlTagName", "xmlEndTag" }, { fg = "#dfaf5f" })
+  link({ "htmlTag" }, "xmlTag")
+  link({ "htmlTagName" }, "xmlTagName")
+  link({ "htmlEndTag" }, "xmlEndTag")
+  apply("checkbox", { fg = "#3a3a3a" })
+  apply("checkboxDone", { bold = true, fg = "#5fff00" })
+  apply("checkboxNotDone", { bold = true, fg = "#005fdf" })
 
-    Folded { bg = "#444444", fg = hsl(colors.white) },                             -- Line used for closed folds
+  apply("DiffAdd", { fg = colors.dark_green })
+  apply("DiffChange", { fg = colors.cyan })
+  apply("DiffDelete", { bold = true, fg = colors.red })
+  apply("DiffText", { bold = true, bg = colors.red, fg = colors.white })
+  link({ "diffAdded" }, "DiffAdd")
+  link({ "diffRemoved" }, "DiffDelete")
+  link({ "MiniDiffSignAdd", "MiniDiffOverAdd" }, "DiffAdd")
+  link({ "MiniDiffSignDelete", "MiniDiffOverDelete" }, "DiffDelete")
+  link({ "MiniDiffSignChange", "MiniDiffOverChange" }, "DiffChange")
+  apply("MiniDiffOverContext", { bg = colors.purple })
+  apply("IndentLine", { fg = "#767676" })
+  apply("IndentBlanklineSpaceChar", { nocombine = true, fg = "#767676" })
+  apply("IndentBlanklineContextStart", { underline = true, sp = colors.dark_brown })
+  link({ "IndentBlanklineSpaceCharBlankline", "IndentBlanklineChar" }, "IndentBlanklineSpaceChar")
+  apply("IndentBlanklineContextChar", { nocombine = true, fg = colors.dark_brown })
+  apply("TelescopeBorder", { fg = colors.light_brown })
+  apply("TelescopeSelection", { fg = colors.dark_orange })
+  apply("TelescopeTitle", { fg = colors.red })
+  link({ "TelescopePromptTitle" }, "TelescopeTitle")
+  apply("TelescopePromptNormal", { fg = colors.yellow })
+  link({ "TelescopePromptPrefix", "TelescopeMatching" }, "TelescopePromptNormal")
+  link({ "zshDeref" }, "Constant")
 
-    FoldColumn { bg = "grey", fg = "cyan" },                                       -- 'foldcolumn'
-    CursorLineFold { FoldColumn },                                                 -- Like FoldColumn when 'cursorline' is set for the cursor line
+  apply("@text", { fg = colors.beige_grey })
+  link({ "@text.title", "@markup.heading" }, "Title")
+  link({ "@text.todo", "@markup.todo" }, "Todo")
+  link({ "@markup" }, "@text")
+  link({ "@number", "@float" }, "Number")
+  link({ "@conceal" }, "NonText")
+  apply("@function.call", { fg = colors.beige_grey })
+  link({ "@parameter", "@variable.parameter", "@punctuation.bracket", "@punctuation.delimiter", "@field", "@variable", "@operator" }, "@function.call")
+  apply("@label", { fg = colors.purple })
+  link({ "@variable.member" }, "@label")
+  link({ "@property", "@namespace", "@text.reference", "@constant", "@type", "@character", "@type.definition", "@storageclass" }, "Identifier")
+  link({ "@comment", "@structure", "@text.literal" }, "Comment")
+  link({ "@preproc", "@function.builtin", "@function.macro", "@include", "@constant.macro", "@define", "@macro", "@type.qualifier" }, "PreProc")
+  link({ "@function.method", "@tag", "@function", "@method" }, "Function")
+  link({ "@conditional", "@exception", "@keyword", "@keyword.function", "@keyword.return", "@repeat" }, "Keyword")
+  link({ "@constructor", "@character.special", "@punctuation", "@debug" }, "Special")
+  link({ "@string", "@string.escape", "@string.special", "@string.special.path" }, "String")
+  link({ "@string.special.url", "@text.uri", "@text.underline" }, "Underlined")
+  apply("@label.json", { fg = colors.light_green })
+  apply("@constant.builtin", { fg = colors.blue })
+  link({ "@variable.builtin", "@boolean" }, "@constant.builtin")
+  link({ "@text.diff.add" }, "diffAdded")
+  link({ "@text.diff.delete" }, "diffRemoved")
+  link({ "@lsp.type.type" }, "Type")
+  link({ "@lsp.type.comment" }, "Comment")
+  link({ "@lsp.type.enumMember" }, "Constant")
+  link({ "@lsp.type.parameter", "@lsp.type.variable" }, "@function.call")
+  link({ "@lsp.type.property" }, "Identifier")
+  link({ "@lsp.type.function", "@lsp.type.method" }, "Function")
+  link({ "@operator.ruby" }, "PreProc")
+  apply("@symbol.ruby", { fg = colors.cyan })
+  link({ "@string.special.symbol" }, "@symbol.ruby")
+  link({ "@tag.delimiter.html" }, "PreProc")
+  link({ "@property.typescript" }, "@text")
+  link({ "@field.yaml" }, "Function")
+  link({ "@punctuation.special.yaml" }, "PreProc")
+end
 
-    SignColumn { fg = hsl(colors.white) },                                         -- Column where |signs| are displayed
-    CursorLineSign { SignColumn },                                                 -- Like SignColumn when 'cursorline' is set for the cursor line
-
-    IncSearch { gui = "reverse" },                                                 -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
-
-    MatchParen { bg = "#005f5f", fg = hsl(colors.white) },                         -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
-    ModeMsg { gui = "bold" },                                                      -- 'showmode' message (e.g., "-- INSERT -- ")
-    -- MsgArea        { }, -- Area for messages and cmdline
-
-    StatusLine { bg = hsl(colors.background), fg = "#e4e4e4" },          -- Status line of current window
-    MsgSeparator { StatusLine },                                         -- Separator for scrolled messages, `msgsep` flag of 'display'
-
-    MoreMsg { gui = "bold", fg = "seagreen" },                           -- |more-prompt|
-    Normal { bg = hsl(colors.background), fg = hsl(colors.beige_grey) }, -- Normal text
-    NormalFloat { Normal },                                              -- Normal text in floating windows.
-    -- FloatBorder    { }, -- Border of floating windows.
-    FloatTitle { gui = "bold", fg = hsl(colors.beige_grey) },            -- Title of floating windows.
-    -- NormalNC       { }, -- normal text in non-current windows
-
-    Pmenu { bg = "#444444", fg = hsl(colors.white) },                                      -- Popup menu: Normal item.
-    PmenuKind { Pmenu },                                                                   -- Popup menu: Normal item "kind"
-    PmenuExtra { Pmenu },                                                                  -- Popup menu: Normal item "extra text"
-
-    PmenuSel { bg = hsl(colors.light_green), fg = hsl(colors.black) },                     -- Popup menu: Selected item.
-    PmenuKindSel { PmenuSel },                                                             -- Popup menu: Selected item "kind"
-    PmenuExtraSel { PmenuSel },                                                            -- Popup menu: Selected item "extra text"
-
-    PmenuSbar { bg = "#5a647e" },                                                          -- Popup menu: Scrollbar.
-    PmenuThumb { bg = "#a8a8a8", fg = hsl(colors.white) },                                 -- Popup menu: Thumb of the scrollbar.
-    Question { gui = "bold", fg = "green" },                                               -- |hit-enter| prompt and yes/no questions
-    SpellBad { gui = "undercurl", sp = "red" },                                            -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
-    SpellCap { gui = "underline", sp = "blue", fg = "#dfdfff" },                           -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
-    SpellLocal { gui = "undercurl", sp = "cyan", fg = "#00ffff" },                         -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
-    SpellRare { gui = "underline", sp = "magenta", fg = "#df5f87" },                       -- Word that is recognized by the spellchecker as one that is hardly ever used. |spell| Combined with the highlighting used otherwise.
-    StatusLineNC { StatusLine },                                                           -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-    TabLine { bg = hsl(colors.light_brown), fg = hsl(colors.background) },                 -- Tab pages line, not active tab page label
-    TabLineFill { bg = hsl(colors.background) },                                           -- Tab pages line, where there are no labels
-    TabLineSel { gui = "bold", bg = hsl(colors.dark_green), fg = hsl(colors.beige_grey) }, -- Tab pages line, active tab page label
-    Title { gui = "bold", fg = hsl(colors.white) },                                        -- Titles for output from ":set all", ":autocmd" etc.
-    Visual { bg = "#5A647E" },                                                             -- Visual mode selection
-    -- VisualNOS      { }, -- Visual mode selection when vim is "Not Owning the Selection".
-    WarningMsg { fg = "#800000" },                                                         -- Warning messages
-    WildMenu { bg = "yellow", fg = "black" },                                              -- Current match in 'wildmenu' completion
-
-    WinBar { gui = "bold", TabLineSel },                                                   -- Window bar of current window
-    WinBarNC { TabLine },                                                                  -- Window bar of not-current windows
-
-    Comment { fg = hsl(colors.light_brown) },         -- Any comment
-
-    Delimiter { fg = hsl(colors.light_grey) },        -- Character that needs attention
-
-    Constant { fg = hsl(colors.red) },                -- (*) Any constant
-    Character { Constant },                           --   A character constant: 'c', '\n'
-    Identifier { Constant },                          -- (*) Any variable name
-    StorageClass { Constant },                        --   static, register, volatile, etc.
-    Structure { Constant },                           --   struct, union, enum, etc.
-    Type { Constant },                                -- (*) int, long, char, etc.
-    Typedef { Type },                                 --   A typedef
-
-    String { fg = hsl(colors.light_green) },          --   A string constant: "this is a string"
-    Number { fg = hsl(colors.moss) },                 --   A number constant: 234, 0xff
-    Float { Number },                                 --   A floating point constant: 2.3e10
-
-    Boolean { fg = hsl(colors.blue) },                --   A boolean constant: TRUE, false
-
-    Function { fg = hsl(colors.light_orange) },       --   Function name (also: methods for classes)
-
-    Label { fg = hsl(colors.purple) },                --   case, default, etc.
-
-    Statement { fg = hsl(colors.dark_brown) },        -- (*) Any statement
-    Conditional { Statement },                        --   if, then, else, endif, switch, etc.
-    Repeat { Statement },                             --   for, do, while, etc.
-    Operator { Statement },                           --   "sizeof", "+", "*", etc.
-    Keyword { Statement },                            --   any other keyword
-    Exception { Statement },                          --   try, catch, throw
-
-    PreProc { fg = hsl(colors.dark_orange) },         -- (*) Generic Preprocessor
-    Include { PreProc },                              --   Preprocessor #include
-    Define { PreProc },                               --   Preprocessor #define
-    Macro { PreProc },                                --   Same as Define
-    PreCondit { PreProc },                            --   Preprocessor #if, #else, #endif, etc.
-
-    Special { fg = hsl(colors.dark_green) },          -- (*) Any special symbol
-    SpecialChar { Special },                          -- Special character in a constant
-    Tag { Special },                                  -- You can use CTRL-] on this
-    SpecialComment { Special },                       -- Special things inside a comment (e.g. '\n')
-    Debug { Special },                                -- Debugging statements
-
-    Underlined { gui = "underline", fg = "#80a0ff" }, -- Text that stands out, HTML links
-    Ignore { fg = "bg" },                             -- Left blank, hidden |hl-Ignore| (NOTE: May be invisible here in template)
-    Error { bg = "#990000", fg = hsl(colors.white) }, -- Any erroneous construct
-    Todo { gui = "bold", fg = hsl(colors.red) },      -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
-
-    -- LspReferenceText            { } , -- Used for highlighting "text" references
-    -- LspReferenceRead            { } , -- Used for highlighting "read" references
-    -- LspReferenceWrite           { } , -- Used for highlighting "write" references
-    -- LspCodeLens                 { } , -- Used to color the virtual text of the codelens. See |nvim_buf_set_extmark()|.
-    -- LspCodeLensSeparator        { } , -- Used to color the seperator between two or more code lens.
-    -- LspSignatureActiveParameter { } , -- Used to highlight the active parameter in the signature help. See |vim.lsp.handlers.signature_help()|.
-
-    DiagnosticError { fg = "red" },                                             -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticWarn { fg = "orange" },                                           -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticInfo { fg = "lightblue" },                                        -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticHint { fg = hsl(colors.beige_grey) },                             -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticOk { fg = "lightgreen" },                                         -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticVirtualTextError { DiagnosticError },                             -- Used for "Error" diagnostic virtual text.
-    DiagnosticVirtualTextWarn { DiagnosticWarn },                               -- Used for "Warn" diagnostic virtual text.
-    DiagnosticVirtualTextInfo { DiagnosticInfo },                               -- Used for "Info" diagnostic virtual text.
-    DiagnosticVirtualTextHint { DiagnosticHint },                               -- Used for "Hint" diagnostic virtual text.
-    DiagnosticVirtualTextOk { DiagnosticOk },                                   -- Used for "Ok" diagnostic virtual text.
-    DiagnosticUnderlineError { gui = "underline", sp = "red" },                 -- Used to underline "Error" diagnostics.
-    DiagnosticUnderlineWarn { gui = "underline", sp = "orange" },               -- Used to underline "Warn" diagnostics.
-    DiagnosticUnderlineInfo { gui = "underline", sp = "lightblue" },            -- Used to underline "Info" diagnostics.
-    DiagnosticUnderlineHint { gui = "underline", sp = hsl(colors.beige_grey) }, -- Used to underline "Hint" diagnostics.
-    DiagnosticUnderlineOk { gui = "underline", sp = "lightgreen" },             -- Used to underline "Ok" diagnostics.
-    DiagnosticFloatingError { DiagnosticError },                                -- Used to color "Error" diagnostic messages in diagnostics float. See |vim.diagnostic.open_float()|
-    DiagnosticFloatingWarn { DiagnosticWarn },                                  -- Used to color "Warn" diagnostic messages in diagnostics float.
-    DiagnosticFloatingInfo { DiagnosticInfo },                                  -- Used to color "Info" diagnostic messages in diagnostics float.
-    DiagnosticFloatingHint { DiagnosticHint },                                  -- Used to color "Hint" diagnostic messages in diagnostics float.
-    DiagnosticFloatingOk { DiagnosticOk },                                      -- Used to color "Ok" diagnostic messages in diagnostics float.
-    DiagnosticSignError { DiagnosticError },                                    -- Used for "Error" signs in sign column.
-    DiagnosticSignWarn { DiagnosticWarn },                                      -- Used for "Warn" signs in sign column.
-    DiagnosticSignInfo { DiagnosticInfo },                                      -- Used for "Info" signs in sign column.
-    DiagnosticSignHint { DiagnosticHint },                                      -- Used for "Hint" signs in sign column.
-    DiagnosticSignOk { DiagnosticOk },                                          -- Used for "Ok" signs in sign column.
-    DiagnosticDeprecated { gui = "strikethrough", sp = "red" },
-    DiagnosticUnnecessary { Comment },
-
-    NvimInvalidSpacing { ErrorMsg },
-    NvimSpacing { Normal },
-    FloatShadow { bg = "black", blend = 80 },
-    FloatShadowThrough { bg = "black", blend = 100 },
-    RedrawDebugNormal { gui = "reverse" },
-    RedrawDebugClear { bg = "yellow" },
-    RedrawDebugComposed { bg = "green" },
-    RedrawDebugRecompose { bg = "red" },
-    NvimInvalid { Error },
-    NvimString { String },
-    NvimNumber { Number },
-    NvimIdentifier { Identifier },
-    NvimNumberPrefix { Type },
-    NvimOptionSigil { Type },
-
-    NvimInternalError { bg = "red", fg = "red" },
-    NvimFigureBrace { NvimInternalError },
-    NvimSingleQuotedUnknownEscape { NvimInternalError },
-    NvimInvalidSingleQuotedUnknownEscape { NvimInternalError },
-    User1 { gui = "bold", bg = "#606060", fg = "#eeeeee" },
-    User2 { gui = "bold", bg = "#606060", fg = "#ffaf00" },
-    User3 { gui = "bold", bg = "#606060", fg = "#5fff00" },
-    User4 { gui = "bold", bg = "#606060", fg = "#870000" },
-    User5 { gui = "bold", bg = "#606060", fg = "#e4e4e4" },
-    User6 { gui = "bold", bg = "#606060", fg = "#e4e4e4" },
-    User7 { gui = "bold", bg = "#606060", fg = "#e4e4e4" },
-    User8 { gui = "bold", bg = "#606060", fg = "#e4e4e4" },
-    User9 { gui = "bold", bg = "#606060", fg = "#e4e4e4" },
-    diffNewFile { gui = "bold", fg = hsl(colors.white) },
-    diffFile { gui = "bold", fg = hsl(colors.white) },
-    pythonExceptions { fg = "#ffaf87" },
-    pythonDoctest { fg = "#8787ff" },
-    pythonDoctestValue { fg = "#87d7af" },
-    mailEmail { gui = "italic", fg = hsl(colors.light_green) },
-    mailHeaderKey { fg = "#ffdf5f" },
-    mailSubject { mailHeaderKey },
-    xmlTag { fg = "#dfaf5f" },
-    htmlTag { xmlTag },
-    xmlTagName { fg = "#dfaf5f" },
-    htmlTagName { xmlTagName },
-    xmlEndTag { fg = "#dfaf5f" },
-    htmlEndTag { xmlEndTag },
-    checkbox { fg = "#3a3a3a" },
-    checkboxDone { gui = "bold", fg = "#5fff00" },
-    checkboxNotDone { gui = "bold", fg = "#005fdf" },
-
-    DiffAdd { fg = hsl(colors.dark_green) },                                 -- Diff mode: Added line |diff.txt|
-    DiffChange { fg = hsl(colors.cyan) },                                    -- Diff mode: Changed line |diff.txt|
-    DiffDelete { gui = "bold", fg = hsl(colors.red) },                       -- Diff mode: Deleted line |diff.txt|
-    DiffText { gui = "bold", bg = hsl(colors.red), fg = hsl(colors.white) }, -- Diff mode: Changed text within a changed line |diff.txt|
-
-    diffAdded { DiffAdd },
-    diffRemoved { DiffDelete },
-
-    MiniDiffSignAdd { DiffAdd },
-    MiniDiffOverAdd { DiffAdd },
-    MiniDiffSignDelete { DiffDelete },
-    MiniDiffOverDelete { DiffDelete },
-    MiniDiffSignChange { DiffChange },
-    MiniDiffOverChange { DiffChange },
-    MiniDiffOverContext { bg = hsl(colors.purple) },
-
-    IndentLine { fg = hsl("#767676") },
-
-    IndentBlanklineSpaceChar { gui = "nocombine", fg = "#767676" },
-    IndentBlanklineContextStart { gui = "underline", sp = hsl(colors.dark_brown) },
-    IndentBlanklineSpaceCharBlankline { IndentBlanklineSpaceChar },
-    IndentBlanklineContextChar { gui = "nocombine", fg = hsl(colors.dark_brown) },
-    IndentBlanklineChar { IndentBlanklineSpaceChar },
-
-    TelescopeBorder { fg = hsl(colors.light_brown) },
-    TelescopeSelection { fg = hsl(colors.dark_orange) },
-    TelescopeTitle { fg = hsl(colors.red) },
-    TelescopePromptTitle { TelescopeTitle },
-    TelescopePromptNormal { fg = hsl(colors.yellow) },
-    TelescopePromptPrefix { TelescopePromptNormal },
-    TelescopeMatching { TelescopePromptNormal },
-
-    zshDeref { Constant },
-
-    -- Tree-sitter capture names use `sym` because they contain an `@`.
-
-    sym "@text" { fg = hsl(colors.beige_grey) },
-    sym "@text.title" { Title },
-    sym "@text.todo" { Todo },
-    sym "@markup" { sym "@text" },
-    sym "@markup.heading" { Title },
-    sym "@markup.todo" { Todo },
-    sym "@number" { Number },
-    sym "@float" { Number },
-    sym "@conceal" { NonText },
-
-    sym "@function.call" { fg = hsl(colors.beige_grey) },  -- Function calls
-    sym "@parameter" { sym "@function.call" },
-    sym "@punctuation.bracket" { sym "@function.call" },   -- For brackets and parenthesis
-    sym "@punctuation.delimiter" { sym "@function.call" }, -- For delimiters (e.g. `.`)
-    sym "@field" { sym "@function.call" },
-    sym "@variable" { sym "@function.call" },
-    sym "@variable.parameter" { sym "@function.call" },
-    sym "@operator" { sym "@function.call" },
-
-    sym "@label" { fg = hsl(colors.purple) },
-    sym "@variable.member" { sym "@label" },
-
-    sym "@property" { Identifier },
-    sym "@namespace" { Identifier },
-    sym "@text.reference" { Identifier },
-    sym "@constant" { Identifier },
-    sym "@type" { Identifier },
-    sym "@character" { Identifier },
-    sym "@type.definition" { Identifier },
-    sym "@storageclass" { Identifier },
-
-    sym "@comment" { Comment },
-    sym "@structure" { Comment },
-    sym "@text.literal" { Comment },
-
-    sym "@preproc" { PreProc },
-    sym "@function.builtin" { PreProc },
-    sym "@function.macro" { PreProc },
-    sym "@function.method" { Function },
-    sym "@include" { PreProc },
-    sym "@constant.macro" { PreProc },
-    sym "@define" { PreProc },
-    sym "@macro" { PreProc },
-    sym "@type.qualifier" { PreProc },
-
-    sym "@conditional" { Keyword },
-    sym "@exception" { Keyword },
-    sym "@keyword" { Keyword },
-    sym "@keyword.function" { Keyword },
-    sym "@keyword.return" { Keyword },
-    sym "@repeat" { Keyword },
-
-    sym "@constructor" { Special },
-    sym "@character.special" { Special },
-    sym "@punctuation" { Special },
-    sym "@debug" { Special },
-
-    sym "@string" { String },
-    sym "@string.escape" { String },
-    sym "@string.special" { String },
-    sym "@string.special.path" { String },
-    sym "@string.special.url" { Underlined },
-    sym "@label.json" { String },
-
-    sym "@tag" { Function },
-    sym "@function" { Function },
-    sym "@method" { Function },
-
-    sym "@constant.builtin" { fg = hsl(colors.blue) },
-    sym "@variable.builtin" { sym "@constant.builtin" },
-    sym "@boolean" { sym "@constant.builtin" },
-
-    sym "@text.uri" { Underlined },
-    sym "@text.underline" { Underlined },
-
-    sym "@text.diff.add" { diffAdded },
-    sym "@text.diff.delete" { diffRemoved },
-
-    sym "@lsp.type.type" {},
-    sym "@lsp.type.comment" {},
-    sym "@lsp.type.enumMember" {},
-    sym "@lsp.type.parameter" {},
-    sym "@lsp.type.property" {},
-    sym "@lsp.type.variable" {},
-
-    sym "@operator.ruby" { PreProc },
-    sym "@symbol.ruby" { fg = hsl(colors.cyan) },
-    sym "@string.special.symbol" { sym "@symbol.ruby" },
-
-    sym "@tag.delimiter.html" { PreProc },
-
-    sym "@property.typescript" { sym "@text" },
-
-    sym "@field.yaml" { Function },
-    sym "@punctuation.special.yaml" { PreProc },
-  }
-end)
-
-return theme
+return M
