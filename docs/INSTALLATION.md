@@ -69,8 +69,7 @@ require("railscasts").setup {
 vim.cmd.colorscheme "railscasts"
 ```
 
-`vim.g.railscasts_high_contrast = true` remains supported for existing
-configurations. The setup API is preferred for new configurations.
+The setup API is the only supported configuration interface in v2.
 
 ## Integrations
 

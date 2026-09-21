@@ -1,7 +1,7 @@
 local M = {}
 
 local options = {
-  high_contrast = vim.g.railscasts_high_contrast == true,
+  high_contrast = false,
   transparent = false,
   dim_inactive = false,
 }
@@ -15,8 +15,6 @@ function M.setup(user_options)
     options[name] = value
   end
 
-  -- Preserve the original global option for existing configurations.
-  vim.g.railscasts_high_contrast = options.high_contrast
 end
 
 function M.get()

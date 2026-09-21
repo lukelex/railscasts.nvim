@@ -77,7 +77,6 @@ require("railscasts").setup {
 }
 vim.cmd.colorscheme("railscasts")
 assert(require("railscasts.colors").dark_green == "#5FAF5F")
-assert(vim.g.railscasts_high_contrast == true)
 assert(highlight("Normal").bg == nil)
 assert(highlight("NormalNC").bg == nil)
 assert(highlight("NormalNC").fg == 0xC7A66D)
