@@ -337,6 +337,9 @@ local theme = lush(function(injected_functions)
     sym "@text" { fg = hsl(colors.beige_grey) },
     sym "@text.title" { Title },
     sym "@text.todo" { Todo },
+    sym "@markup" { sym "@text" },
+    sym "@markup.heading" { Title },
+    sym "@markup.todo" { Todo },
     sym "@number" { Number },
     sym "@float" { Number },
     sym "@conceal" { NonText },
@@ -347,6 +350,7 @@ local theme = lush(function(injected_functions)
     sym "@punctuation.delimiter" { sym "@function.call" }, -- For delimiters (e.g. `.`)
     sym "@field" { sym "@function.call" },
     sym "@variable" { sym "@function.call" },
+    sym "@variable.parameter" { sym "@function.call" },
     sym "@operator" { sym "@function.call" },
 
     sym "@label" { fg = hsl(colors.purple) },
@@ -369,6 +373,7 @@ local theme = lush(function(injected_functions)
     sym "@preproc" { PreProc },
     sym "@function.builtin" { PreProc },
     sym "@function.macro" { PreProc },
+    sym "@function.method" { Function },
     sym "@include" { PreProc },
     sym "@constant.macro" { PreProc },
     sym "@define" { PreProc },
@@ -378,6 +383,8 @@ local theme = lush(function(injected_functions)
     sym "@conditional" { Keyword },
     sym "@exception" { Keyword },
     sym "@keyword" { Keyword },
+    sym "@keyword.function" { Keyword },
+    sym "@keyword.return" { Keyword },
     sym "@repeat" { Keyword },
 
     sym "@constructor" { Special },
@@ -389,6 +396,8 @@ local theme = lush(function(injected_functions)
     sym "@string" { String },
     sym "@string.escape" { String },
     sym "@string.special" { String },
+    sym "@string.special.path" { String },
+    sym "@string.special.url" { Underlined },
     sym "@label.json" { String },
 
     sym "@tag" { Function },
