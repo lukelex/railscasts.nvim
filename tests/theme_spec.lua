@@ -92,6 +92,8 @@ assert(highlight("MiniFilesDirectory").fg == highlight("Directory").fg)
 assert(highlight("MiniPickMatchRanges").bg == highlight("Search").bg)
 assert(highlight("TroubleSignError").fg == highlight("DiagnosticError").fg)
 assert(highlight("TroubleCode").fg == highlight("Number").fg)
+assert(highlight("NotifyERRORTitle").fg == highlight("DiagnosticError").fg)
+assert(highlight("NotifyWARNBody").bg == highlight("NormalFloat").bg)
 assert(highlight("RenderMarkdownH1").fg == highlight("Title").fg)
 assert(highlight("IblScope").fg == 0xAF5F00)
 

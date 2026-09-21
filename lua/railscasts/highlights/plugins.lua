@@ -121,6 +121,13 @@ function M.setup(colors, _, highlights)
   link({ "TroubleSignWarning", "TroubleWarning" }, "DiagnosticWarn")
   link({ "TroubleSignInformation", "TroubleInformation" }, "DiagnosticInfo")
   link({ "TroubleSignHint", "TroubleHint" }, "DiagnosticHint")
+  link({ "NotifyERRORIcon", "NotifyERRORTitle", "NotifyERRORBorder" }, "DiagnosticError")
+  link({ "NotifyWARNIcon", "NotifyWARNTitle", "NotifyWARNBorder" }, "DiagnosticWarn")
+  link({ "NotifyINFOIcon", "NotifyINFOTitle", "NotifyINFOBorder" }, "DiagnosticInfo")
+  link({ "NotifyDEBUGIcon", "NotifyDEBUGTitle", "NotifyDEBUGBorder" }, "DiagnosticHint")
+  link({ "NotifyTRACEIcon", "NotifyTRACETitle", "NotifyTRACEBorder" }, "Comment")
+  link({ "NotifyERRORBody", "NotifyWARNBody", "NotifyINFOBody", "NotifyDEBUGBody", "NotifyTRACEBody" }, "NormalFloat")
+  link({ "NotifyBackground" }, "NormalFloat")
 
   -- Indentation and rendered Markdown
   apply("IblIndent", { fg = "#767676" })
