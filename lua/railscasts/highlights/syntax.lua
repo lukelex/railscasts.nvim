@@ -1,0 +1,46 @@
+local M = {}
+
+function M.setup(colors, _, highlights)
+  local apply = highlights.apply
+  local link = highlights.link
+  local apply_many = highlights.apply_many
+
+  apply("Comment", { fg = colors.light_brown })
+  apply("Delimiter", { fg = colors.beige_grey })
+  apply("Constant", { fg = colors.red })
+  link({ "Character", "Identifier", "StorageClass", "Structure", "Type" }, "Constant")
+  link({ "Typedef" }, "Type")
+  apply("String", { fg = colors.light_green })
+  apply("Number", { fg = colors.moss })
+  link({ "Float" }, "Number")
+  apply("Boolean", { fg = colors.blue })
+  apply("Function", { fg = colors.light_orange })
+  apply("Label", { fg = colors.purple })
+  apply("Statement", { fg = colors.dark_orange })
+  link({ "Conditional", "Repeat", "Operator", "Keyword", "Exception" }, "Statement")
+  apply("PreProc", { fg = colors.dark_orange })
+  link({ "Include", "Define", "Macro", "PreCondit" }, "PreProc")
+  apply("Special", { fg = colors.light_green })
+  link({ "SpecialChar", "Tag", "SpecialComment", "Debug" }, "Special")
+  apply("Underlined", { underline = true, fg = "#80a0ff" })
+  apply("Ignore", { fg = colors.background })
+  apply("Error", { bg = "#990000", fg = colors.white })
+  apply("Todo", { bold = true, fg = colors.red })
+
+  apply_many({ "diffNewFile", "diffFile" }, { bold = true, fg = colors.white })
+  apply("pythonExceptions", { fg = "#ffaf87" })
+  apply("pythonDoctest", { fg = "#8787ff" })
+  apply("pythonDoctestValue", { fg = "#87d7af" })
+  apply("mailEmail", { italic = true, fg = colors.light_green })
+  apply("mailHeaderKey", { fg = "#ffdf5f" })
+  link({ "mailSubject" }, "mailHeaderKey")
+  apply_many({ "xmlTag", "xmlTagName", "xmlEndTag" }, { fg = "#dfaf5f" })
+  link({ "htmlTag" }, "xmlTag")
+  link({ "htmlTagName" }, "xmlTagName")
+  link({ "htmlEndTag" }, "xmlEndTag")
+  apply("checkbox", { fg = "#3a3a3a" })
+  apply("checkboxDone", { bold = true, fg = "#5fff00" })
+  apply("checkboxNotDone", { bold = true, fg = "#005fdf" })
+end
+
+return M

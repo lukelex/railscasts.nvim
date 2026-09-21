@@ -1,0 +1,101 @@
+local M = {}
+
+function M.setup(colors, _, highlights)
+  local apply = highlights.apply
+  local link = highlights.link
+  local apply_many = highlights.apply_many
+
+  apply("DiffAdd", { fg = colors.light_green })
+  apply("DiffChange", { fg = colors.cyan })
+  apply("DiffDelete", { bold = true, fg = colors.red })
+  apply("DiffText", { bold = true, bg = colors.red, fg = colors.white })
+  link({ "diffAdded" }, "DiffAdd")
+  link({ "diffRemoved" }, "DiffDelete")
+  link({ "MiniDiffSignAdd", "MiniDiffOverAdd" }, "DiffAdd")
+  link({ "MiniDiffSignDelete", "MiniDiffOverDelete" }, "DiffDelete")
+  link({ "MiniDiffSignChange", "MiniDiffOverChange" }, "DiffChange")
+  apply("MiniDiffOverContext", { bg = colors.purple })
+  apply("IndentLine", { fg = "#767676" })
+  apply("IndentBlanklineSpaceChar", { nocombine = true, fg = "#767676" })
+  apply("IndentBlanklineContextStart", { underline = true, sp = colors.dark_brown })
+  link({ "IndentBlanklineSpaceCharBlankline", "IndentBlanklineChar" }, "IndentBlanklineSpaceChar")
+  apply("IndentBlanklineContextChar", { nocombine = true, fg = colors.dark_brown })
+  apply("TelescopeBorder", { fg = colors.light_brown })
+  apply("TelescopeSelection", { fg = colors.dark_orange })
+  apply("TelescopeTitle", { fg = colors.red })
+  link({ "TelescopePromptTitle" }, "TelescopeTitle")
+  apply("TelescopePromptNormal", { fg = colors.yellow })
+  link({ "TelescopePromptPrefix", "TelescopeMatching" }, "TelescopePromptNormal")
+  link({ "zshDeref" }, "Constant")
+
+  -- Completion
+  link({ "CmpItemAbbr", "BlinkCmpLabel" }, "Normal")
+  link({ "CmpItemAbbrDeprecated", "BlinkCmpLabelDeprecated" }, "Comment")
+  apply_many({ "CmpItemAbbrMatch", "CmpItemAbbrMatchFuzzy", "BlinkCmpLabelMatch" }, { bold = true, fg = colors.yellow })
+  link({ "CmpItemKind", "BlinkCmpKind" }, "Function")
+  link({ "CmpItemMenu", "BlinkCmpSource" }, "Comment")
+  link({ "BlinkCmpMenu", "BlinkCmpDoc", "BlinkCmpSignatureHelp" }, "NormalFloat")
+  link({ "BlinkCmpMenuBorder", "BlinkCmpDocBorder", "BlinkCmpSignatureHelpBorder" }, "TelescopeBorder")
+  link({ "BlinkCmpMenuSelection" }, "PmenuSel")
+  link({ "BlinkCmpDocSeparator" }, "WinSeparator")
+  link({ "BlinkCmpSignatureHelpActiveParameter" }, "Search")
+
+  -- Git and file explorers
+  link({ "GitSignsAdd", "GitSignsAddNr", "GitSignsAddLn" }, "DiffAdd")
+  link({ "GitSignsChange", "GitSignsChangeNr", "GitSignsChangeLn" }, "DiffChange")
+  link({ "GitSignsDelete", "GitSignsDeleteNr", "GitSignsDeleteLn" }, "DiffDelete")
+  link({ "NeoTreeNormal", "NeoTreeNormalNC", "OilNormal" }, "Normal")
+  link({ "NeoTreeDirectoryName", "NeoTreeDirectoryIcon", "OilDir", "OilDirIcon" }, "Directory")
+  link({ "NeoTreeRootName" }, "Title")
+  link({ "NeoTreeGitAdded" }, "DiffAdd")
+  link({ "NeoTreeGitModified" }, "DiffChange")
+  link({ "NeoTreeGitDeleted" }, "DiffDelete")
+  link({ "OilLink" }, "Underlined")
+  link({ "OilCopy", "OilMove", "OilCreate" }, "DiffAdd")
+  link({ "OilDelete" }, "DiffDelete")
+  link({ "OilPermission", "OilSize", "OilMTime" }, "Comment")
+
+  -- UI plugins
+  link({ "WhichKey", "WhichKeyGroup" }, "Function")
+  link({ "WhichKeyDesc" }, "Normal")
+  link({ "WhichKeySeparator", "WhichKeyValue" }, "Comment")
+  link({ "WhichKeyFloat" }, "NormalFloat")
+  link({ "WhichKeyBorder" }, "TelescopeBorder")
+  link({ "LazyNormal" }, "NormalFloat")
+  link({ "LazyButton" }, "Pmenu")
+  link({ "LazyButtonActive" }, "PmenuSel")
+  link({ "LazyH1" }, "Title")
+  link({ "LazyComment" }, "Comment")
+  link({ "LazyReasonPlugin" }, "Function")
+  link({ "LazyValue" }, "String")
+  link({ "NoiceCmdline", "NoicePopup", "NoiceConfirm" }, "NormalFloat")
+  link({ "NoiceCmdlinePopup", "NoicePopupmenu" }, "Pmenu")
+  link({ "NoiceCmdlinePopupBorder", "NoicePopupBorder", "NoiceConfirmBorder" }, "TelescopeBorder")
+  link({ "NoiceCmdlineIcon", "NoiceFormatEvent", "NoiceFormatKind" }, "Special")
+  link({ "NoiceFormatTitle" }, "Title")
+  link({ "NoiceFormatDate" }, "Comment")
+  link({ "NoiceFormatProgressDone" }, "DiffAdd")
+  link({ "NoiceFormatProgressTodo" }, "Comment")
+
+  -- Indentation and rendered Markdown
+  apply("IblIndent", { fg = "#767676" })
+  link({ "IblWhitespace" }, "IblIndent")
+  apply("IblScope", { fg = colors.dark_brown })
+  link({ "IblScopeChar" }, "IblScope")
+  apply_many({
+    "RenderMarkdownH1",
+    "RenderMarkdownH2",
+    "RenderMarkdownH3",
+    "RenderMarkdownH4",
+    "RenderMarkdownH5",
+    "RenderMarkdownH6",
+  }, { bold = true, fg = colors.white })
+  link({ "RenderMarkdownCode", "RenderMarkdownCodeInline" }, "Pmenu")
+  link({ "RenderMarkdownBullet", "RenderMarkdownDash" }, "Special")
+  link({ "RenderMarkdownQuote" }, "Comment")
+  link({ "RenderMarkdownTableHead" }, "Title")
+  link({ "RenderMarkdownTableRow" }, "Normal")
+  link({ "RenderMarkdownLink" }, "Underlined")
+end
+
+return M
