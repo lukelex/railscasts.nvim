@@ -30,9 +30,9 @@ has remained immediately recognizable for years.
 
 ## Gallery
 
-The gallery cycles through Ruby, Lua, Bash, and YAML highlights. The previews
-are rasterized to keep their monospaced glyphs and spacing consistent in GitHub
-and other Markdown renderers.
+The gallery cycles through Ruby, Lua, Bash, and YAML fixtures captured from a
+Kitty window running Neovim with Railscasts. This keeps the syntax, spacing, and
+glyph rendering faithful to the editor.
 
 ## Language support
 
