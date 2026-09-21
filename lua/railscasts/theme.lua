@@ -1,46 +1,4 @@
---
--- Built with,
---
---        ,gggg,
---       d8" "8I                         ,dPYb,
---       88  ,dP                         IP'`Yb
---    8888888P"                          I8  8I
---       88                              I8  8'
---       88        gg      gg    ,g,     I8 dPgg,
---  ,aa,_88        I8      8I   ,8'8,    I8dP" "8I
--- dP" "88P        I8,    ,8I  ,8'  Yb   I8P    I8
--- Yb,_,d88b,,_   ,d8b,  ,d8b,,8'_   8) ,d8     I8,
---  "Y8P"  "Y888888P'"Y88P"`Y8P' "YY8P8P88P     `Y8
---
-
--- This is a starter colorscheme for use with Lush,
--- for usage guides, see :h lush or :LushRunTutorial
-
---
--- Note: Because this is a lua file, vim will append it to the runtime,
---       which means you can require(...) it in other lua code (this is useful),
---       but you should also take care not to conflict with other libraries.
---
---       (This is a lua quirk, as it has somewhat poor support for namespacing.)
---
---       Basically, name your file,
---
---       "super_theme/lua/lush_theme/super_theme_dark.lua",
---
---       not,
---
---       "super_theme/lua/dark.lua".
---
---       With that caveat out of the way...
---
-
--- Enable lush.ify on this file, run:
---
---  `:Lushify`
---
---  or
---
---  `:lua require('lush').ify()`
+-- Railscasts highlight definitions. Run `:Lushify` to edit with Lush support.
 
 local lush = require("lush")
 local hsl = lush.hsl
@@ -53,16 +11,6 @@ local colors = require("railscasts.colors")
 local theme = lush(function(injected_functions)
   local sym = injected_functions.sym
   return {
-    -- The following are the Neovim (as of 0.8.0-dev+100-g371dfb174) highlight
-    -- groups, mostly used for styling UI elements.
-    -- Comment them out and add your own properties to override the defaults.
-    -- An empty definition `{}` will clear all styling, leaving elements looking
-    -- like the 'Normal' group.
-    -- To be able to link to a group, it must already be defined, so you may have
-    -- to reorder items as you go.
-    --
-    -- See :h highlight-groups
-    --
     ColorColumn { bg = hsl(colors.black) },                                        -- Columns set with 'colorcolumn'
     Conceal { bg = "darkgrey", fg = hsl(colors.beige_grey) },                      -- Placeholder characters substituted for concealed text (see 'conceallevel')
     Cursor { bg = hsl(colors.white), fg = hsl(colors.background) },                -- Character under the cursor
@@ -146,14 +94,6 @@ local theme = lush(function(injected_functions)
     WinBar { gui = "bold", TabLineSel },                                                   -- Window bar of current window
     WinBarNC { TabLine },                                                                  -- Window bar of not-current windows
 
-    -- Common vim syntax groups used for all kinds of code and markup.
-    -- Commented-out groups should chain up to their preferred (*) group
-    -- by default.
-    --
-    -- See :h group-name
-    --
-    -- Uncomment and edit if you want more specific syntax highlighting.
-
     Comment { fg = hsl(colors.light_brown) },         -- Any comment
 
     Delimiter { fg = hsl(colors.light_grey) },        -- Character that needs attention
@@ -200,12 +140,6 @@ local theme = lush(function(injected_functions)
     Error { bg = "#990000", fg = hsl(colors.white) }, -- Any erroneous construct
     Todo { gui = "bold", fg = hsl(colors.red) },      -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
-    -- These groups are for the native LSP client and diagnostic system. Some
-    -- other LSP clients may use these groups, or use their own. Consult your
-    -- LSP client's documentation.
-
-    -- See :h lsp-highlight, some groups may not be listed, submit a PR fix to lush-template!
-    --
     -- LspReferenceText            { } , -- Used for highlighting "text" references
     -- LspReferenceRead            { } , -- Used for highlighting "read" references
     -- LspReferenceWrite           { } , -- Used for highlighting "write" references
@@ -213,8 +147,6 @@ local theme = lush(function(injected_functions)
     -- LspCodeLensSeparator        { } , -- Used to color the seperator between two or more code lens.
     -- LspSignatureActiveParameter { } , -- Used to highlight the active parameter in the signature help. See |vim.lsp.handlers.signature_help()|.
 
-    -- See :h diagnostic-highlights, some groups may not be listed, submit a PR fix to lush-template!
-    --
     DiagnosticError { fg = "red" },                                             -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     DiagnosticWarn { fg = "orange" },                                           -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     DiagnosticInfo { fg = "lightblue" },                                        -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
@@ -323,16 +255,7 @@ local theme = lush(function(injected_functions)
 
     zshDeref { Constant },
 
-    -- Tree-Sitter syntax groups.
-    --
-    -- See :h treesitter-highlight-groups, some groups may not be listed,
-    -- submit a PR fix to lush-template!
-    --
-    -- Tree-Sitter groups are defined with an "@" symbol, which must be
-    -- specially handled to be valid lua code, we do this via the special
-    -- sym function.
-    --
-    -- For more information see https://github.com/rktjmp/lush.nvim/issues/109
+    -- Tree-sitter capture names use `sym` because they contain an `@`.
 
     sym "@text" { fg = hsl(colors.beige_grey) },
     sym "@text.title" { Title },
