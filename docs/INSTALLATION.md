@@ -73,6 +73,13 @@ The setup API is the only supported configuration interface in v2.
 
 ## Integrations
 
+### Neovim terminal
+
+Loading Railscasts sets Neovim's `terminal_color_0` through
+`terminal_color_15` values using the ANSI mapping in the
+[design language](../DESIGN.md#terminal-language). Embedded `:terminal`
+buffers therefore match the Kitty profile.
+
 ### Lualine
 
 ```lua

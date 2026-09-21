@@ -74,6 +74,10 @@ assert(highlight("DiffAdd").fg == 0x87AF5F)
 assert(highlight("Delimiter").fg == 0xE6E1DC)
 assert(highlight("TabLine").bg == 0x333435)
 assert(require("lualine.themes.railscasts").normal.c.bg == "#333435")
+assert(vim.g.terminal_color_0 == "#2B2B2B")
+assert(vim.g.terminal_color_1 == "#DA4939")
+assert(vim.g.terminal_color_6 == "#87AF5F")
+assert(vim.g.terminal_color_15 == "#F3F4F5")
 
 require("railscasts").setup {
   high_contrast = true,
