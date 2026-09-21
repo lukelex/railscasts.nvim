@@ -27,13 +27,15 @@ ones that it has been visually optimized for so far are:
 
 ## Installation
 
-### Packer
+Requires Neovim 0.9.5 or later and [lush.nvim](https://github.com/rktjmp/lush.nvim).
 
-```lua
-use({
-  "lukelex/railscasts.nvim",
-  requires = { "rktjmp/lush.nvim" }
-})
+### Native packages
+
+```sh
+git clone https://github.com/rktjmp/lush.nvim.git \
+  ~/.local/share/nvim/site/pack/plugins/start/lush.nvim
+git clone https://github.com/lukelex/railscasts.nvim.git \
+  ~/.local/share/nvim/site/pack/plugins/start/railscasts.nvim
 ```
 
 ### Lazy.nvim
@@ -62,6 +64,16 @@ vim.cmd.colorscheme "railscasts"
 ```vim
 " Vimscript
 colorscheme railscasts
+```
+
+### Options
+
+Set options before loading the colorscheme.
+
+```lua
+-- Use brighter accents and a darker statusline background.
+vim.g.railscasts_high_contrast = true
+vim.cmd.colorscheme "railscasts"
 ```
 
 ### Plugins
