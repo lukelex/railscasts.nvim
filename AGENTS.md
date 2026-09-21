@@ -32,3 +32,10 @@ These rules apply to every colorscheme change, including changes made by AI agen
   semantic category or plugin integration.
 - Run `luac -p` on changed Lua files and run the headless test command from the
   CI workflow before committing.
+
+## Release notes
+
+- Keep changelogs concise and user-facing: summarize visual changes, options,
+  compatibility, breaking changes, and supported integrations.
+- Exclude CI, tests, linting, formatting, and internal infrastructure unless a
+  user explicitly requests those details.
