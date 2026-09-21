@@ -72,6 +72,22 @@ vim.g.railscasts_high_contrast = true
 vim.cmd.colorscheme "railscasts"
 ```
 
+## Local CI
+
+Run the same Lua syntax and Neovim version-matrix checks used in CI:
+
+```sh
+docker build --tag railscasts-ci .
+docker run --rm railscasts-ci
+```
+
+To test the current working tree without rebuilding the image, mount it over
+the image workspace:
+
+```sh
+docker run --rm --volume "$PWD:/workspace" railscasts-ci
+```
+
 ### Plugins
 
 #### [Lualine](https://github.com/nvim-lualine/lualine.nvim)
