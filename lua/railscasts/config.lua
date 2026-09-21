@@ -14,7 +14,6 @@ function M.setup(user_options)
     assert(type(value) == "boolean", "Railscasts option " .. name .. " must be a boolean")
     options[name] = value
   end
-
 end
 
 function M.get()

@@ -9,6 +9,6 @@
 - [x] Audit and improve contrast, including diagnostics, diffs, search results, and statusline modes.
 - [x] Add parser-backed Tree-sitter fixture tests for Ruby, Lua, and YAML.
 - [x] Run the Kitty config through Kitty's own parser in CI.
-- [ ] Add a pinned StyLua formatting check after adopting a repository formatter configuration.
+- [x] Add a pinned StyLua formatting check after adopting a repository formatter configuration.
 - [ ] Extend CI assertions across supported Neovim versions for UI, documented plugin integrations, semantic tokens, and high-contrast mode.
 - [ ] Split highlight specifications into UI, syntax, Tree-sitter, plugin, and LSP modules as the theme grows.

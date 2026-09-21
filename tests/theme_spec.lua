@@ -79,11 +79,11 @@ assert(vim.g.terminal_color_1 == "#DA4939")
 assert(vim.g.terminal_color_6 == "#87AF5F")
 assert(vim.g.terminal_color_15 == "#F3F4F5")
 
-require("railscasts").setup {
+require("railscasts").setup({
   high_contrast = true,
   transparent = true,
   dim_inactive = true,
-}
+})
 vim.cmd.colorscheme("railscasts")
 assert(require("railscasts.colors").dark_green == "#5FAF5F")
 assert(highlight("Normal").bg == nil)

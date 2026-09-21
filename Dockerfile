@@ -5,8 +5,14 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-    && apt-get install --yes --no-install-recommends ca-certificates curl g++ gcc kitty lua5.1 \
+    && apt-get install --yes --no-install-recommends ca-certificates curl g++ gcc kitty lua5.1 unzip \
     && rm -rf /var/lib/apt/lists/*
+
+RUN curl --fail --location --retry 3 --retry-all-errors \
+      https://github.com/JohnnyMorganz/StyLua/releases/download/v2.5.2/stylua-linux-x86_64.zip \
+      --output /tmp/stylua.zip \
+    && unzip -q /tmp/stylua.zip -d /usr/local/bin \
+    && rm /tmp/stylua.zip
 
 RUN for version in v0.9.5 v0.10.4 v0.11.7 v0.12.5; do \
       if [[ "$version" == "v0.9.5" ]]; then archive="nvim-linux64.tar.gz"; \
@@ -48,6 +54,7 @@ ENV RAILSCASTS_PARSER_DIR=/opt/treesitter/parsers
 
 CMD set -e; \
     find colors lua tests -name '*.lua' -print0 | xargs -0 -r luac5.1 -p; \
+    stylua --check colors lua tests; \
     for version in v0.9.5 v0.10.4 v0.11.7 v0.12.5; do \
       echo "Testing Neovim $version"; \
       nvim="/opt/neovim/$version/bin/nvim"; \

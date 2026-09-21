@@ -108,7 +108,10 @@ function M.setup()
   apply("DiagnosticHint", { fg = colors.beige_grey })
   apply("DiagnosticOk", { fg = colors.light_green })
   for _, severity in ipairs({ "Error", "Warn", "Info", "Hint", "Ok" }) do
-    link({ "DiagnosticVirtualText" .. severity, "DiagnosticFloating" .. severity, "DiagnosticSign" .. severity }, "Diagnostic" .. severity)
+    link(
+      { "DiagnosticVirtualText" .. severity, "DiagnosticFloating" .. severity, "DiagnosticSign" .. severity },
+      "Diagnostic" .. severity
+    )
   end
   apply("DiagnosticUnderlineError", { underline = true, sp = colors.red })
   apply("DiagnosticUnderlineWarn", { underline = true, sp = colors.dark_orange })
@@ -132,7 +135,10 @@ function M.setup()
   link({ "NvimIdentifier" }, "Identifier")
   link({ "NvimNumberPrefix", "NvimOptionSigil" }, "Type")
   apply("NvimInternalError", { bg = colors.red, fg = colors.red })
-  link({ "NvimFigureBrace", "NvimSingleQuotedUnknownEscape", "NvimInvalidSingleQuotedUnknownEscape" }, "NvimInternalError")
+  link(
+    { "NvimFigureBrace", "NvimSingleQuotedUnknownEscape", "NvimInvalidSingleQuotedUnknownEscape" },
+    "NvimInternalError"
+  )
   apply_many({ "User1", "User6", "User7", "User8", "User9" }, { bold = true, bg = "#606060", fg = "#eeeeee" })
   apply("User2", { bold = true, bg = "#606060", fg = "#ffaf00" })
   apply("User3", { bold = true, bg = "#606060", fg = "#5fff00" })
@@ -230,7 +236,14 @@ function M.setup()
   link({ "IblWhitespace" }, "IblIndent")
   apply("IblScope", { fg = colors.dark_brown })
   link({ "IblScopeChar" }, "IblScope")
-  apply_many({ "RenderMarkdownH1", "RenderMarkdownH2", "RenderMarkdownH3", "RenderMarkdownH4", "RenderMarkdownH5", "RenderMarkdownH6" }, { bold = true, fg = colors.white })
+  apply_many({
+    "RenderMarkdownH1",
+    "RenderMarkdownH2",
+    "RenderMarkdownH3",
+    "RenderMarkdownH4",
+    "RenderMarkdownH5",
+    "RenderMarkdownH6",
+  }, { bold = true, fg = colors.white })
   link({ "RenderMarkdownCode", "RenderMarkdownCodeInline" }, "Pmenu")
   link({ "RenderMarkdownBullet", "RenderMarkdownDash" }, "Special")
   link({ "RenderMarkdownQuote" }, "Comment")
@@ -245,15 +258,55 @@ function M.setup()
   link({ "@number", "@float" }, "Number")
   link({ "@conceal" }, "NonText")
   apply("@function.call", { fg = colors.beige_grey })
-  link({ "@parameter", "@variable.parameter", "@punctuation.bracket", "@punctuation.delimiter", "@field", "@variable", "@operator" }, "@function.call")
+  link({
+    "@parameter",
+    "@variable.parameter",
+    "@punctuation.bracket",
+    "@punctuation.delimiter",
+    "@field",
+    "@variable",
+    "@operator",
+  }, "@function.call")
   apply("@label", { fg = colors.purple })
   link({ "@variable.member" }, "@label")
-  link({ "@property", "@namespace", "@text.reference", "@constant", "@type", "@character", "@type.definition", "@storageclass" }, "Identifier")
+  link({
+    "@property",
+    "@namespace",
+    "@text.reference",
+    "@constant",
+    "@type",
+    "@character",
+    "@type.definition",
+    "@storageclass",
+  }, "Identifier")
   link({ "@module", "@module.builtin", "@tag.attribute" }, "Identifier")
   link({ "@comment", "@structure", "@text.literal" }, "Comment")
-  link({ "@preproc", "@attribute", "@function.builtin", "@function.macro", "@include", "@constant.macro", "@define", "@macro", "@type.qualifier" }, "PreProc")
+  link({
+    "@preproc",
+    "@attribute",
+    "@function.builtin",
+    "@function.macro",
+    "@include",
+    "@constant.macro",
+    "@define",
+    "@macro",
+    "@type.qualifier",
+  }, "PreProc")
   link({ "@function.method", "@tag", "@function", "@method" }, "Function")
-  link({ "@conditional", "@exception", "@keyword", "@keyword.conditional", "@keyword.directive", "@keyword.exception", "@keyword.function", "@keyword.import", "@keyword.repeat", "@keyword.return", "@keyword.type", "@repeat" }, "Keyword")
+  link({
+    "@conditional",
+    "@exception",
+    "@keyword",
+    "@keyword.conditional",
+    "@keyword.directive",
+    "@keyword.exception",
+    "@keyword.function",
+    "@keyword.import",
+    "@keyword.repeat",
+    "@keyword.return",
+    "@keyword.type",
+    "@repeat",
+  }, "Keyword")
   link({ "@constructor", "@character.special", "@punctuation", "@debug" }, "Special")
   link({ "@string", "@string.escape", "@string.regex", "@string.special", "@string.special.path" }, "String")
   link({ "@string.special.url", "@text.uri", "@text.underline" }, "Underlined")
@@ -270,7 +323,15 @@ function M.setup()
   link({ "@diff.plus" }, "DiffAdd")
   link({ "@diff.delta" }, "DiffChange")
   link({ "@diff.minus" }, "DiffDelete")
-  link({ "@lsp.type.type", "@lsp.type.builtinType", "@lsp.type.class", "@lsp.type.enum", "@lsp.type.interface", "@lsp.type.struct", "@lsp.type.typeParameter" }, "Type")
+  link({
+    "@lsp.type.type",
+    "@lsp.type.builtinType",
+    "@lsp.type.class",
+    "@lsp.type.enum",
+    "@lsp.type.interface",
+    "@lsp.type.struct",
+    "@lsp.type.typeParameter",
+  }, "Type")
   link({ "@lsp.type.comment" }, "Comment")
   link({ "@lsp.type.enumMember" }, "Constant")
   link({ "@lsp.type.decorator", "@lsp.type.macro" }, "PreProc")
