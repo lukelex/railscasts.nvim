@@ -51,6 +51,8 @@ assert(highlight("DiagnosticError").fg == 0xDA4939)
 assert(highlight("DiagnosticWarn").fg == 0xCC7833)
 assert(highlight("DiagnosticInfo").fg == 0x6E9CBE)
 assert(highlight("DiagnosticOk").fg == 0x87AF5F)
+assert(highlight("lCursor").bg == 0xE6E1DC)
+assert(highlight("lCursor").fg == 0x2B2B2B)
 
 vim.g.railscasts_high_contrast = true
 vim.cmd.colorscheme("railscasts")
