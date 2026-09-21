@@ -53,31 +53,50 @@ for _, color in ipairs(kitty_colors) do
 end
 
 assert(vim.g.colors_name == "railscasts")
+
+-- Core UI
 assert(highlight("Normal").bg == 0x2B2B2B)
-assert(highlight("diffRemoved").fg == highlight("DiffDelete").fg)
-assert(require("lualine.themes.railscasts").normal.a.bg == "#87AF5F")
-assert(highlight("GitSignsDelete").fg == highlight("DiffDelete").fg)
-assert(highlight("BlinkCmpMenuSelection").bg == highlight("PmenuSel").bg)
-assert(highlight("IblScope").fg == 0xAF5F00)
-assert(highlight("@keyword.import").fg == highlight("Keyword").fg)
-assert(highlight("@string.regex").fg == highlight("String").fg)
-assert(highlight("@lsp.type.function").fg == highlight("Function").fg)
-assert(highlight("@lsp.type.class").fg == highlight("Type").fg)
-assert(highlight("DiagnosticError").fg == 0xDA4939)
-assert(highlight("DiagnosticWarn").fg == 0xCC7833)
-assert(highlight("DiagnosticInfo").fg == 0x6E9CBE)
-assert(highlight("DiagnosticOk").fg == 0x87AF5F)
 assert(highlight("lCursor").bg == 0xE6E1DC)
 assert(highlight("lCursor").fg == 0x2B2B2B)
-assert(highlight("Special").fg == 0x87AF5F)
-assert(highlight("DiffAdd").fg == 0x87AF5F)
 assert(highlight("Delimiter").fg == 0xE6E1DC)
 assert(highlight("TabLine").bg == 0x333435)
+assert(highlight("PmenuSel").bg == 0x87AF5F)
+assert(highlight("WinBar").bg == 0x005F00)
 assert(require("lualine.themes.railscasts").normal.c.bg == "#333435")
 assert(vim.g.terminal_color_0 == "#2B2B2B")
 assert(vim.g.terminal_color_1 == "#DA4939")
 assert(vim.g.terminal_color_6 == "#87AF5F")
 assert(vim.g.terminal_color_15 == "#F3F4F5")
+
+-- Diagnostics and diffs
+assert(highlight("DiagnosticError").fg == 0xDA4939)
+assert(highlight("DiagnosticWarn").fg == 0xCC7833)
+assert(highlight("DiagnosticInfo").fg == 0x6E9CBE)
+assert(highlight("DiagnosticOk").fg == 0x87AF5F)
+assert(highlight("DiffAdd").fg == 0x87AF5F)
+assert(highlight("diffRemoved").fg == highlight("DiffDelete").fg)
+assert(highlight("GitSignsDelete").fg == highlight("DiffDelete").fg)
+
+-- Documented plugin integrations
+assert(require("lualine.themes.railscasts").normal.a.bg == "#87AF5F")
+assert(highlight("CmpItemKind").fg == highlight("Function").fg)
+assert(highlight("BlinkCmpMenuSelection").bg == highlight("PmenuSel").bg)
+assert(highlight("NeoTreeDirectoryName").fg == highlight("Directory").fg)
+assert(highlight("OilDelete").fg == highlight("DiffDelete").fg)
+assert(highlight("WhichKey").fg == highlight("Function").fg)
+assert(highlight("LazyButtonActive").bg == highlight("PmenuSel").bg)
+assert(highlight("NoiceFormatProgressDone").fg == highlight("DiffAdd").fg)
+assert(highlight("RenderMarkdownH1").fg == highlight("Title").fg)
+assert(highlight("IblScope").fg == 0xAF5F00)
+
+-- Tree-sitter and LSP semantic tokens
+assert(highlight("Special").fg == 0x87AF5F)
+assert(highlight("@keyword.import").fg == highlight("Keyword").fg)
+assert(highlight("@string.regex").fg == highlight("String").fg)
+assert(highlight("@markup.heading").fg == highlight("Title").fg)
+assert(highlight("@lsp.type.function").fg == highlight("Function").fg)
+assert(highlight("@lsp.type.class").fg == highlight("Type").fg)
+assert(highlight("@lsp.type.variable").fg == highlight("@function.call").fg)
 
 require("railscasts").setup({
   high_contrast = true,
@@ -89,3 +108,5 @@ assert(require("railscasts.colors").dark_green == "#5FAF5F")
 assert(highlight("Normal").bg == nil)
 assert(highlight("NormalNC").bg == nil)
 assert(highlight("NormalNC").fg == 0xC7A66D)
+assert(highlight("Comment").fg == 0xC7A66D)
+assert(highlight("TabLineSel").bg == 0x5FAF5F)
