@@ -362,7 +362,6 @@ local theme = lush(function(injected_functions)
     sym "@constant" { Identifier },
     sym "@type" { Identifier },
     sym "@character" { Identifier },
-    sym "@type" { Identifier },
     sym "@type.definition" { Identifier },
     sym "@storageclass" { Identifier },
 
@@ -390,7 +389,6 @@ local theme = lush(function(injected_functions)
     sym "@constructor" { Special },
     sym "@character.special" { Special },
     sym "@punctuation" { Special },
-    sym "@constructor" { Special },
     sym "@debug" { Special },
 
     sym "@string" { String },
