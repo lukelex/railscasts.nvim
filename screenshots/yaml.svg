@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#2B2B2B"/>
+  <rect width="800" height="42" fill="#333435"/>
+  <text x="24" y="28" fill="#E6E1DC" font-family="monospace" font-size="18">theme.yml</text>
+  <g font-family="monospace" font-size="21">
+    <text x="42" y="94" fill="#FFC66D">theme</text><text x="112" y="94" fill="#E6E1DC">:</text>
+    <text x="72" y="134" fill="#FFC66D">name</text><text x="142" y="134" fill="#E6E1DC">: </text><text x="170" y="134" fill="#87AF5F">Railscasts</text>
+    <text x="72" y="174" fill="#FFC66D">dark</text><text x="142" y="174" fill="#E6E1DC">: </text><text x="170" y="174" fill="#6E9CBE">true</text>
+    <text x="72" y="234" fill="#FFC66D">languages</text><text x="202" y="234" fill="#E6E1DC">:</text>
+    <text x="102" y="274" fill="#E6E1DC">- </text><text x="132" y="274" fill="#87AF5F">ruby</text>
+    <text x="102" y="314" fill="#E6E1DC">- </text><text x="132" y="314" fill="#87AF5F">lua</text>
+    <text x="102" y="354" fill="#E6E1DC">- </text><text x="132" y="354" fill="#87AF5F">yaml</text>
+  </g>
+</svg>

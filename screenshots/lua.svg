@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#2B2B2B"/>
+  <rect width="800" height="42" fill="#333435"/>
+  <text x="24" y="28" fill="#E6E1DC" font-family="monospace" font-size="18">episode.lua</text>
+  <g font-family="monospace" font-size="21">
+    <text x="42" y="94" fill="#CC7833">local</text><text x="115" y="94" fill="#E6E1DC"> Episode </text><text x="223" y="94" fill="#E6E1DC">=</text><text x="250" y="94" fill="#E6E1DC"> {}</text>
+    <text x="42" y="144" fill="#CC7833">function</text><text x="145" y="144" fill="#FFC66D"> Episode.new</text><text x="300" y="144" fill="#E6E1DC">(title)</text>
+    <text x="72" y="184" fill="#CC7833">return</text><text x="150" y="184" fill="#E6E1DC"> { title = title }</text>
+    <text x="42" y="224" fill="#CC7833">end</text>
+    <text x="42" y="294" fill="#CC7833">function</text><text x="145" y="294" fill="#FFC66D"> Episode:label</text><text x="320" y="294" fill="#E6E1DC">()</text>
+    <text x="72" y="334" fill="#CC7833">return</text><text x="150" y="334" fill="#87AF5F"> "Episode: "</text><text x="288" y="334" fill="#E6E1DC"> .. self.title</text>
+    <text x="42" y="374" fill="#CC7833">end</text>
+  </g>
+</svg>

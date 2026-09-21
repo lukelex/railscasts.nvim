@@ -1,7 +1,7 @@
 # Theme improvements
 
 - [x] Add deterministic SVG theme snapshot regression tests.
-- [ ] Add representative Lua, Bash, and YAML screenshots to the README gallery.
+- [x] Add representative Lua, Bash, and YAML screenshots to the README gallery.
 - [x] Expand support for common UI plugins: nvim-cmp/Blink, GitSigns, Neo-tree/Oil, WhichKey, Lazy, Noice, render-markdown, and IndentBlankLine v3.
 - [x] Complete modern Tree-sitter and semantic-token coverage, with fixture-based tests.
 - [x] Provide a `require("railscasts").setup()` API for high contrast, transparency, and inactive-window options.
