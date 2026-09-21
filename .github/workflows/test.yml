@@ -1,0 +1,27 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  theme:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        neovim: [v0.9.5, stable]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: rhysd/action-setup-vim@v1
+        with:
+          version: ${{ matrix.neovim }}
+          neovim: true
+      - name: Install Lush
+        run: git clone --depth=1 https://github.com/rktjmp/lush.nvim.git .deps/lush.nvim
+      - name: Load and validate the theme
+        run: >-
+          nvim --headless --clean
+          --cmd "set rtp^=$PWD"
+          --cmd "set rtp+=$PWD/.deps/lush.nvim"
+          -l tests/theme_spec.lua
