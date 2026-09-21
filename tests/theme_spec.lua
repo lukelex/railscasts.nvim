@@ -86,6 +86,8 @@ assert(highlight("OilDelete").fg == highlight("DiffDelete").fg)
 assert(highlight("WhichKey").fg == highlight("Function").fg)
 assert(highlight("LazyButtonActive").bg == highlight("PmenuSel").bg)
 assert(highlight("NoiceFormatProgressDone").fg == highlight("DiffAdd").fg)
+assert(highlight("SnacksPickerMatch").bg == highlight("Search").bg)
+assert(highlight("SnacksPickerGitStatusAdded").fg == highlight("DiffAdd").fg)
 assert(highlight("RenderMarkdownH1").fg == highlight("Title").fg)
 assert(highlight("IblScope").fg == 0xAF5F00)
 
