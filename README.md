@@ -98,9 +98,11 @@ It just works :wink:.
 
 #### Kitty
 
-Paste the contents of `./extras/kitty.conf` into your Kitty
-config file. Usually found at `~/.config/kitty/kitty.conf`.
+Download the theme file, then add `include railscasts.conf` to your Kitty
+config file (usually `~/.config/kitty/kitty.conf`). This avoids duplicate
+settings when updating the theme.
 
 ```sh
-$ wget -O - https://raw.githubusercontent.com/lukelex/railscasts.nvim/main/extras/kitty.conf >> ~/.config/kitty/kitty.conf
+curl -fLo ~/.config/kitty/railscasts.conf \
+  https://raw.githubusercontent.com/lukelex/railscasts.nvim/main/extras/kitty.conf
 ```
