@@ -1,0 +1,6 @@
+episode:
+  title: "Native highlights"
+  published: true
+  tags:
+    - neovim
+    - treesitter
