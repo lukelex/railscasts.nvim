@@ -42,14 +42,36 @@ RUN mkdir -p /tmp/grammars /opt/treesitter/parsers \
     && curl --fail --location --retry 3 --retry-all-errors https://github.com/tree-sitter/tree-sitter-bash/archive/a06c2e4415e9bc0346c6b86d401879ffb44058f7.tar.gz \
       | tar --extract --gzip --directory /tmp/grammars --strip-components=1 \
     && mv /tmp/grammars /tmp/bash \
-    && for language in ruby lua bash; do \
+    && mkdir /tmp/grammars \
+    && curl --fail --location --retry 3 --retry-all-errors https://github.com/tree-sitter/tree-sitter-typescript/archive/75b3874edb2dc714fb1fd77a32013d0f8699989f.tar.gz \
+      | tar --extract --gzip --directory /tmp/grammars --strip-components=1 \
+    && mv /tmp/grammars /tmp/typescript \
+    && mkdir /tmp/grammars \
+    && curl --fail --location --retry 3 --retry-all-errors https://github.com/tree-sitter/tree-sitter-json/archive/254c42a6476413b776221e03982ac8ae159eeb72.tar.gz \
+      | tar --extract --gzip --directory /tmp/grammars --strip-components=1 \
+    && mv /tmp/grammars /tmp/json \
+    && mkdir /tmp/grammars \
+    && curl --fail --location --retry 3 --retry-all-errors https://github.com/tree-sitter/tree-sitter-html/archive/73a3947324f6efddf9e17c0ea58d454843590cc0.tar.gz \
+      | tar --extract --gzip --directory /tmp/grammars --strip-components=1 \
+    && mv /tmp/grammars /tmp/html \
+    && mkdir /tmp/grammars \
+    && curl --fail --location --retry 3 --retry-all-errors https://github.com/tree-sitter/tree-sitter-css/archive/dda5cfc5722c429eaba1c910ca32c2c0c5bb1a3f.tar.gz \
+      | tar --extract --gzip --directory /tmp/grammars --strip-components=1 \
+    && mv /tmp/grammars /tmp/css \
+    && mkdir /tmp/grammars \
+    && curl --fail --location --retry 3 --retry-all-errors https://github.com/tree-sitter-grammars/tree-sitter-markdown/archive/a0a00f817d02412bd92c54d316f164d827b57b5c.tar.gz \
+      | tar --extract --gzip --directory /tmp/grammars --strip-components=1 \
+    && mv /tmp/grammars /tmp/markdown \
+    && for language in ruby lua bash json html css; do \
       scanner=""; test -f "/tmp/$language/src/scanner.c" && scanner="/tmp/$language/src/scanner.c"; \
       gcc -shared -fPIC -O2 -I "/tmp/$language/src" "/tmp/$language/src/parser.c" $scanner -o "/opt/treesitter/parsers/$language.so"; \
     done \
+    && gcc -shared -fPIC -O2 -I /tmp/typescript/typescript/src /tmp/typescript/typescript/src/parser.c /tmp/typescript/typescript/src/scanner.c -o /opt/treesitter/parsers/typescript.so \
+    && gcc -shared -fPIC -O2 -I /tmp/markdown/tree-sitter-markdown/src /tmp/markdown/tree-sitter-markdown/src/parser.c /tmp/markdown/tree-sitter-markdown/src/scanner.c -o /opt/treesitter/parsers/markdown.so \
     && gcc -fPIC -O2 -I /tmp/yaml/src -c /tmp/yaml/src/parser.c -o /tmp/yaml-parser.o \
     && g++ -fPIC -O2 -I /tmp/yaml/src -c /tmp/yaml/src/scanner.cc -o /tmp/yaml-scanner.o \
     && g++ -shared /tmp/yaml-parser.o /tmp/yaml-scanner.o -o /opt/treesitter/parsers/yaml.so \
-    && rm -rf /tmp/grammars /tmp/ruby /tmp/lua /tmp/yaml /tmp/bash /tmp/yaml-parser.o /tmp/yaml-scanner.o
+    && rm -rf /tmp/grammars /tmp/ruby /tmp/lua /tmp/yaml /tmp/bash /tmp/typescript /tmp/json /tmp/html /tmp/css /tmp/markdown /tmp/yaml-parser.o /tmp/yaml-scanner.o
 
 RUN mkdir -p /opt/plugins/{mini.nvim,nvim-notify,trouble.nvim,snacks.nvim} \
     && curl --fail --location --retry 3 --retry-all-errors https://github.com/echasnovski/mini.nvim/archive/561751e839b99a4baca36b9d963166b66d2536a6.tar.gz \

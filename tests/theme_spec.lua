@@ -10,12 +10,22 @@ local fixtures = {
   ["lua.lua"] = "local Episode",
   ["config.yaml"] = "episode:",
   ["release.sh"] = "set -euo pipefail",
+  ["example.ts"] = "interface Episode",
+  ["package.json"] = '"name": "railscasts.nvim"',
+  ["guide.md"] = "# Railscasts",
+  ["index.html"] = "<title>Railscasts</title>",
+  ["theme.css"] = "--accent: #ffc66d;",
 }
 local fixture_languages = {
   ["ruby.rb"] = "ruby",
   ["lua.lua"] = "lua",
   ["config.yaml"] = "yaml",
   ["release.sh"] = "bash",
+  ["example.ts"] = "typescript",
+  ["package.json"] = "json",
+  ["guide.md"] = "markdown",
+  ["index.html"] = "html",
+  ["theme.css"] = "css",
 }
 local capture_specs = {
   ruby = {
@@ -48,6 +58,42 @@ local capture_specs = {
       (command name: (command_name) @function)
     ]],
     groups = { ["@comment"] = "Comment", ["@string"] = "String", ["@function"] = "Function" },
+  },
+  typescript = {
+    query = [[
+      (comment) @comment
+      (string) @string
+      (function_declaration name: (identifier) @function)
+    ]],
+    groups = { ["@comment"] = "Comment", ["@string"] = "String", ["@function"] = "Function" },
+  },
+  json = {
+    query = [[
+      (pair key: (string) @label.json)
+      (string) @string
+    ]],
+    groups = { ["@label.json"] = "String", ["@string"] = "String" },
+  },
+  markdown = {
+    query = [[
+      (atx_heading) @markup.heading
+      (block_quote) @markup.quote
+    ]],
+    groups = { ["@markup.heading"] = "Title", ["@markup.quote"] = "Comment" },
+  },
+  html = {
+    query = [[
+      (tag_name) @tag
+      (attribute_name) @tag.attribute
+    ]],
+    groups = { ["@tag"] = "Function", ["@tag.attribute"] = "Identifier" },
+  },
+  css = {
+    query = [[
+      (class_selector) @type
+      (property_name) @property
+    ]],
+    groups = { ["@type"] = "Identifier", ["@property"] = "Identifier" },
   },
 }
 

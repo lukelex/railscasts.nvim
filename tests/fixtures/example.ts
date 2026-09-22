@@ -1,3 +1,4 @@
+// A Railscasts-style TypeScript fixture
 interface Episode {
   title: string
   published: boolean

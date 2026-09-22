@@ -43,6 +43,11 @@ fixtures focus on:
 - Lua
 - Bash
 - YAML
+- TypeScript
+- JSON
+- Markdown
+- HTML
+- CSS
 
 Modern Tree-sitter captures, LSP semantic tokens, diagnostics, diffs, Lualine,
 ibl/IndentBlankLine, Kitty, and common Neovim UI plugins are covered by the
