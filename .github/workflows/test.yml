@@ -24,16 +24,16 @@ jobs:
           docker run --rm --entrypoint bash railscasts-ci
           -o pipefail -c "find colors lua tests -name '*.lua' -print0 | xargs -0 -r luac5.1 -p && stylua --check colors lua tests"
 
-  kitty-config:
+  terminal-config:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Build local CI image
         run: docker build --tag railscasts-ci .
-      - name: Validate Kitty configuration
+      - name: Validate terminal configurations
         run: >-
           docker run --rm --entrypoint bash railscasts-ci
-          -o pipefail -c 'kitty +runpy "import kitty.config; bad = []; kitty.config.load_config(\"extras/kitty.conf\", accumulate_bad_lines=bad); assert not bad, bad"'
+          -o pipefail -c 'kitty +runpy "import kitty.config; bad = []; kitty.config.load_config(\"extras/kitty.conf\", accumulate_bad_lines=bad); assert not bad, bad" && luac5.1 -p extras/wezterm.lua && python3 -c "import tomllib; tomllib.load(open(\"extras/alacritty.toml\", \"rb\"))"'
 
   plugin-integrations:
     runs-on: ubuntu-latest

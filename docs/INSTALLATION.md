@@ -84,7 +84,7 @@ Run `:checkhealth railscasts` to verify the supported Neovim version,
 Loading Railscasts sets Neovim's `terminal_color_0` through
 `terminal_color_15` values using the ANSI mapping in the
 [design language](../DESIGN.md#terminal-language). Embedded `:terminal`
-buffers therefore match the Kitty profile.
+buffers therefore match the Kitty, WezTerm, and Alacritty profiles.
 
 ### Lualine
 
@@ -125,6 +125,24 @@ Add this line to `~/.config/kitty/kitty.conf`:
 
 ```conf
 include railscasts.conf
+```
+
+### WezTerm
+
+Copy [`extras/wezterm.lua`](../extras/wezterm.lua) into your configuration and
+assign it to the `colors` field:
+
+```lua
+config.colors = dofile(os.getenv("HOME") .. "/.config/wezterm/railscasts.lua")
+```
+
+### Alacritty
+
+Copy [`extras/alacritty.toml`](../extras/alacritty.toml) into your Alacritty
+configuration directory, then import it from `alacritty.toml`:
+
+```toml
+import = ["~/.config/alacritty/railscasts.toml"]
 ```
 
 **macOS**

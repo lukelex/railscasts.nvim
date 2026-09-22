@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing release tag
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Select release tag
+        id: release
+        env:
+          INPUT_TAG: ${{ inputs.tag }}
+        run: echo "tag=${INPUT_TAG:-${GITHUB_REF_NAME}}" >> "$GITHUB_OUTPUT"
+      - name: Validate release notes
+        env:
+          TAG: ${{ steps.release.outputs.tag }}
+        run: |
+          test -s "docs/releases/${TAG}.md"
+          grep --quiet '[^[:space:]]' "docs/releases/${TAG}.md"
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.release.outputs.tag }}
+        run: |
+          gh release view "$TAG" >/dev/null 2>&1 || \
+            gh release create "$TAG" --title "$TAG" --notes-file "docs/releases/${TAG}.md"

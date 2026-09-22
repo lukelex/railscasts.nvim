@@ -52,9 +52,12 @@ docker run --rm --volume "$root:/workspace" --workdir /workspace --entrypoint ba
   capture tests/fixtures/guide.md markdown "◆ Markdown" "$frames/markdown.png"
   capture tests/fixtures/index.html html "◆ HTML" "$frames/html.png"
   capture tests/fixtures/theme.css css "◆ CSS" "$frames/css.png"
+  capture tests/fixtures/show.html.erb eruby "◆ Rails ERB" "$frames/rails-erb.png"
+  capture tests/fixtures/episode_live.ex elixir "◆ Phoenix" "$frames/phoenix.png"
 
   convert -delay 180 -loop 0 \
     "$frames/ruby.png" "$frames/lua.png" "$frames/bash.png" "$frames/yaml.png" \
     "$frames/typescript.png" "$frames/json.png" "$frames/markdown.png" "$frames/html.png" "$frames/css.png" \
+    "$frames/rails-erb.png" "$frames/phoenix.png" \
     -layers Optimize screenshots/gallery.gif
 '

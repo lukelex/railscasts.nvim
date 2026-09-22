@@ -44,3 +44,9 @@ scripts/capture_gallery.sh
 ```
 
 Keep the relevant GitHub Wiki page current when user-facing behavior changes.
+
+## Releases
+
+Add concise user-facing notes at `docs/releases/vX.Y.Z.md` before creating a
+matching tag. The tag-triggered Release workflow validates that file and creates
+the GitHub release if one does not already exist.

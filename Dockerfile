@@ -152,4 +152,6 @@ CMD set -e; \
       "$nvim" --headless --clean --cmd 'set rtp^=.' -l tests/screenshot_spec.lua; \
     done; \
     /opt/neovim/v0.12.5/bin/nvim --headless --clean --cmd 'set rtp^=.' -l tests/plugins_spec.lua; \
-    kitty +runpy 'import kitty.config; bad = []; kitty.config.load_config("extras/kitty.conf", accumulate_bad_lines=bad); assert not bad, bad'
+    kitty +runpy 'import kitty.config; bad = []; kitty.config.load_config("extras/kitty.conf", accumulate_bad_lines=bad); assert not bad, bad'; \
+    luac5.1 -p extras/wezterm.lua; \
+    python3 -c 'import tomllib; tomllib.load(open("extras/alacritty.toml", "rb"))'
