@@ -54,10 +54,22 @@ docker run --rm --volume "$root:/workspace" --workdir /workspace --entrypoint ba
   capture tests/fixtures/theme.css css "◆ CSS" "$frames/css.png"
   capture tests/fixtures/show.html.erb eruby "◆ Rails ERB" "$frames/rails-erb.png"
   capture tests/fixtures/episode_live.ex elixir "◆ Phoenix" "$frames/phoenix.png"
+  capture tests/fixtures/App.vue vue "◆ Vue" "$frames/vue.png"
+  capture tests/fixtures/App.svelte svelte "◆ Svelte" "$frames/svelte.png"
+  capture tests/fixtures/kmonad.kbd kmonad "◆ Kmonad" "$frames/kmonad.png"
+  capture tests/fixtures/theme.nix nix "◆ Nix" "$frames/nix.png"
+  capture tests/fixtures/episode.clj clojure "◆ Clojure" "$frames/clojure.png"
+  capture tests/fixtures/Episode.kt kotlin "◆ Kotlin" "$frames/kotlin.png"
+  capture tests/fixtures/Episode.swift swift "◆ Swift" "$frames/swift.png"
+  capture tests/fixtures/episode.zig zig "◆ Zig" "$frames/zig.png"
+  capture tests/fixtures/episode.dart dart "◆ Dart" "$frames/dart.png"
 
   convert -delay 180 -loop 0 \
     "$frames/ruby.png" "$frames/lua.png" "$frames/bash.png" "$frames/yaml.png" \
     "$frames/typescript.png" "$frames/json.png" "$frames/markdown.png" "$frames/html.png" "$frames/css.png" \
     "$frames/rails-erb.png" "$frames/phoenix.png" \
+    "$frames/vue.png" "$frames/svelte.png" "$frames/kmonad.png" \
+    "$frames/nix.png" "$frames/clojure.png" "$frames/kotlin.png" \
+    "$frames/swift.png" "$frames/zig.png" "$frames/dart.png" \
     -layers Optimize screenshots/gallery.gif
 '
