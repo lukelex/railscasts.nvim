@@ -30,6 +30,7 @@ local fixtures = {
   ["Episode.cs"] = "public record Episode",
   ["App.vue"] = "<template>",
   ["App.svelte"] = '<main class="episode">',
+  ["COMMIT_EDITMSG"] = "feat(theme): support Git commit messages",
 }
 local fixture_languages = {
   ["ruby.rb"] = "ruby",
@@ -56,6 +57,7 @@ local fixture_languages = {
   ["Episode.cs"] = "c_sharp",
   ["App.vue"] = "vue",
   ["App.svelte"] = "svelte",
+  ["COMMIT_EDITMSG"] = "gitcommit",
 }
 local default_capture_spec = {
   query = "(_) @text",
@@ -128,6 +130,20 @@ local capture_specs = {
       (property_name) @property
     ]],
     groups = { ["@type"] = "Identifier", ["@property"] = "Identifier" },
+  },
+  gitcommit = {
+    query = [[
+      (subject) @markup.heading
+      (type) @keyword
+      (token) @label
+      (breaking_change (token) @comment.error)
+    ]],
+    groups = {
+      ["@markup.heading"] = "Title",
+      ["@keyword"] = "Keyword",
+      ["@label"] = "Label",
+      ["@comment.error"] = "DiagnosticError",
+    },
   },
 }
 
@@ -236,6 +252,10 @@ assert(highlight("NeotestFailed").fg == highlight("DiagnosticError").fg)
 assert(highlight("FzfLuaFzfMatch").bg == highlight("Search").bg)
 assert(highlight("RenderMarkdownH1").fg == highlight("Title").fg)
 assert(highlight("IblScope").fg == 0xAF5F00)
+assert(highlight("gitcommitSummary").fg == highlight("Title").fg)
+assert(highlight("gitcommitComment").fg == highlight("Comment").fg)
+assert(highlight("gitcommitSelected").fg == highlight("DiffAdd").fg)
+assert(highlight("gitcommitDiscarded").fg == highlight("DiffDelete").fg)
 
 -- Tree-sitter and LSP semantic tokens
 assert(highlight("Special").fg == 0x87AF5F)

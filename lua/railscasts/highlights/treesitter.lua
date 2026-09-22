@@ -94,6 +94,7 @@ function M.setup(colors, _, highlights)
   link({ "@tag.vue", "@tag.svelte" }, "Function")
   link({ "@tag.attribute.vue", "@tag.attribute.svelte" }, "Identifier")
   link({ "@keyword.vue", "@keyword.svelte" }, "Keyword")
+  link({ "@comment.error.gitcommit" }, "DiagnosticError")
 end
 
 return M

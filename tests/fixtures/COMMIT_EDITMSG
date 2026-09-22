@@ -1,0 +1,11 @@
+feat(theme): support Git commit messages
+
+Style generated Git status, conventional commit prefixes, trailers, and
+breaking changes without adding colors to the Railscasts palette.
+
+Reviewed-by: Railscasts Maintainer <maintainer@example.com>
+BREAKING CHANGE: Commit-message highlighting now has formal support.
+
+# On branch main
+# Changes to be committed:
+#	modified:   lua/railscasts/highlights/syntax.lua

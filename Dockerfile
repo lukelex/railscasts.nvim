@@ -96,18 +96,19 @@ RUN set -e; \
     fetch vue ikatyang/tree-sitter-vue 91fe2754796cd8fba5f229505a23fa08f3546c06; \
     fetch svelte tree-sitter-grammars/tree-sitter-svelte ae5199db47757f785e43a14b332118a5474de1a2; \
     fetch python tree-sitter/tree-sitter-python 26855eabccb19c6abf499fbc5b8dc7cc9ab8bc64; \
+    fetch gitcommit gbprod/tree-sitter-gitcommit 55a265cf763ec15d6e2d96bb206e3f5e30d82bae; \
     curl --fail --location --retry 3 --retry-all-errors https://github.com/tree-sitter/tree-sitter/releases/download/v0.24.7/tree-sitter-linux-x64.gz \
       | gunzip > /usr/local/bin/tree-sitter; \
     chmod +x /usr/local/bin/tree-sitter; \
     (cd /tmp/sql && tree-sitter generate); \
-    for language in javascript go rust sql toml dockerfile make c cpp java c_sharp vue svelte python; do \
+    for language in javascript go rust sql toml dockerfile make c cpp java c_sharp vue svelte python gitcommit; do \
       scanner=""; test -f "/tmp/$language/src/scanner.c" && scanner="/tmp/$language/src/scanner.c"; \
       gcc -shared -fPIC -O2 -I "/tmp/$language/src" "/tmp/$language/src/parser.c" $scanner -o "/opt/treesitter/parsers/$language.so"; \
     done \
     && gcc -fPIC -O2 -I /tmp/vue/src -c /tmp/vue/src/parser.c -o /tmp/vue-parser.o \
     && g++ -fPIC -O2 -I /tmp/vue/src -c /tmp/vue/src/scanner.cc -o /tmp/vue-scanner.o \
     && g++ -shared /tmp/vue-parser.o /tmp/vue-scanner.o -o /opt/treesitter/parsers/vue.so \
-    && rm -rf /tmp/grammar /tmp/javascript /tmp/go /tmp/rust /tmp/sql /tmp/toml /tmp/dockerfile /tmp/make /tmp/c /tmp/cpp /tmp/java /tmp/c_sharp /tmp/vue /tmp/svelte /tmp/python /tmp/vue-parser.o /tmp/vue-scanner.o
+    && rm -rf /tmp/grammar /tmp/javascript /tmp/go /tmp/rust /tmp/sql /tmp/toml /tmp/dockerfile /tmp/make /tmp/c /tmp/cpp /tmp/java /tmp/c_sharp /tmp/vue /tmp/svelte /tmp/python /tmp/gitcommit /tmp/vue-parser.o /tmp/vue-scanner.o
 
 RUN mkdir -p /opt/plugins/{mini.nvim,nvim-notify,trouble.nvim,snacks.nvim} \
     && curl --fail --location --retry 3 --retry-all-errors https://github.com/echasnovski/mini.nvim/archive/561751e839b99a4baca36b9d963166b66d2536a6.tar.gz \
