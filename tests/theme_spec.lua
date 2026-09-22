@@ -316,11 +316,9 @@ assert(vim.fn.synIDattr(vim.fn.synID(3, 1, 1), "name") == "manSectionHeading")
 assert(vim.fn.synIDattr(vim.fn.synID(10, 8, 1), "name") == "manOptionDesc")
 assert(vim.fn.synIDattr(vim.fn.synID(14, 8, 1), "name") == "manReference")
 
+vim.cmd("enew!")
 vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.fn.readfile("tests/fixtures/kmonad.kbd"))
-vim.opt.rtp:append("/opt/plugins/kmonad-vim")
-vim.cmd("syntax clear")
-vim.b.current_syntax = nil
-vim.cmd("runtime! syntax/kbd.vim")
+vim.cmd("runtime! syntax/kmonad.vim")
 assert(vim.fn.synIDattr(vim.fn.synID(1, 2, 1), "name") == "kmonadkeyword")
 
 -- Tree-sitter and LSP semantic tokens

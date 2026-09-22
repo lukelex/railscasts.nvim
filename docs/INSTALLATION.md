@@ -84,7 +84,8 @@ Run `:checkhealth railscasts` to verify the supported Neovim version,
 Loading Railscasts sets Neovim's `terminal_color_0` through
 `terminal_color_15` values using the ANSI mapping in the
 [design language](../DESIGN.md#terminal-language). Embedded `:terminal`
-buffers therefore match the Kitty, WezTerm, and Alacritty profiles.
+buffers therefore match the Kitty, WezTerm, Alacritty, Ghostty, and Windows
+Terminal profiles.
 
 ### Lualine
 
@@ -111,10 +112,8 @@ neotest, and fzf-lua.
 
 ### Kmonad
 
-Railscasts styles the named groups provided by
-[`kmonad/kmonad-vim`](https://github.com/kmonad/kmonad-vim) for `.kbd` files.
-Install that syntax plugin and load Railscasts after it; no Railscasts-specific
-Kmonad configuration is required.
+Railscasts natively detects `.kbd` files and provides Kmonad syntax groups. No
+additional syntax plugin or Railscasts-specific Kmonad configuration is needed.
 
 ### Kitty
 
@@ -151,6 +150,14 @@ configuration directory, then import it from `alacritty.toml`:
 ```toml
 import = ["~/.config/alacritty/railscasts.toml"]
 ```
+
+### Ghostty and Windows Terminal
+
+Copy [`extras/ghostty.conf`](../extras/ghostty.conf) into Ghostty's
+configuration directory and include it from `config`. Add
+[`extras/windows-terminal.json`](../extras/windows-terminal.json) to Windows
+Terminal's `schemes` array, then select the `Railscasts` color scheme in a
+profile.
 
 **macOS**
 
