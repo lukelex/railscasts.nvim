@@ -28,12 +28,6 @@ unclear, the original sources remain the reference:
 Thank you to Ryan Bates and the Railscasts community for a visual identity that
 has remained immediately recognizable for years.
 
-## Gallery
-
-The gallery cycles through Ruby, Lua, Bash, YAML, TypeScript, JSON, Markdown,
-HTML, and CSS fixtures captured from a Kitty window running Neovim with
-Railscasts. Each frame has a language badge in its top-right winbar.
-
 ## Get started
 
 Railscasts requires Neovim 0.9.5 or later.
