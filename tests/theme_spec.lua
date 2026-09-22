@@ -20,6 +20,7 @@ local fixtures = {
   ["component.tsx"] = "export function EpisodeLabel",
   ["example.go"] = "type Episode struct",
   ["example.rs"] = "struct Episode",
+  ["example.sql"] = "SELECT title, published",
 }
 local fixture_languages = {
   ["ruby.rb"] = "ruby",
@@ -36,6 +37,7 @@ local fixture_languages = {
   ["component.tsx"] = "tsx",
   ["example.go"] = "go",
   ["example.rs"] = "rust",
+  ["example.sql"] = "sql",
 }
 local default_capture_spec = {
   query = "(_) @text",
