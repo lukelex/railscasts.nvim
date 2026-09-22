@@ -1,0 +1,6 @@
+{
+  "name": "railscasts.nvim",
+  "private": true,
+  "keywords": ["neovim", "colorscheme"],
+  "version": "2.0.0"
+}

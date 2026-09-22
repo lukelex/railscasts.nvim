@@ -30,9 +30,9 @@ has remained immediately recognizable for years.
 
 ## Gallery
 
-The gallery cycles through Ruby, Lua, Bash, and YAML fixtures captured from a
-Kitty window running Neovim with Railscasts. This keeps the syntax, spacing, and
-glyph rendering faithful to the editor.
+The gallery cycles through Ruby, Lua, Bash, YAML, TypeScript, JSON, Markdown,
+HTML, and CSS fixtures captured from a Kitty window running Neovim with
+Railscasts. Each frame has a language badge in its top-right winbar.
 
 ## Language support
 
@@ -81,6 +81,12 @@ after a reviewed visual change:
 
 ```sh
 docker run --rm --env UPDATE_SNAPSHOTS=1 --volume "$PWD:/workspace" railscasts-ci
+```
+
+Regenerate the README gallery from the fixture files with:
+
+```sh
+scripts/capture_gallery.sh
 ```
 
 Future work is tracked in [TODO.md](TODO.md). Contributors should also follow

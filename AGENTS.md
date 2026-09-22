@@ -38,6 +38,8 @@
   fixture tests intentionally run only on 0.11.7 and 0.12.5 because of parser ABI compatibility.
 - Update `tests/snapshots/theme.svg` only for reviewed visual changes with
   `UPDATE_SNAPSHOTS=1 docker run --rm --volume "$PWD:/workspace" railscasts-ci`.
+- Regenerate `screenshots/gallery.gif` with `scripts/capture_gallery.sh`; it
+  captures the fixture files in Kitty/Neovim rather than composing mock text.
 
 ## Release notes
 

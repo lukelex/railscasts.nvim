@@ -1,0 +1,9 @@
+:root {
+  --background: #2b2b2b;
+  --accent: #ffc66d;
+}
+
+.episode {
+  color: var(--accent);
+  background: var(--background);
+}

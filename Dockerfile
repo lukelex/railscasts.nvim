@@ -5,7 +5,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-    && apt-get install --yes --no-install-recommends ca-certificates curl g++ gcc kitty lua5.1 unzip \
+    && apt-get install --yes --no-install-recommends ca-certificates curl g++ gcc imagemagick kitty lua5.1 unzip xvfb \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl --fail --location --retry 3 --retry-all-errors \
