@@ -32,8 +32,8 @@ jobs:
         run: docker build --tag railscasts-ci .
       - name: Validate Kitty configuration
         run: >-
-          docker run --rm --entrypoint kitty railscasts-ci
-           +runpy 'import kitty.config; bad = []; kitty.config.load_config("extras/kitty.conf", accumulate_bad_lines=bad); assert not bad, bad'
+          docker run --rm --entrypoint bash railscasts-ci
+          -o pipefail -c 'kitty +runpy "import kitty.config; bad = []; kitty.config.load_config(\"extras/kitty.conf\", accumulate_bad_lines=bad); assert not bad, bad"'
 
   plugin-integrations:
     runs-on: ubuntu-latest
