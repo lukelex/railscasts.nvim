@@ -24,6 +24,8 @@ local fixtures = {
   ["example.toml"] = 'name = "Railscasts"',
   ["Dockerfile"] = "FROM ruby:3.4-alpine",
   ["Makefile"] = "all:",
+  ["example.c"] = "struct episode",
+  ["example.cpp"] = "class Episode",
 }
 local fixture_languages = {
   ["ruby.rb"] = "ruby",
@@ -44,6 +46,8 @@ local fixture_languages = {
   ["example.toml"] = "toml",
   ["Dockerfile"] = "dockerfile",
   ["Makefile"] = "make",
+  ["example.c"] = "c",
+  ["example.cpp"] = "cpp",
 }
 local default_capture_spec = {
   query = "(_) @text",
