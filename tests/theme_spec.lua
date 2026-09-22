@@ -16,6 +16,8 @@ local fixtures = {
   ["index.html"] = "<title>Railscasts</title>",
   ["theme.css"] = "--accent: #ffc66d;",
   ["example.py"] = "class Episode:",
+  ["example.js"] = "export function label",
+  ["component.tsx"] = "export function EpisodeLabel",
 }
 local fixture_languages = {
   ["ruby.rb"] = "ruby",
@@ -28,6 +30,8 @@ local fixture_languages = {
   ["index.html"] = "html",
   ["theme.css"] = "css",
   ["example.py"] = "python",
+  ["example.js"] = "javascript",
+  ["component.tsx"] = "tsx",
 }
 local default_capture_spec = {
   query = "(_) @text",
