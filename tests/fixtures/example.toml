@@ -1,0 +1,4 @@
+[theme]
+name = "Railscasts"
+dark = true
+languages = ["ruby", "lua"]

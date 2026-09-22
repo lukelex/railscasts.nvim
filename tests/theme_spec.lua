@@ -21,6 +21,7 @@ local fixtures = {
   ["example.go"] = "type Episode struct",
   ["example.rs"] = "struct Episode",
   ["example.sql"] = "SELECT title, published",
+  ["example.toml"] = 'name = "Railscasts"',
 }
 local fixture_languages = {
   ["ruby.rb"] = "ruby",
@@ -38,6 +39,7 @@ local fixture_languages = {
   ["example.go"] = "go",
   ["example.rs"] = "rust",
   ["example.sql"] = "sql",
+  ["example.toml"] = "toml",
 }
 local default_capture_spec = {
   query = "(_) @text",
