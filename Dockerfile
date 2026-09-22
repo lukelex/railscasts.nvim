@@ -38,14 +38,18 @@ RUN mkdir -p /tmp/grammars /opt/treesitter/parsers \
     && curl --fail --location --retry 3 --retry-all-errors https://github.com/ikatyang/tree-sitter-yaml/archive/0e36bed171768908f331ff7dff9d956bae016efb.tar.gz \
       | tar --extract --gzip --directory /tmp/grammars --strip-components=1 \
     && mv /tmp/grammars /tmp/yaml \
-    && for language in ruby lua; do \
+    && mkdir /tmp/grammars \
+    && curl --fail --location --retry 3 --retry-all-errors https://github.com/tree-sitter/tree-sitter-bash/archive/a06c2e4415e9bc0346c6b86d401879ffb44058f7.tar.gz \
+      | tar --extract --gzip --directory /tmp/grammars --strip-components=1 \
+    && mv /tmp/grammars /tmp/bash \
+    && for language in ruby lua bash; do \
       scanner=""; test -f "/tmp/$language/src/scanner.c" && scanner="/tmp/$language/src/scanner.c"; \
       gcc -shared -fPIC -O2 -I "/tmp/$language/src" "/tmp/$language/src/parser.c" $scanner -o "/opt/treesitter/parsers/$language.so"; \
     done \
     && gcc -fPIC -O2 -I /tmp/yaml/src -c /tmp/yaml/src/parser.c -o /tmp/yaml-parser.o \
     && g++ -fPIC -O2 -I /tmp/yaml/src -c /tmp/yaml/src/scanner.cc -o /tmp/yaml-scanner.o \
     && g++ -shared /tmp/yaml-parser.o /tmp/yaml-scanner.o -o /opt/treesitter/parsers/yaml.so \
-    && rm -rf /tmp/grammars /tmp/ruby /tmp/lua /tmp/yaml /tmp/yaml-parser.o /tmp/yaml-scanner.o
+    && rm -rf /tmp/grammars /tmp/ruby /tmp/lua /tmp/yaml /tmp/bash /tmp/yaml-parser.o /tmp/yaml-scanner.o
 
 WORKDIR /workspace
 COPY . .

@@ -9,11 +9,46 @@ local fixtures = {
   ["ruby.rb"] = "class Episode",
   ["lua.lua"] = "local Episode",
   ["config.yaml"] = "episode:",
+  ["release.sh"] = "set -euo pipefail",
 }
 local fixture_languages = {
   ["ruby.rb"] = "ruby",
   ["lua.lua"] = "lua",
   ["config.yaml"] = "yaml",
+  ["release.sh"] = "bash",
+}
+local capture_specs = {
+  ruby = {
+    query = [[
+      (comment) @comment
+      (string) @string
+      (method name: (identifier) @function)
+    ]],
+    groups = { ["@comment"] = "Comment", ["@string"] = "String", ["@function"] = "Function" },
+  },
+  lua = {
+    query = [[
+      (comment) @comment
+      (string) @string
+      (function_declaration name: (_) @function)
+    ]],
+    groups = { ["@comment"] = "Comment", ["@string"] = "String", ["@function"] = "Function" },
+  },
+  yaml = {
+    query = [[
+      (block_mapping_pair key: (_) @field.yaml)
+      (double_quote_scalar) @string
+    ]],
+    groups = { ["@field.yaml"] = "Function", ["@string"] = "String" },
+  },
+  bash = {
+    query = [[
+      (comment) @comment
+      (string) @string
+      (command name: (command_name) @function)
+    ]],
+    groups = { ["@comment"] = "Comment", ["@string"] = "String", ["@function"] = "Function" },
+  },
 }
 
 for name, marker in pairs(fixtures) do
@@ -29,6 +64,17 @@ if parser_dir and parser_dir ~= "" then
     vim.treesitter.language.add(language, { path = parser_dir .. "/" .. language .. ".so" })
     local tree = vim.treesitter.get_string_parser(content, language):parse()[1]
     assert(not tree:root():has_error(), "Tree-sitter parse error: " .. name)
+
+    local spec = capture_specs[language]
+    local query = vim.treesitter.query.parse(language, spec.query)
+    local captures = {}
+    for capture, _ in query:iter_captures(tree:root(), content, 0, -1) do
+      captures["@" .. query.captures[capture]] = true
+    end
+    for capture, group in pairs(spec.groups) do
+      assert(captures[capture], "missing Tree-sitter capture " .. capture .. " for " .. name)
+      assert(highlight(capture).fg == highlight(group).fg, "unexpected highlight for " .. capture)
+    end
   end
 end
 
