@@ -1,0 +1,10 @@
+directive @private on FIELD_DEFINITION
+
+type Episode {
+  title: String!
+  published: Boolean!
+}
+
+type Query {
+  episode(id: ID!): Episode
+}

@@ -105,11 +105,15 @@ RUN set -e; \
     fetch embedded_template tree-sitter/tree-sitter-embedded-template 3499d85f0a0d937c507a4a65368f2f63772786e1; \
     fetch jinja cathaysia/tree-sitter-jinja c213d3745ccdcaaa858869181c7b1bf9557a025f; \
     fetch liquid hankthetank27/tree-sitter-liquid e45dbac8c5fa95b1f0e00e7e0c04bc8855823391; \
+    fetch elixir elixir-lang/tree-sitter-elixir 4b0c7118760af58a2e7081bbc8396e136f820b37; \
+    fetch erlang WhatsApp/tree-sitter-erlang 6ba4c762eb3065495e3db85697ffeecdf364ce35; \
+    fetch graphql bkegley/tree-sitter-graphql 5e66e961eee421786bdda8495ed1db045e06b5fe; \
+    fetch proto treywood/tree-sitter-proto e9f6b43f6844bd2189b50a422d4e2094313f6aa3; \
     curl --fail --location --retry 3 --retry-all-errors https://github.com/tree-sitter/tree-sitter/releases/download/v0.24.7/tree-sitter-linux-x64.gz \
       | gunzip > /usr/local/bin/tree-sitter; \
     chmod +x /usr/local/bin/tree-sitter; \
     (cd /tmp/sql && tree-sitter generate); \
-    for language in javascript go rust sql toml dockerfile make c cpp java c_sharp vue svelte python gitcommit vimdoc git_config git_rebase diff hcl embedded_template liquid; do \
+    for language in javascript go rust sql toml dockerfile make c cpp java c_sharp vue svelte python gitcommit vimdoc git_config git_rebase diff hcl embedded_template liquid elixir erlang graphql proto; do \
       scanner=""; test -f "/tmp/$language/src/scanner.c" && scanner="/tmp/$language/src/scanner.c"; \
       gcc -shared -fPIC -O2 -I "/tmp/$language/src" "/tmp/$language/src/parser.c" $scanner -o "/opt/treesitter/parsers/$language.so"; \
     done \
@@ -117,7 +121,7 @@ RUN set -e; \
     && gcc -fPIC -O2 -I /tmp/vue/src -c /tmp/vue/src/parser.c -o /tmp/vue-parser.o \
     && g++ -fPIC -O2 -I /tmp/vue/src -c /tmp/vue/src/scanner.cc -o /tmp/vue-scanner.o \
     && g++ -shared /tmp/vue-parser.o /tmp/vue-scanner.o -o /opt/treesitter/parsers/vue.so \
-    && rm -rf /tmp/grammar /tmp/javascript /tmp/go /tmp/rust /tmp/sql /tmp/toml /tmp/dockerfile /tmp/make /tmp/c /tmp/cpp /tmp/java /tmp/c_sharp /tmp/vue /tmp/svelte /tmp/python /tmp/gitcommit /tmp/vimdoc /tmp/git_config /tmp/git_rebase /tmp/diff /tmp/hcl /tmp/embedded_template /tmp/jinja /tmp/liquid /tmp/vue-parser.o /tmp/vue-scanner.o
+    && rm -rf /tmp/grammar /tmp/javascript /tmp/go /tmp/rust /tmp/sql /tmp/toml /tmp/dockerfile /tmp/make /tmp/c /tmp/cpp /tmp/java /tmp/c_sharp /tmp/vue /tmp/svelte /tmp/python /tmp/gitcommit /tmp/vimdoc /tmp/git_config /tmp/git_rebase /tmp/diff /tmp/hcl /tmp/embedded_template /tmp/jinja /tmp/liquid /tmp/elixir /tmp/erlang /tmp/graphql /tmp/proto /tmp/vue-parser.o /tmp/vue-scanner.o
 
 RUN mkdir -p /opt/plugins/{mini.nvim,nvim-notify,trouble.nvim,snacks.nvim} \
     && curl --fail --location --retry 3 --retry-all-errors https://github.com/echasnovski/mini.nvim/archive/561751e839b99a4baca36b9d963166b66d2536a6.tar.gz \

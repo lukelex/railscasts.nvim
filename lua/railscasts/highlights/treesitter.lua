@@ -95,6 +95,11 @@ function M.setup(colors, _, highlights)
   link({ "@tag.attribute.vue", "@tag.attribute.svelte" }, "Identifier")
   link({ "@keyword.vue", "@keyword.svelte" }, "Keyword")
   link({ "@comment.error.gitcommit" }, "DiagnosticError")
+  link({ "@attribute.elixir", "@function.macro.elixir" }, "PreProc")
+  link({ "@type.erlang", "@type.graphql", "@type.proto" }, "Type")
+  link({ "@function.erlang", "@field.graphql", "@field.proto" }, "Function")
+  link({ "@keyword.graphql", "@keyword.proto" }, "Keyword")
+  link({ "@directive.graphql", "@attribute.proto" }, "PreProc")
 end
 
 return M

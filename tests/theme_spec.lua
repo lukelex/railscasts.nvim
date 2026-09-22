@@ -39,6 +39,10 @@ local fixtures = {
   ["index.html.erb"] = "<%= episode.title %>",
   ["index.jinja"] = "{{ episode.title }}",
   ["index.liquid"] = "{{ episode.title }}",
+  ["episode.ex"] = "defmodule Episode do",
+  ["episode.erl"] = "-module(episode).",
+  ["schema.graphql"] = "type Episode",
+  ["episode.proto"] = "message Episode",
 }
 local fixture_languages = {
   ["ruby.rb"] = "ruby",
@@ -74,6 +78,10 @@ local fixture_languages = {
   ["index.html.erb"] = "embedded_template",
   ["index.jinja"] = "jinja",
   ["index.liquid"] = "liquid",
+  ["episode.ex"] = "elixir",
+  ["episode.erl"] = "erlang",
+  ["schema.graphql"] = "graphql",
+  ["episode.proto"] = "proto",
 }
 local default_capture_spec = {
   query = "(_) @text",
@@ -329,6 +337,12 @@ local language_semantics = {
   ["@attribute.c_sharp"] = "PreProc",
   ["@tag.vue"] = "Function",
   ["@tag.svelte"] = "Function",
+  ["@attribute.elixir"] = "PreProc",
+  ["@type.erlang"] = "Type",
+  ["@field.graphql"] = "Function",
+  ["@directive.graphql"] = "PreProc",
+  ["@field.proto"] = "Function",
+  ["@attribute.proto"] = "PreProc",
 }
 for capture, group in pairs(language_semantics) do
   assert(highlight(capture).fg == highlight(group).fg, "unexpected language highlight for " .. capture)
