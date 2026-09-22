@@ -33,7 +33,18 @@ jobs:
       - name: Validate Kitty configuration
         run: >-
           docker run --rm --entrypoint kitty railscasts-ci
-          +runpy 'import kitty.config; bad = []; kitty.config.load_config("extras/kitty.conf", accumulate_bad_lines=bad); assert not bad, bad'
+           +runpy 'import kitty.config; bad = []; kitty.config.load_config("extras/kitty.conf", accumulate_bad_lines=bad); assert not bad, bad'
+
+  plugin-integrations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build local CI image
+        run: docker build --tag railscasts-ci .
+      - name: Load supported plugin integrations
+        run: >-
+          docker run --rm --entrypoint /opt/neovim/v0.12.5/bin/nvim railscasts-ci
+          --headless --clean --cmd "set rtp^=." -l tests/plugins_spec.lua
 
   theme:
     runs-on: ubuntu-latest

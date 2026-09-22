@@ -51,6 +51,16 @@ RUN mkdir -p /tmp/grammars /opt/treesitter/parsers \
     && g++ -shared /tmp/yaml-parser.o /tmp/yaml-scanner.o -o /opt/treesitter/parsers/yaml.so \
     && rm -rf /tmp/grammars /tmp/ruby /tmp/lua /tmp/yaml /tmp/bash /tmp/yaml-parser.o /tmp/yaml-scanner.o
 
+RUN mkdir -p /opt/plugins/{mini.nvim,nvim-notify,trouble.nvim,snacks.nvim} \
+    && curl --fail --location --retry 3 --retry-all-errors https://github.com/echasnovski/mini.nvim/archive/561751e839b99a4baca36b9d963166b66d2536a6.tar.gz \
+      | tar --extract --gzip --directory /opt/plugins/mini.nvim --strip-components=1 \
+    && curl --fail --location --retry 3 --retry-all-errors https://github.com/rcarriga/nvim-notify/archive/8701bece920b38ea289b457f902e2ad184131a5d.tar.gz \
+      | tar --extract --gzip --directory /opt/plugins/nvim-notify --strip-components=1 \
+    && curl --fail --location --retry 3 --retry-all-errors https://github.com/folke/trouble.nvim/archive/bd67efe408d4816e25e8491cc5ad4088e708a69a.tar.gz \
+      | tar --extract --gzip --directory /opt/plugins/trouble.nvim --strip-components=1 \
+    && curl --fail --location --retry 3 --retry-all-errors https://github.com/folke/snacks.nvim/archive/882c996cf28183f4d63640de0b4c02ec886d01f2.tar.gz \
+      | tar --extract --gzip --directory /opt/plugins/snacks.nvim --strip-components=1
+
 WORKDIR /workspace
 COPY . .
 
@@ -69,4 +79,5 @@ CMD set -e; \
       fi; \
       "$nvim" --headless --clean --cmd 'set rtp^=.' -l tests/screenshot_spec.lua; \
     done; \
+    /opt/neovim/v0.12.5/bin/nvim --headless --clean --cmd 'set rtp^=.' -l tests/plugins_spec.lua; \
     kitty +runpy 'import kitty.config; bad = []; kitty.config.load_config("extras/kitty.conf", accumulate_bad_lines=bad); assert not bad, bad'
