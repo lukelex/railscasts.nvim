@@ -38,3 +38,6 @@ preserve the original Railscasts hierarchy. They should not be the sole carrier
 of meaning: diagnostics also use signs and underlines, and diff states use
 separate groups. Enable `high_contrast` through `require("railscasts").setup()`
 when stronger muted-text contrast is needed.
+
+The supported UI integrations inherit the same semantic groups in high-contrast
+mode, including transparent and dimmed-inactive-window configurations.

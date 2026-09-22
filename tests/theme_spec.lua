@@ -178,3 +178,33 @@ assert(highlight("NormalNC").bg == nil)
 assert(highlight("NormalNC").fg == 0xC7A66D)
 assert(highlight("Comment").fg == 0xC7A66D)
 assert(highlight("TabLineSel").bg == 0x5FAF5F)
+assert(highlight("NormalFloat").bg == nil)
+assert(highlight("TelescopeBorder").fg == 0xC7A66D)
+
+local high_contrast_links = {
+  CmpItemAbbrDeprecated = "Comment",
+  SnacksDashboardFooter = "Comment",
+  MiniStarterFooter = "Comment",
+  TroubleSource = "Comment",
+  NotifyTRACEIcon = "Comment",
+  BufferLineCloseButton = "Comment",
+  DressingInputBorder = "TelescopeBorder",
+  DapUIBreakpointsDisabledLine = "Comment",
+  DiffviewSecondary = "Comment",
+  FugitiveStagedModification = "DiffAdd",
+  NavicIconsFunction = "Function",
+  DropBarMenuHoverSymbol = "Function",
+  RainbowDelimiterGreen = "String",
+  AerialConstructor = "Function",
+  OutlineDetails = "Comment",
+  NeogitChangeAdded = "DiffAdd",
+  NeotestSkipped = "Comment",
+  FzfLuaHeaderBind = "Comment",
+  RenderMarkdownQuote = "Comment",
+}
+for group, target in pairs(high_contrast_links) do
+  assert(highlight(group).fg == highlight(target).fg, "unexpected high-contrast highlight for " .. group)
+end
+
+package.loaded["lualine.themes.railscasts"] = nil
+assert(require("lualine.themes.railscasts").visual.b.fg == "#C7A66D")
