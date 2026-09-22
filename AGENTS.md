@@ -19,9 +19,10 @@
   highlights and reloads the palette before applying `lua/railscasts/theme.lua`.
 - `theme.lua` orchestrates `lua/railscasts/highlights/{ui,syntax,plugins,treesitter,lsp}.lua`;
   put new definitions in the matching section.
-- Configuration accepts only boolean `high_contrast`, `transparent`, and
-  `dim_inactive` options through `require("railscasts").setup()`; the legacy
-  global option is intentionally unsupported.
+- Configuration accepts only boolean `high_contrast`, `transparent`,
+  `darker_background`, and `dim_inactive` options through
+  `require("railscasts").setup()`; the legacy global option is intentionally
+  unsupported.
 - Keep the Lualine theme (`lua/lualine/themes/railscasts.lua`) and Kitty palette
   (`extras/kitty.conf`) aligned with the canonical palette.
 - Add a `tests/theme_spec.lua` assertion for every new semantic category or

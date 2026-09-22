@@ -63,6 +63,7 @@ Configure Railscasts before loading the colorscheme.
 require("railscasts").setup {
   high_contrast = true, -- Brighter accents and darker secondary surfaces.
   transparent = false,  -- Let the terminal or Neovim UI provide the background.
+  darker_background = false, -- Use the darker #1F1F1F Railscasts surface.
   dim_inactive = false, -- Mute inactive windows and their winbars.
 }
 

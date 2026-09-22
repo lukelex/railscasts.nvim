@@ -59,12 +59,15 @@ while preserving the base surface and text roles.
 - **Contrast:** use the default palette for fidelity. Use the opt-in
   high-contrast palette only when accessibility is preferred over exact
   historical matching.
+- **Surface choice:** use `darker_background` when a darker solid surface is
+  preferred; use transparent mode when the terminal should provide the surface.
 
 ## Palette tokens
 
 | Token | Value | Intended use |
 | --- | --- | --- |
 | `background` | `#2B2B2B` | Main editor and terminal background |
+| `darker_background` | `#1F1F1F` | Opt-in darker editor and terminal background |
 | `black` | `#000000` | Strong inverse foreground/background |
 | `beige_grey` | `#E6E1DC` | Primary readable text |
 | `white` | `#F3F4F5` | High-emphasis foreground |
@@ -97,6 +100,7 @@ Use these roles when a target supports named styling categories.
 | `text.primary` | `beige_grey` | Normal text, variables, punctuation |
 | `text.strong` | `white` | Titles and high-emphasis text |
 | `text.muted` | `light_brown` | Comments and metadata |
+
 | `syntax.function` | `light_orange` | Functions, methods, tags |
 | `syntax.keyword` | `dark_orange` | Keywords and preprocessor directives |
 | `syntax.string` | `light_green` | Strings and paths |
@@ -113,6 +117,11 @@ Use these roles when a target supports named styling categories.
 | `diagnostic.warning` | `dark_orange` | Warnings |
 | `diagnostic.info` | `blue` | Information |
 | `diagnostic.hint` | `beige_grey` | Hints |
+
+`darker_background` is an opt-in surface override, not a new semantic role.
+When enabled, it replaces `background` everywhere the base surface is used and
+for Neovim's terminal color 0. It is intentionally incompatible with
+transparent mode, which leaves the surface unset.
 
 ## Mode language
 

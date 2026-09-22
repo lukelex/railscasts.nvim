@@ -1,5 +1,6 @@
 local colors = {
   background = "#2B2B2B",
+  darker_background = "#1F1F1F",
 
   black = "#000000",
   blue = "#6E9CBE",
@@ -22,7 +23,13 @@ local colors = {
   light_grey = "#7C6F64",
 }
 
-if require("railscasts.config").get().high_contrast then
+local options = require("railscasts.config").get()
+
+if options.darker_background then
+  colors.background = colors.darker_background
+end
+
+if options.high_contrast then
   colors.dark_green = "#5FAF5F"
   colors.light_brown = "#C7A66D"
   colors.light_grey = "#635A50"

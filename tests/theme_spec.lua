@@ -348,9 +348,24 @@ for capture, group in pairs(language_semantics) do
   assert(highlight(capture).fg == highlight(group).fg, "unexpected language highlight for " .. capture)
 end
 
+require("railscasts").setup({ darker_background = true })
+vim.cmd.colorscheme("railscasts")
+assert(require("railscasts.colors").background == "#1F1F1F")
+assert(vim.g.terminal_color_0 == "#1F1F1F")
+assert(highlight("Normal").bg == 0x1F1F1F)
+assert(highlight("NormalFloat").bg == 0x1F1F1F)
+
+local configured, configuration_error = pcall(require("railscasts").setup, {
+  transparent = true,
+  darker_background = true,
+})
+assert(not configured)
+assert(configuration_error:find("cannot both be true", 1, true))
+
 require("railscasts").setup({
   high_contrast = true,
   transparent = true,
+  darker_background = false,
   dim_inactive = true,
 })
 vim.cmd.colorscheme("railscasts")

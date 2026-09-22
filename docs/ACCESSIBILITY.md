@@ -39,5 +39,13 @@ of meaning: diagnostics also use signs and underlines, and diff states use
 separate groups. Enable `high_contrast` through `require("railscasts").setup()`
 when stronger muted-text contrast is needed.
 
+## Darker background
+
+Set `darker_background = true` to use the opt-in `#1F1F1F` editor and terminal
+surface. This keeps every syntax and UI role unchanged while increasing text
+contrast against the background. It cannot be combined with `transparent = true`,
+because transparent windows deliberately defer their surface to the terminal or
+GUI.
+
 The supported UI integrations inherit the same semantic groups in high-contrast
 mode, including transparent and dimmed-inactive-window configurations.
