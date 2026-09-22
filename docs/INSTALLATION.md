@@ -72,6 +72,11 @@ vim.cmd.colorscheme "railscasts"
 
 The setup API is the only supported configuration interface.
 
+## Health check
+
+Run `:checkhealth railscasts` to verify the supported Neovim version,
+`termguicolors`, Railscasts options, and the applied ANSI terminal palette.
+
 ## Integrations
 
 ### Neovim terminal

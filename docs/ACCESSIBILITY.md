@@ -47,5 +47,10 @@ contrast against the background. It cannot be combined with `transparent = true`
 because transparent windows deliberately defer their surface to the terminal or
 GUI.
 
+Against the darker `#1F1F1F` surface, primary text is 12.69:1, strong text is
+14.97:1, functions are 10.64:1, strings are 6.54:1, booleans are 5.62:1, and
+keywords are 4.95:1. Muted comments rise to 3.86:1 and errors to 3.92:1; use
+`high_contrast` when muted text needs more separation.
+
 The supported UI integrations inherit the same semantic groups in high-contrast
 mode, including transparent and dimmed-inactive-window configurations.

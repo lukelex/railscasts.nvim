@@ -1,7 +1,7 @@
 local M = {}
 
-function M.apply(colors)
-  local ansi = {
+function M.colors(colors)
+  return {
     colors.background,
     colors.red,
     colors.light_orange,
@@ -19,7 +19,10 @@ function M.apply(colors)
     colors.light_green,
     colors.white,
   }
+end
 
+function M.apply(colors)
+  local ansi = M.colors(colors)
   for index, color in ipairs(ansi) do
     vim.g["terminal_color_" .. (index - 1)] = color
   end

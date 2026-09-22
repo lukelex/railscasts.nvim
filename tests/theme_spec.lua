@@ -240,6 +240,7 @@ assert(vim.g.terminal_color_0 == "#2B2B2B")
 assert(vim.g.terminal_color_1 == "#DA4939")
 assert(vim.g.terminal_color_6 == "#87AF5F")
 assert(vim.g.terminal_color_15 == "#F3F4F5")
+assert(type(require("railscasts.health").check) == "function")
 
 -- Diagnostics and diffs
 assert(highlight("DiagnosticError").fg == 0xDA4939)
@@ -354,6 +355,7 @@ assert(require("railscasts.colors").background == "#1F1F1F")
 assert(vim.g.terminal_color_0 == "#1F1F1F")
 assert(highlight("Normal").bg == 0x1F1F1F)
 assert(highlight("NormalFloat").bg == 0x1F1F1F)
+assert(require("railscasts.terminal").colors(require("railscasts.colors"))[1] == "#1F1F1F")
 
 local configured, configuration_error = pcall(require("railscasts").setup, {
   transparent = true,
