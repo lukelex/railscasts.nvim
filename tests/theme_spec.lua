@@ -304,6 +304,9 @@ assert(highlight("hclAttributeName").fg == highlight("Function").fg)
 assert(highlight("erubyDelimiter").fg == highlight("PreProc").fg)
 assert(highlight("jinjaStatement").fg == highlight("Keyword").fg)
 assert(highlight("liquidFilter").fg == highlight("Function").fg)
+assert(highlight("kmonadAliascode").fg == highlight("Label").fg)
+assert(highlight("kmonaddefaliasName").fg == highlight("Function").fg)
+assert(highlight("kmonaddefcfgIOName").fg == highlight("Type").fg)
 
 local manpage = vim.fn.readfile("tests/fixtures/railscasts.1")
 vim.api.nvim_buf_set_lines(0, 0, -1, false, manpage)
@@ -312,6 +315,13 @@ assert(vim.fn.synIDattr(vim.fn.synID(1, 1, 1), "name") == "manHeader")
 assert(vim.fn.synIDattr(vim.fn.synID(3, 1, 1), "name") == "manSectionHeading")
 assert(vim.fn.synIDattr(vim.fn.synID(10, 8, 1), "name") == "manOptionDesc")
 assert(vim.fn.synIDattr(vim.fn.synID(14, 8, 1), "name") == "manReference")
+
+vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.fn.readfile("tests/fixtures/kmonad.kbd"))
+vim.opt.rtp:append("/opt/plugins/kmonad-vim")
+vim.cmd("syntax clear")
+vim.b.current_syntax = nil
+vim.cmd("runtime! syntax/kbd.vim")
+assert(vim.fn.synIDattr(vim.fn.synID(1, 2, 1), "name") == "kmonadkeyword")
 
 -- Tree-sitter and LSP semantic tokens
 assert(highlight("Special").fg == 0x87AF5F)

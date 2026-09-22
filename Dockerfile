@@ -123,7 +123,7 @@ RUN set -e; \
     && g++ -shared /tmp/vue-parser.o /tmp/vue-scanner.o -o /opt/treesitter/parsers/vue.so \
     && rm -rf /tmp/grammar /tmp/javascript /tmp/go /tmp/rust /tmp/sql /tmp/toml /tmp/dockerfile /tmp/make /tmp/c /tmp/cpp /tmp/java /tmp/c_sharp /tmp/vue /tmp/svelte /tmp/python /tmp/gitcommit /tmp/vimdoc /tmp/git_config /tmp/git_rebase /tmp/diff /tmp/hcl /tmp/embedded_template /tmp/jinja /tmp/liquid /tmp/elixir /tmp/erlang /tmp/graphql /tmp/proto /tmp/vue-parser.o /tmp/vue-scanner.o
 
-RUN mkdir -p /opt/plugins/{mini.nvim,nvim-notify,trouble.nvim,snacks.nvim} \
+RUN mkdir -p /opt/plugins/{mini.nvim,nvim-notify,trouble.nvim,snacks.nvim,kmonad-vim} \
     && curl --fail --location --retry 3 --retry-all-errors https://github.com/echasnovski/mini.nvim/archive/561751e839b99a4baca36b9d963166b66d2536a6.tar.gz \
       | tar --extract --gzip --directory /opt/plugins/mini.nvim --strip-components=1 \
     && curl --fail --location --retry 3 --retry-all-errors https://github.com/rcarriga/nvim-notify/archive/8701bece920b38ea289b457f902e2ad184131a5d.tar.gz \
@@ -131,7 +131,9 @@ RUN mkdir -p /opt/plugins/{mini.nvim,nvim-notify,trouble.nvim,snacks.nvim} \
     && curl --fail --location --retry 3 --retry-all-errors https://github.com/folke/trouble.nvim/archive/bd67efe408d4816e25e8491cc5ad4088e708a69a.tar.gz \
       | tar --extract --gzip --directory /opt/plugins/trouble.nvim --strip-components=1 \
     && curl --fail --location --retry 3 --retry-all-errors https://github.com/folke/snacks.nvim/archive/882c996cf28183f4d63640de0b4c02ec886d01f2.tar.gz \
-      | tar --extract --gzip --directory /opt/plugins/snacks.nvim --strip-components=1
+      | tar --extract --gzip --directory /opt/plugins/snacks.nvim --strip-components=1 \
+    && curl --fail --location --retry 3 --retry-all-errors https://github.com/kmonad/kmonad-vim/archive/37978445197ab00edeb5b731e9ca90c2b141723f.tar.gz \
+      | tar --extract --gzip --directory /opt/plugins/kmonad-vim --strip-components=1
 
 WORKDIR /workspace
 COPY . .

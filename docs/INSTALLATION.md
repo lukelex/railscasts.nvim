@@ -109,6 +109,13 @@ nvim-dap-ui, Diffview, vim-fugitive, dressing.nvim, nvim-navic, dropbar,
 treesitter-context, rainbow-delimiters, aerial.nvim, outline.nvim, neogit,
 neotest, and fzf-lua.
 
+### Kmonad
+
+Railscasts styles the named groups provided by
+[`kmonad/kmonad-vim`](https://github.com/kmonad/kmonad-vim) for `.kbd` files.
+Install that syntax plugin and load Railscasts after it; no Railscasts-specific
+Kmonad configuration is required.
+
 ### Kitty
 
 Download [`extras/kitty.conf`](../extras/kitty.conf) as a separate include file

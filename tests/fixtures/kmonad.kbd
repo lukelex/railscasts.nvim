@@ -1,0 +1,17 @@
+(defcfg
+  input  (device-file "/dev/input/event0")
+  output (uinput-sink "Railscasts KMonad")
+  fallthrough true
+)
+
+(defalias
+  nav (layer-toggle navigation)
+)
+
+(defsrc
+  a s d f
+)
+
+(deflayer navigation
+  @nav left down up right
+)
