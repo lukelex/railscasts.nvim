@@ -26,6 +26,8 @@ local fixtures = {
   ["Makefile"] = "all:",
   ["example.c"] = "struct episode",
   ["example.cpp"] = "class Episode",
+  ["Episode.java"] = "public record Episode",
+  ["Episode.cs"] = "public record Episode",
 }
 local fixture_languages = {
   ["ruby.rb"] = "ruby",
@@ -48,6 +50,8 @@ local fixture_languages = {
   ["Makefile"] = "make",
   ["example.c"] = "c",
   ["example.cpp"] = "cpp",
+  ["Episode.java"] = "java",
+  ["Episode.cs"] = "c_sharp",
 }
 local default_capture_spec = {
   query = "(_) @text",
