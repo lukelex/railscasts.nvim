@@ -2,4 +2,4 @@
   let title = "Railscasts";
 </script>
 
-<main class="episode">{title}</main>
+<main class:published={true} class="episode">{title.toUpperCase()}</main>

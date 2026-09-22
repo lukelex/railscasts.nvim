@@ -29,7 +29,7 @@ local fixtures = {
   ["Episode.java"] = "public record Episode",
   ["Episode.cs"] = "public record Episode",
   ["App.vue"] = "<template>",
-  ["App.svelte"] = '<main class="episode">',
+  ["App.svelte"] = "class:published={true}",
   ["COMMIT_EDITMSG"] = "feat(theme): support Git commit messages",
   ["help.txt"] = "Railscasts theme",
   ["config.git"] = "[core]",
@@ -43,6 +43,12 @@ local fixtures = {
   ["episode.erl"] = "-module(episode).",
   ["schema.graphql"] = "type Episode",
   ["episode.proto"] = "message Episode",
+  ["theme.nix"] = "packages = with pkgs",
+  ["episode.clj"] = "(defn label",
+  ["Episode.kt"] = "data class Episode",
+  ["Episode.swift"] = "struct Episode",
+  ["episode.zig"] = "pub fn label",
+  ["episode.dart"] = "class Episode",
 }
 local fixture_languages = {
   ["ruby.rb"] = "ruby",
@@ -82,6 +88,12 @@ local fixture_languages = {
   ["episode.erl"] = "erlang",
   ["schema.graphql"] = "graphql",
   ["episode.proto"] = "proto",
+  ["theme.nix"] = "nix",
+  ["episode.clj"] = "clojure",
+  ["Episode.kt"] = "kotlin",
+  ["Episode.swift"] = "swift",
+  ["episode.zig"] = "zig",
+  ["episode.dart"] = "dart",
 }
 local default_capture_spec = {
   query = "(_) @text",
@@ -352,6 +364,12 @@ local language_semantics = {
   ["@directive.graphql"] = "PreProc",
   ["@field.proto"] = "Function",
   ["@attribute.proto"] = "PreProc",
+  ["@type.nix"] = "Type",
+  ["@function.clojure"] = "Function",
+  ["@keyword.kotlin"] = "Keyword",
+  ["@type.swift"] = "Type",
+  ["@function.zig"] = "Function",
+  ["@attribute.dart"] = "PreProc",
 }
 for capture, group in pairs(language_semantics) do
   assert(highlight(capture).fg == highlight(group).fg, "unexpected language highlight for " .. capture)

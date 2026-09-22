@@ -96,6 +96,16 @@ function M.setup(colors, _, highlights)
   link({ "@keyword.vue", "@keyword.svelte" }, "Keyword")
   link({ "@comment.error.gitcommit" }, "DiagnosticError")
   link({ "@attribute.elixir", "@function.macro.elixir" }, "PreProc")
+  link({ "@type.nix", "@type.clojure", "@type.kotlin", "@type.swift", "@type.zig", "@type.dart" }, "Type")
+  link(
+    { "@function.nix", "@function.clojure", "@function.kotlin", "@function.swift", "@function.zig", "@function.dart" },
+    "Function"
+  )
+  link(
+    { "@keyword.nix", "@keyword.clojure", "@keyword.kotlin", "@keyword.swift", "@keyword.zig", "@keyword.dart" },
+    "Keyword"
+  )
+  link({ "@attribute.kotlin", "@attribute.swift", "@attribute.dart" }, "PreProc")
   link({ "@type.erlang", "@type.graphql", "@type.proto" }, "Type")
   link({ "@function.erlang", "@field.graphql", "@field.proto" }, "Function")
   link({ "@keyword.graphql", "@keyword.proto" }, "Keyword")

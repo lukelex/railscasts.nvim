@@ -109,11 +109,18 @@ RUN set -e; \
     fetch erlang WhatsApp/tree-sitter-erlang 6ba4c762eb3065495e3db85697ffeecdf364ce35; \
     fetch graphql bkegley/tree-sitter-graphql 5e66e961eee421786bdda8495ed1db045e06b5fe; \
     fetch proto treywood/tree-sitter-proto e9f6b43f6844bd2189b50a422d4e2094313f6aa3; \
+    fetch nix cstrahan/tree-sitter-nix 545766491895dd1b7696fa4d6efba982c10dea56; \
+    fetch clojure sogaiu/tree-sitter-clojure e43eff80d17cf34852dcd92ca5e6986d23a7040f; \
+    fetch kotlin fwcd/tree-sitter-kotlin 1852ea17b7f60fb3f9d84e0b1555d56b46b39fb1; \
+    fetch swift alex-pinkus/tree-sitter-swift 00bbb0a2550f8bc0023a2a4992922d51ae045626; \
+    fetch zig tree-sitter-grammars/tree-sitter-zig 6479aa13f32f701c383083d8b28360ebd682fb7d; \
+    fetch dart UserNobody14/tree-sitter-dart be07cf7118d3dba06236a3f19541685a68209934; \
     curl --fail --location --retry 3 --retry-all-errors https://github.com/tree-sitter/tree-sitter/releases/download/v0.24.7/tree-sitter-linux-x64.gz \
       | gunzip > /usr/local/bin/tree-sitter; \
     chmod +x /usr/local/bin/tree-sitter; \
     (cd /tmp/sql && tree-sitter generate); \
-    for language in javascript go rust sql toml dockerfile make c cpp java c_sharp vue svelte python gitcommit vimdoc git_config git_rebase diff hcl embedded_template liquid elixir erlang graphql proto; do \
+    (cd /tmp/swift && tree-sitter generate); \
+    for language in javascript go rust sql toml dockerfile make c cpp java c_sharp vue svelte python gitcommit vimdoc git_config git_rebase diff hcl embedded_template liquid elixir erlang graphql proto nix clojure kotlin swift zig dart; do \
       scanner=""; test -f "/tmp/$language/src/scanner.c" && scanner="/tmp/$language/src/scanner.c"; \
       gcc -shared -fPIC -O2 -I "/tmp/$language/src" "/tmp/$language/src/parser.c" $scanner -o "/opt/treesitter/parsers/$language.so"; \
     done \
@@ -121,7 +128,7 @@ RUN set -e; \
     && gcc -fPIC -O2 -I /tmp/vue/src -c /tmp/vue/src/parser.c -o /tmp/vue-parser.o \
     && g++ -fPIC -O2 -I /tmp/vue/src -c /tmp/vue/src/scanner.cc -o /tmp/vue-scanner.o \
     && g++ -shared /tmp/vue-parser.o /tmp/vue-scanner.o -o /opt/treesitter/parsers/vue.so \
-    && rm -rf /tmp/grammar /tmp/javascript /tmp/go /tmp/rust /tmp/sql /tmp/toml /tmp/dockerfile /tmp/make /tmp/c /tmp/cpp /tmp/java /tmp/c_sharp /tmp/vue /tmp/svelte /tmp/python /tmp/gitcommit /tmp/vimdoc /tmp/git_config /tmp/git_rebase /tmp/diff /tmp/hcl /tmp/embedded_template /tmp/jinja /tmp/liquid /tmp/elixir /tmp/erlang /tmp/graphql /tmp/proto /tmp/vue-parser.o /tmp/vue-scanner.o
+    && rm -rf /tmp/grammar /tmp/javascript /tmp/go /tmp/rust /tmp/sql /tmp/toml /tmp/dockerfile /tmp/make /tmp/c /tmp/cpp /tmp/java /tmp/c_sharp /tmp/vue /tmp/svelte /tmp/python /tmp/gitcommit /tmp/vimdoc /tmp/git_config /tmp/git_rebase /tmp/diff /tmp/hcl /tmp/embedded_template /tmp/jinja /tmp/liquid /tmp/elixir /tmp/erlang /tmp/graphql /tmp/proto /tmp/nix /tmp/clojure /tmp/kotlin /tmp/swift /tmp/zig /tmp/dart /tmp/vue-parser.o /tmp/vue-scanner.o
 
 RUN mkdir -p /opt/plugins/{mini.nvim,nvim-notify,trouble.nvim,snacks.nvim} \
     && curl --fail --location --retry 3 --retry-all-errors https://github.com/echasnovski/mini.nvim/archive/561751e839b99a4baca36b9d963166b66d2536a6.tar.gz \
@@ -154,5 +161,5 @@ CMD set -e; \
     /opt/neovim/v0.12.5/bin/nvim --headless --clean --cmd 'set rtp^=.' -l tests/plugins_spec.lua; \
     kitty +runpy 'import kitty.config; bad = []; kitty.config.load_config("extras/kitty.conf", accumulate_bad_lines=bad); assert not bad, bad'; \
     luac5.1 -p extras/wezterm.lua; \
-    python3 -c 'import json, tomllib; tomllib.load(open("extras/alacritty.toml", "rb")); json.load(open("extras/windows-terminal.json"))'; \
+    python3 -c 'import json, plistlib, tomllib; tomllib.load(open("extras/alacritty.toml", "rb")); json.load(open("extras/windows-terminal.json")); profile = plistlib.load(open("extras/iterm2.itermcolors", "rb")); assert all(f"Ansi {index} Color" in profile for index in range(16))'; \
     test "$(grep -c '^palette = ' extras/ghostty.conf)" -eq 16

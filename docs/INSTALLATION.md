@@ -159,6 +159,12 @@ configuration directory and include it from `config`. Add
 Terminal's `schemes` array, then select the `Railscasts` color scheme in a
 profile.
 
+### iTerm2
+
+Import [`extras/iterm2.itermcolors`](../extras/iterm2.itermcolors) from iTerm2
+using **Settings → Profiles → Colors → Color Presets → Import**. Select the
+resulting Railscasts preset for the profile.
+
 **macOS**
 
 Use `~/Library/Preferences/kitty/kitty.conf` as the main config location.

@@ -33,7 +33,7 @@ jobs:
       - name: Validate terminal configurations
         run: >-
           docker run --rm --entrypoint bash railscasts-ci
-          -o pipefail -c 'kitty +runpy "import kitty.config; bad = []; kitty.config.load_config(\"extras/kitty.conf\", accumulate_bad_lines=bad); assert not bad, bad" && luac5.1 -p extras/wezterm.lua && python3 -c "import json, tomllib; tomllib.load(open(\"extras/alacritty.toml\", \"rb\")); json.load(open(\"extras/windows-terminal.json\"))" && test "$(grep -c '\''^palette = '\'' extras/ghostty.conf)" -eq 16'
+          -o pipefail -c 'kitty +runpy "import kitty.config; bad = []; kitty.config.load_config(\"extras/kitty.conf\", accumulate_bad_lines=bad); assert not bad, bad" && luac5.1 -p extras/wezterm.lua && python3 -c "import json, plistlib, tomllib; tomllib.load(open(\"extras/alacritty.toml\", \"rb\")); json.load(open(\"extras/windows-terminal.json\")); profile = plistlib.load(open(\"extras/iterm2.itermcolors\", \"rb\")); assert all(f\"Ansi {index} Color\" in profile for index in range(16))" && test "$(grep -c '\''^palette = '\'' extras/ghostty.conf)" -eq 16'
 
   plugin-integrations:
     runs-on: ubuntu-latest

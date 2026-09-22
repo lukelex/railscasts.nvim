@@ -3,5 +3,5 @@ const title = "Railscasts"
 </script>
 
 <template>
-  <main class="episode">{{ title }}</main>
+  <main :class="{ published: true }" class="episode">{{ title.toUpperCase() }}</main>
 </template>
