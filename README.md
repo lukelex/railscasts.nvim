@@ -32,6 +32,8 @@ has remained immediately recognizable for years.
 
 Railscasts requires Neovim 0.9.5 or later.
 
+### lazy.nvim
+
 ```lua
 {
   "lukelex/railscasts.nvim",
