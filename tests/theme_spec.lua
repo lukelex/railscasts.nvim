@@ -28,6 +28,8 @@ local fixtures = {
   ["example.cpp"] = "class Episode",
   ["Episode.java"] = "public record Episode",
   ["Episode.cs"] = "public record Episode",
+  ["App.vue"] = "<template>",
+  ["App.svelte"] = '<main class="episode">',
 }
 local fixture_languages = {
   ["ruby.rb"] = "ruby",
@@ -52,6 +54,8 @@ local fixture_languages = {
   ["example.cpp"] = "cpp",
   ["Episode.java"] = "java",
   ["Episode.cs"] = "c_sharp",
+  ["App.vue"] = "vue",
+  ["App.svelte"] = "svelte",
 }
 local default_capture_spec = {
   query = "(_) @text",
