@@ -15,6 +15,7 @@ local fixtures = {
   ["guide.md"] = "# Railscasts",
   ["index.html"] = "<title>Railscasts</title>",
   ["theme.css"] = "--accent: #ffc66d;",
+  ["example.py"] = "class Episode:",
 }
 local fixture_languages = {
   ["ruby.rb"] = "ruby",
@@ -26,6 +27,7 @@ local fixture_languages = {
   ["guide.md"] = "markdown",
   ["index.html"] = "html",
   ["theme.css"] = "css",
+  ["example.py"] = "python",
 }
 local default_capture_spec = {
   query = "(_) @text",
