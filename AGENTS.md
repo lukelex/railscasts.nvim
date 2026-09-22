@@ -47,3 +47,11 @@
   compatibility, breaking changes, and supported integrations.
 - Exclude CI, tests, linting, formatting, and internal infrastructure unless
   explicitly requested.
+
+## Documentation
+
+- Keep user-facing documentation current whenever behavior, options,
+  compatibility, integrations, or visual design changes.
+- Maintain the GitHub Wiki alongside repository docs: update the relevant Wiki
+  page and its navigation, and document design choices and palette changes
+  there rather than leaving them implicit in code.

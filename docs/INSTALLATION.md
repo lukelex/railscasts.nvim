@@ -69,7 +69,7 @@ require("railscasts").setup {
 vim.cmd.colorscheme "railscasts"
 ```
 
-The setup API is the only supported configuration interface in v2.
+The setup API is the only supported configuration interface.
 
 ## Integrations
 
