@@ -3,10 +3,10 @@
 > A warm, dark Neovim colorscheme faithfully inspired by the original
 > Railscasts TextMate theme.
 
-[Installation](docs/INSTALLATION.md) · [Design language](DESIGN.md) · [Accessibility](docs/ACCESSIBILITY.md) · [Development](#development)
+[Wiki](https://github.com/lukelex/railscasts.nvim/wiki) · [Development](docs/DEVELOPMENT.md)
 
 <p align="center">
-  <img src="screenshots/gallery.gif" alt="Railscasts syntax highlighting for Ruby, Lua, Bash, and YAML" width="800" />
+  <img src="screenshots/gallery.gif" alt="Railscasts syntax highlighting across representative languages" width="800" />
 </p>
 
 ## Railscasts, carried forward
@@ -34,65 +34,19 @@ The gallery cycles through Ruby, Lua, Bash, YAML, TypeScript, JSON, Markdown,
 HTML, and CSS fixtures captured from a Kitty window running Neovim with
 Railscasts. Each frame has a language badge in its top-right winbar.
 
-## Language support
-
-Railscasts works with every Neovim filetype. Its current visual tuning and
-fixtures focus on:
-
-- Ruby
-- Lua
-- Bash
-- YAML
-- TypeScript
-- JSON
-- Markdown
-- HTML
-- CSS
-
-Modern Tree-sitter captures, LSP semantic tokens, diagnostics, diffs, Lualine,
-ibl/IndentBlankLine, Kitty, and common Neovim UI plugins are covered by the
-theme.
-
 ## Get started
 
 Railscasts requires Neovim 0.9.5 or later.
 
 ```lua
-vim.cmd.colorscheme "railscasts"
+{
+  "lukelex/railscasts.nvim",
+  priority = 1000,
+  config = function()
+    vim.cmd.colorscheme "railscasts"
+  end,
+},
 ```
 
-See the [installation guide](docs/INSTALLATION.md) for native packages,
-lazy.nvim, vim-plug, Windows, Lualine, Kitty, high-contrast mode, and other
-configuration details.
-
-## Development
-
-The repository includes a Docker runner for the same checks used in CI:
-
-```sh
-docker build --tag railscasts-ci .
-docker run --rm railscasts-ci
-```
-
-To test the current working tree without rebuilding the image:
-
-```sh
-docker run --rm --volume "$PWD:/workspace" railscasts-ci
-```
-
-The visual regression snapshot is stored at
-[`tests/snapshots/theme.svg`](tests/snapshots/theme.svg). Update it intentionally
-after a reviewed visual change:
-
-```sh
-docker run --rm --env UPDATE_SNAPSHOTS=1 --volume "$PWD:/workspace" railscasts-ci
-```
-
-Regenerate the README gallery from the fixture files with:
-
-```sh
-scripts/capture_gallery.sh
-```
-
-Future work is tracked in [TODO.md](TODO.md). Contributors should also follow
-the palette and integration rules in [AGENTS.md](AGENTS.md).
+For other installation methods, configuration, integrations, accessibility, and
+the design language, visit the [Wiki](https://github.com/lukelex/railscasts.nvim/wiki).
