@@ -5,7 +5,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-    && apt-get install --yes --no-install-recommends ca-certificates curl g++ gcc imagemagick kitty lua5.1 unzip xvfb \
+    && apt-get install --yes --no-install-recommends ca-certificates curl g++ gcc imagemagick kitty lua5.1 nodejs unzip xvfb \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl --fail --location --retry 3 --retry-all-errors \
@@ -67,11 +67,47 @@ RUN mkdir -p /tmp/grammars /opt/treesitter/parsers \
       gcc -shared -fPIC -O2 -I "/tmp/$language/src" "/tmp/$language/src/parser.c" $scanner -o "/opt/treesitter/parsers/$language.so"; \
     done \
     && gcc -shared -fPIC -O2 -I /tmp/typescript/typescript/src /tmp/typescript/typescript/src/parser.c /tmp/typescript/typescript/src/scanner.c -o /opt/treesitter/parsers/typescript.so \
+    && gcc -shared -fPIC -O2 -I /tmp/typescript/tsx/src /tmp/typescript/tsx/src/parser.c /tmp/typescript/tsx/src/scanner.c -o /opt/treesitter/parsers/tsx.so \
     && gcc -shared -fPIC -O2 -I /tmp/markdown/tree-sitter-markdown/src /tmp/markdown/tree-sitter-markdown/src/parser.c /tmp/markdown/tree-sitter-markdown/src/scanner.c -o /opt/treesitter/parsers/markdown.so \
     && gcc -fPIC -O2 -I /tmp/yaml/src -c /tmp/yaml/src/parser.c -o /tmp/yaml-parser.o \
     && g++ -fPIC -O2 -I /tmp/yaml/src -c /tmp/yaml/src/scanner.cc -o /tmp/yaml-scanner.o \
     && g++ -shared /tmp/yaml-parser.o /tmp/yaml-scanner.o -o /opt/treesitter/parsers/yaml.so \
     && rm -rf /tmp/grammars /tmp/ruby /tmp/lua /tmp/yaml /tmp/bash /tmp/typescript /tmp/json /tmp/html /tmp/css /tmp/markdown /tmp/yaml-parser.o /tmp/yaml-scanner.o
+
+RUN set -e; \
+    fetch() { \
+      local name="$1" repository="$2" revision="$3"; \
+      mkdir /tmp/grammar; \
+      curl --fail --location --retry 3 --retry-all-errors "https://github.com/${repository}/archive/${revision}.tar.gz" \
+        | tar --extract --gzip --directory /tmp/grammar --strip-components=1; \
+      mv /tmp/grammar "/tmp/${name}"; \
+    }; \
+    fetch javascript tree-sitter/tree-sitter-javascript 58404d8cf191d69f2674a8fd507bd5776f46cb11; \
+    fetch go tree-sitter/tree-sitter-go 2346a3ab1bb3857b48b29d779a1ef9799a248cd7; \
+    fetch rust tree-sitter/tree-sitter-rust 77a3747266f4d621d0757825e6b11edcbf991ca5; \
+    fetch sql DerekStride/tree-sitter-sql 97614d051eebfd3bc5d97c0bdb5a1638719ca811; \
+    fetch toml tree-sitter-grammars/tree-sitter-toml 64b56832c2cffe41758f28e05c756a3a98d16f41; \
+    fetch dockerfile camdencheek/tree-sitter-dockerfile 971acdd908568b4531b0ba28a445bf0bb720aba5; \
+    fetch make alemuller/tree-sitter-make 8881e0dc005862fa6954f1c67ecceacd53daa633; \
+    fetch c tree-sitter/tree-sitter-c b780e47fc780ddc8da13afa35a3f4ed5c157823d; \
+    fetch cpp tree-sitter/tree-sitter-cpp c009222808634c1014f82438d4883753516a2c24; \
+    fetch java tree-sitter/tree-sitter-java e10607b45ff745f5f876bfa3e94fbcc6b44bdc11; \
+    fetch c_sharp tree-sitter/tree-sitter-c-sharp 9150f7d56bb47f1a809fa23623f1ba1413e93fa9; \
+    fetch vue ikatyang/tree-sitter-vue 91fe2754796cd8fba5f229505a23fa08f3546c06; \
+    fetch svelte tree-sitter-grammars/tree-sitter-svelte ae5199db47757f785e43a14b332118a5474de1a2; \
+    fetch python tree-sitter/tree-sitter-python 26855eabccb19c6abf499fbc5b8dc7cc9ab8bc64; \
+    curl --fail --location --retry 3 --retry-all-errors https://github.com/tree-sitter/tree-sitter/releases/download/v0.24.7/tree-sitter-linux-x64.gz \
+      | gunzip > /usr/local/bin/tree-sitter; \
+    chmod +x /usr/local/bin/tree-sitter; \
+    (cd /tmp/sql && tree-sitter generate); \
+    for language in javascript go rust sql toml dockerfile make c cpp java c_sharp vue svelte python; do \
+      scanner=""; test -f "/tmp/$language/src/scanner.c" && scanner="/tmp/$language/src/scanner.c"; \
+      gcc -shared -fPIC -O2 -I "/tmp/$language/src" "/tmp/$language/src/parser.c" $scanner -o "/opt/treesitter/parsers/$language.so"; \
+    done \
+    && gcc -fPIC -O2 -I /tmp/vue/src -c /tmp/vue/src/parser.c -o /tmp/vue-parser.o \
+    && g++ -fPIC -O2 -I /tmp/vue/src -c /tmp/vue/src/scanner.cc -o /tmp/vue-scanner.o \
+    && g++ -shared /tmp/vue-parser.o /tmp/vue-scanner.o -o /opt/treesitter/parsers/vue.so \
+    && rm -rf /tmp/grammar /tmp/javascript /tmp/go /tmp/rust /tmp/sql /tmp/toml /tmp/dockerfile /tmp/make /tmp/c /tmp/cpp /tmp/java /tmp/c_sharp /tmp/vue /tmp/svelte /tmp/python /tmp/vue-parser.o /tmp/vue-scanner.o
 
 RUN mkdir -p /opt/plugins/{mini.nvim,nvim-notify,trouble.nvim,snacks.nvim} \
     && curl --fail --location --retry 3 --retry-all-errors https://github.com/echasnovski/mini.nvim/archive/561751e839b99a4baca36b9d963166b66d2536a6.tar.gz \

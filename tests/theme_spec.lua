@@ -27,6 +27,10 @@ local fixture_languages = {
   ["index.html"] = "html",
   ["theme.css"] = "css",
 }
+local default_capture_spec = {
+  query = "(_) @text",
+  groups = { ["@text"] = "Normal" },
+}
 local capture_specs = {
   ruby = {
     query = [[
@@ -98,7 +102,7 @@ local capture_specs = {
 }
 
 for name, marker in pairs(fixtures) do
-  local content = table.concat(vim.fn.readfile("tests/fixtures/" .. name), "\n")
+  local content = table.concat(vim.fn.readfile("tests/fixtures/" .. name), "\n") .. "\n"
   assert(content:find(marker, 1, true), "invalid fixture: " .. name)
 end
 
@@ -106,12 +110,12 @@ local parser_dir = vim.env.RAILSCASTS_PARSER_DIR
 if parser_dir and parser_dir ~= "" then
   for name in pairs(fixtures) do
     local language = fixture_languages[name]
-    local content = table.concat(vim.fn.readfile("tests/fixtures/" .. name), "\n")
+    local content = table.concat(vim.fn.readfile("tests/fixtures/" .. name), "\n") .. "\n"
     vim.treesitter.language.add(language, { path = parser_dir .. "/" .. language .. ".so" })
     local tree = vim.treesitter.get_string_parser(content, language):parse()[1]
     assert(not tree:root():has_error(), "Tree-sitter parse error: " .. name)
 
-    local spec = capture_specs[language]
+    local spec = capture_specs[language] or default_capture_spec
     local query = vim.treesitter.query.parse(language, spec.query)
     local captures = {}
     for capture, _ in query:iter_captures(tree:root(), content, 0, -1) do
@@ -211,6 +215,27 @@ assert(highlight("@markup.heading").fg == highlight("Title").fg)
 assert(highlight("@lsp.type.function").fg == highlight("Function").fg)
 assert(highlight("@lsp.type.class").fg == highlight("Type").fg)
 assert(highlight("@lsp.type.variable").fg == highlight("@function.call").fg)
+
+local language_semantics = {
+  ["@attribute.python"] = "PreProc",
+  ["@function.javascript"] = "Function",
+  ["@tag.tsx"] = "Function",
+  ["@type.go"] = "Type",
+  ["@attribute.rust"] = "PreProc",
+  ["@keyword.sql"] = "Keyword",
+  ["@field.toml"] = "Function",
+  ["@keyword.dockerfile"] = "Keyword",
+  ["@function.make"] = "Function",
+  ["@type.c"] = "Type",
+  ["@type.cpp"] = "Type",
+  ["@attribute.java"] = "PreProc",
+  ["@attribute.c_sharp"] = "PreProc",
+  ["@tag.vue"] = "Function",
+  ["@tag.svelte"] = "Function",
+}
+for capture, group in pairs(language_semantics) do
+  assert(highlight(capture).fg == highlight(group).fg, "unexpected language highlight for " .. capture)
+end
 
 require("railscasts").setup({
   high_contrast = true,

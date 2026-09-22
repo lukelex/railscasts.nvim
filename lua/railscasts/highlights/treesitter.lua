@@ -76,6 +76,24 @@ function M.setup(colors, _, highlights)
   link({ "@diff.plus" }, "DiffAdd")
   link({ "@diff.delta" }, "DiffChange")
   link({ "@diff.minus" }, "DiffDelete")
+  link({ "@attribute.python", "@decorator.python" }, "PreProc")
+  link({ "@type.python" }, "Type")
+  link({ "@function.javascript", "@function.tsx", "@tag.javascript", "@tag.tsx" }, "Function")
+  link({ "@property.javascript", "@property.tsx" }, "Identifier")
+  link({ "@type.go", "@type.rust", "@type.c", "@type.cpp", "@type.java", "@type.c_sharp" }, "Type")
+  link(
+    { "@function.go", "@function.rust", "@function.c", "@function.cpp", "@function.java", "@function.c_sharp" },
+    "Function"
+  )
+  link({ "@attribute.rust", "@macro.rust", "@lifetime.rust" }, "PreProc")
+  link({ "@keyword.sql", "@keyword.dockerfile", "@keyword.make" }, "Keyword")
+  link({ "@function.sql", "@function.dockerfile", "@function.make" }, "Function")
+  link({ "@field.toml" }, "Function")
+  link({ "@variable.dockerfile", "@variable.make" }, "String")
+  link({ "@attribute.java", "@attribute.c_sharp" }, "PreProc")
+  link({ "@tag.vue", "@tag.svelte" }, "Function")
+  link({ "@tag.attribute.vue", "@tag.attribute.svelte" }, "Identifier")
+  link({ "@keyword.vue", "@keyword.svelte" }, "Keyword")
 end
 
 return M
