@@ -55,5 +55,5 @@
 - Maintain the GitHub Wiki alongside repository docs: update the relevant Wiki
   page and its navigation, and document design choices and palette changes
   there rather than leaving them implicit in code.
-- Treat the README introduction and quick-start section as approved copy. Warn
-  the user and obtain explicit consent before changing either section.
+- Treat the README's “Railscasts, carried forward” section as approved copy.
+  Warn the user and obtain explicit consent before changing it.
