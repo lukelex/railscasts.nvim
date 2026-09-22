@@ -1,0 +1,7 @@
+diff --git a/colors/railscasts.lua b/colors/railscasts.lua
+index 1234567..89abcde 100644
+--- a/colors/railscasts.lua
++++ b/colors/railscasts.lua
+@@ -1,2 +1,2 @@
+-vim.cmd("highlight clear")
++vim.cmd("highlight clear")

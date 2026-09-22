@@ -97,18 +97,27 @@ RUN set -e; \
     fetch svelte tree-sitter-grammars/tree-sitter-svelte ae5199db47757f785e43a14b332118a5474de1a2; \
     fetch python tree-sitter/tree-sitter-python 26855eabccb19c6abf499fbc5b8dc7cc9ab8bc64; \
     fetch gitcommit gbprod/tree-sitter-gitcommit 55a265cf763ec15d6e2d96bb206e3f5e30d82bae; \
+    fetch vimdoc neovim/tree-sitter-vimdoc 23daa416c1ff5d15f59a1aa648f031d6e3ee15c5; \
+    fetch git_config the-mikedavis/tree-sitter-git-config 3a61756a81a86291a0f48e3eeeaa0692b9981aa9; \
+    fetch git_rebase the-mikedavis/tree-sitter-git-rebase 32686d6b72980b36f876ae2d07719c9c3ed154e2; \
+    fetch diff the-mikedavis/tree-sitter-diff ada384ac7bfc1307f32de474620120add29998fb; \
+    fetch hcl MichaHoffmann/tree-sitter-hcl 64ad62785d442eb4d45df3a1764962dafd5bc98b; \
+    fetch embedded_template tree-sitter/tree-sitter-embedded-template 3499d85f0a0d937c507a4a65368f2f63772786e1; \
+    fetch jinja cathaysia/tree-sitter-jinja c213d3745ccdcaaa858869181c7b1bf9557a025f; \
+    fetch liquid hankthetank27/tree-sitter-liquid e45dbac8c5fa95b1f0e00e7e0c04bc8855823391; \
     curl --fail --location --retry 3 --retry-all-errors https://github.com/tree-sitter/tree-sitter/releases/download/v0.24.7/tree-sitter-linux-x64.gz \
       | gunzip > /usr/local/bin/tree-sitter; \
     chmod +x /usr/local/bin/tree-sitter; \
     (cd /tmp/sql && tree-sitter generate); \
-    for language in javascript go rust sql toml dockerfile make c cpp java c_sharp vue svelte python gitcommit; do \
+    for language in javascript go rust sql toml dockerfile make c cpp java c_sharp vue svelte python gitcommit vimdoc git_config git_rebase diff hcl embedded_template liquid; do \
       scanner=""; test -f "/tmp/$language/src/scanner.c" && scanner="/tmp/$language/src/scanner.c"; \
       gcc -shared -fPIC -O2 -I "/tmp/$language/src" "/tmp/$language/src/parser.c" $scanner -o "/opt/treesitter/parsers/$language.so"; \
     done \
+    && gcc -shared -fPIC -O2 -I /tmp/jinja/tree-sitter-jinja/src /tmp/jinja/tree-sitter-jinja/src/parser.c /tmp/jinja/tree-sitter-jinja/src/scanner.c -o /opt/treesitter/parsers/jinja.so \
     && gcc -fPIC -O2 -I /tmp/vue/src -c /tmp/vue/src/parser.c -o /tmp/vue-parser.o \
     && g++ -fPIC -O2 -I /tmp/vue/src -c /tmp/vue/src/scanner.cc -o /tmp/vue-scanner.o \
     && g++ -shared /tmp/vue-parser.o /tmp/vue-scanner.o -o /opt/treesitter/parsers/vue.so \
-    && rm -rf /tmp/grammar /tmp/javascript /tmp/go /tmp/rust /tmp/sql /tmp/toml /tmp/dockerfile /tmp/make /tmp/c /tmp/cpp /tmp/java /tmp/c_sharp /tmp/vue /tmp/svelte /tmp/python /tmp/gitcommit /tmp/vue-parser.o /tmp/vue-scanner.o
+    && rm -rf /tmp/grammar /tmp/javascript /tmp/go /tmp/rust /tmp/sql /tmp/toml /tmp/dockerfile /tmp/make /tmp/c /tmp/cpp /tmp/java /tmp/c_sharp /tmp/vue /tmp/svelte /tmp/python /tmp/gitcommit /tmp/vimdoc /tmp/git_config /tmp/git_rebase /tmp/diff /tmp/hcl /tmp/embedded_template /tmp/jinja /tmp/liquid /tmp/vue-parser.o /tmp/vue-scanner.o
 
 RUN mkdir -p /opt/plugins/{mini.nvim,nvim-notify,trouble.nvim,snacks.nvim} \
     && curl --fail --location --retry 3 --retry-all-errors https://github.com/echasnovski/mini.nvim/archive/561751e839b99a4baca36b9d963166b66d2536a6.tar.gz \
