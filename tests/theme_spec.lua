@@ -18,6 +18,7 @@ local fixtures = {
   ["example.py"] = "class Episode:",
   ["example.js"] = "export function label",
   ["component.tsx"] = "export function EpisodeLabel",
+  ["example.go"] = "type Episode struct",
 }
 local fixture_languages = {
   ["ruby.rb"] = "ruby",
@@ -32,6 +33,7 @@ local fixture_languages = {
   ["example.py"] = "python",
   ["example.js"] = "javascript",
   ["component.tsx"] = "tsx",
+  ["example.go"] = "go",
 }
 local default_capture_spec = {
   query = "(_) @text",
