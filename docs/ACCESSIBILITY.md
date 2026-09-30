@@ -1,56 +1,7 @@
-# Accessibility and contrast
+# Accessibility
 
-Railscasts prioritizes the original Railscasts/TextMate character, while this
-port also protects the roles read most often in a modern Neovim UI. Contrast is
-measured with the WCAG relative-luminance formula against the default
-`background` (`#2B2B2B`).
+Readability choices, contrast measurements, and high-contrast guidance now live
+in the [Accessibility Wiki page](https://github.com/lukelex/railscasts.nvim/wiki/Accessibility).
 
-## Core palette measurements
-
-| Token | Contrast | Role |
-| --- | ---: | --- |
-| `beige_grey` | 10.90:1 | Primary text |
-| `white` | 12.86:1 | High-emphasis text |
-| `light_orange` | 9.14:1 | Functions |
-| `yellow` | 10.93:1 | Search |
-| `moss` | 7.07:1 | Numbers |
-| `light_green` | 5.61:1 | Strings, special syntax, additions |
-| `blue` | 4.83:1 | Booleans and information |
-| `cyan` | 4.82:1 | Changes and visual mode |
-| `dark_orange` | 4.25:1 | Keywords and warnings |
-| `red` | 3.37:1 | Errors and deletions |
-| `light_brown` | 3.32:1 | Comments and muted metadata |
-
-## Applied fixes
-
-- Special syntax and diff additions use `light_green` instead of the
-  low-contrast `dark_green`.
-- Statements and warning messages use `dark_orange` instead of lower-contrast
-  brown or maroon shades.
-- Delimiters use primary text rather than the low-contrast separator gray.
-- Tabline and Lualine secondary surfaces use `grey` with `beige_grey` text.
-- Inactive Lualine text uses `beige_grey`, not black on charcoal.
-
-## Deliberate muted roles
-
-Comments, some diagnostic colors, and legacy UI metadata retain muted tones to
-preserve the original Railscasts hierarchy. They should not be the sole carrier
-of meaning: diagnostics also use signs and underlines, and diff states use
-separate groups. Enable `high_contrast` through `require("railscasts").setup()`
-when stronger muted-text contrast is needed.
-
-## Darker background
-
-Set `darker_background = true` to use the opt-in `#1F1F1F` editor and terminal
-surface. This keeps every syntax and UI role unchanged while increasing text
-contrast against the background. It cannot be combined with `transparent = true`,
-because transparent windows deliberately defer their surface to the terminal or
-GUI.
-
-Against the darker `#1F1F1F` surface, primary text is 12.69:1, strong text is
-14.97:1, functions are 10.64:1, strings are 6.54:1, booleans are 5.62:1, and
-keywords are 4.95:1. Muted comments rise to 3.86:1 and errors to 3.92:1; use
-`high_contrast` when muted text needs more separation.
-
-The supported UI integrations inherit the same semantic groups in high-contrast
-mode, including transparent and dimmed-inactive-window configurations.
+See also [Configuration](https://github.com/lukelex/railscasts.nvim/wiki/Configuration)
+and [Design Language](https://github.com/lukelex/railscasts.nvim/wiki/Design-Language).
