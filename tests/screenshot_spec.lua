@@ -5,6 +5,9 @@ local groups = {
   { "Comment", "# A muted comment" },
   { "String", '"A string"' },
   { "Function", "render_theme()" },
+  { "@property", "object_key" },
+  { "Type", "ObjectType" },
+  { "Constant", "CONSTANT" },
   { "Keyword", "return" },
   { "Number", "2026" },
   { "Boolean", "true" },
@@ -19,8 +22,8 @@ end
 
 local normal = vim.api.nvim_get_hl(0, { name = "Normal", link = false })
 local svg = {
-  '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="360" viewBox="0 0 800 360">',
-  string.format('<rect width="800" height="360" fill="%s"/>', hex(normal.bg)),
+  '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="456" viewBox="0 0 800 456">',
+  string.format('<rect width="800" height="456" fill="%s"/>', hex(normal.bg)),
   '<g font-family="monospace" font-size="24">',
 }
 

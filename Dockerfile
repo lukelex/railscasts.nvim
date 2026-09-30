@@ -14,7 +14,7 @@ RUN curl --fail --location --retry 3 --retry-all-errors \
     && unzip -q /tmp/stylua.zip -d /usr/local/bin \
     && rm /tmp/stylua.zip
 
-RUN for version in v0.9.5 v0.10.4 v0.11.7 v0.12.5; do \
+RUN set -e; for version in v0.9.5 v0.10.4 v0.11.7 v0.12.5; do \
       if [[ "$version" == "v0.9.5" ]]; then archive="nvim-linux64.tar.gz"; \
       else archive="nvim-linux-x86_64.tar.gz"; fi; \
       mkdir -p "/opt/neovim/$version"; \
@@ -23,8 +23,9 @@ RUN for version in v0.9.5 v0.10.4 v0.11.7 v0.12.5; do \
         --output /tmp/nvim.tar.gz; \
       tar --extract --gzip --file /tmp/nvim.tar.gz \
         --directory "/opt/neovim/$version" --strip-components=1; \
-    done \
-    && rm /tmp/nvim.tar.gz
+      test "$("/opt/neovim/$version/bin/nvim" --version | head -n 1)" = "NVIM $version"; \
+    done; \
+    rm /tmp/nvim.tar.gz
 
 RUN mkdir -p /tmp/grammars /opt/treesitter/parsers \
     && curl --fail --location --retry 3 --retry-all-errors https://github.com/tree-sitter/tree-sitter-ruby/archive/ad907a69da0c8a4f7a943a7fe012712208da6dee.tar.gz \

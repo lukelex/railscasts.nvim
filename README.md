@@ -32,6 +32,10 @@ has remained immediately recognizable for years.
 
 Railscasts requires Neovim 0.9.5 or later.
 
+Properties, object keys, and member fields use soft lavender to distinguish
+them from red types and constants. Tree-sitter and LSP property highlighting
+share this role; existing language-specific key styling is preserved.
+
 ### lazy.nvim
 
 ```lua

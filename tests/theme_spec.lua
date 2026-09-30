@@ -136,8 +136,33 @@ local capture_specs = {
       (comment) @comment
       (string) @string
       (function_declaration name: (identifier) @function)
+      (property_identifier) @property
+      (property_identifier) @variable.member
+      (type_identifier) @type
     ]],
-    groups = { ["@comment"] = "Comment", ["@string"] = "String", ["@function"] = "Function" },
+    groups = {
+      ["@comment"] = "Comment",
+      ["@string"] = "String",
+      ["@function"] = "Function",
+      ["@property"] = "Label",
+      ["@variable.member"] = "Label",
+      ["@type"] = "Type",
+    },
+  },
+  javascript = {
+    query = [[
+      (property_identifier) @property
+      (property_identifier) @variable.member
+    ]],
+    groups = { ["@property"] = "Label", ["@variable.member"] = "Label" },
+  },
+  tsx = {
+    query = [[
+      (property_identifier) @property
+      (property_identifier) @variable.member
+      (type_identifier) @type
+    ]],
+    groups = { ["@property"] = "Label", ["@variable.member"] = "Label", ["@type"] = "Type" },
   },
   json = {
     query = [[
@@ -165,7 +190,7 @@ local capture_specs = {
       (class_selector) @type
       (property_name) @property
     ]],
-    groups = { ["@type"] = "Identifier", ["@property"] = "Identifier" },
+    groups = { ["@type"] = "Identifier", ["@property"] = "Label" },
   },
   gitcommit = {
     query = [[
@@ -341,6 +366,23 @@ assert(highlight("@markup.heading").fg == highlight("Title").fg)
 assert(highlight("@lsp.type.function").fg == highlight("Function").fg)
 assert(highlight("@lsp.type.class").fg == highlight("Type").fg)
 assert(highlight("@lsp.type.variable").fg == highlight("@function.call").fg)
+assert(highlight("@lsp.type.property").fg == 0xD0D0FF)
+assert(highlight("@lsp.type.namespace").fg == highlight("Identifier").fg)
+assert(highlight("@field").fg == 0xD0D0FF)
+assert(highlight("@property").fg == 0xD0D0FF)
+assert(highlight("@variable.member").fg == 0xD0D0FF)
+assert(highlight("Type").fg == 0xDA4939)
+assert(highlight("Constant").fg == 0xDA4939)
+assert(highlight("@property").fg ~= highlight("@type").fg)
+assert(highlight("@property").fg ~= highlight("@constant").fg)
+assert(highlight("@label.json").fg == highlight("String").fg)
+assert(highlight("@field.yaml").fg == highlight("Function").fg)
+for _, language in pairs(fixture_languages) do
+  for _, capture in ipairs({ "@property", "@variable.member", "@lsp.type.property" }) do
+    assert(highlight(capture .. "." .. language).fg == 0xD0D0FF, "unexpected property color for " .. language)
+  end
+  assert(highlight("@constant." .. language).fg == highlight("Constant").fg)
+end
 
 local language_semantics = {
   ["@attribute.python"] = "PreProc",
@@ -405,6 +447,8 @@ assert(highlight("Comment").fg == 0xC7A66D)
 assert(highlight("TabLineSel").bg == 0x5FAF5F)
 assert(highlight("NormalFloat").bg == nil)
 assert(highlight("TelescopeBorder").fg == 0xC7A66D)
+assert(highlight("@property").fg == 0xD0D0FF)
+assert(highlight("@lsp.type.property").fg == highlight("@property").fg)
 
 local high_contrast_links = {
   CmpItemAbbrDeprecated = "Comment",

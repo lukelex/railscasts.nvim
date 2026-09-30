@@ -16,14 +16,14 @@ function M.setup(colors, _, highlights)
     "@variable.parameter",
     "@punctuation.bracket",
     "@punctuation.delimiter",
-    "@field",
     "@variable",
     "@operator",
   }, "@function.call")
   apply("@label", { fg = colors.purple })
   link({ "@variable.member" }, "@label")
+  -- Keep properties and fields distinct from red types and constants.
+  link({ "@property", "@field" }, "@variable.member")
   link({
-    "@property",
     "@namespace",
     "@text.reference",
     "@constant",
@@ -79,7 +79,6 @@ function M.setup(colors, _, highlights)
   link({ "@attribute.python", "@decorator.python" }, "PreProc")
   link({ "@type.python" }, "Type")
   link({ "@function.javascript", "@function.tsx", "@tag.javascript", "@tag.tsx" }, "Function")
-  link({ "@property.javascript", "@property.tsx" }, "Identifier")
   link({ "@type.go", "@type.rust", "@type.c", "@type.cpp", "@type.java", "@type.c_sharp" }, "Type")
   link(
     { "@function.go", "@function.rust", "@function.c", "@function.cpp", "@function.java", "@function.c_sharp" },
