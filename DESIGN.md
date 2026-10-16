@@ -136,9 +136,12 @@ black surface.
 | Visual | `cyan` |
 | Replace | `yellow` |
 | Command | `red` |
-| Inactive | `light_green` with a `background` surface |
+| Inactive | `light_grey` with black text; secondary segments use `grey` with `beige_grey` text |
 
 This is the contract implemented by the Lualine theme.
+
+Inactive statuslines and winbars retain their colored segment backgrounds but
+use neutral, non-bold accents to distinguish them from the active editing mode.
 
 ## Terminal language
 
